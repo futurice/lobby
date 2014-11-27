@@ -1,4 +1,4 @@
-# Electronic Receiptionist
+# Electronic Receptionist
 
 Web application to welcome and guide visitors arriving to the Futurice office in Kamppi, Helsinki. Built on [Sails.js](http://sailsjs.org) and [Angularjs](http://www.angularjs.org).
 

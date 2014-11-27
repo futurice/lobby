@@ -1,4 +1,4 @@
-angular.module( 'sailng.todos', [
+angular.module( 'lobby.todos', [
 ])
     .config( ['$stateProvider',function config( $stateProvider ) {
         $stateProvider.state( 'todos', {

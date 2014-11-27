@@ -1,4 +1,4 @@
-angular.module( 'sailng.users', [
+angular.module( 'lobby.users', [
 ])
 
        .config( ['$stateProvider',function config( $stateProvider ) {

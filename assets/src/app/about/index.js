@@ -1,4 +1,4 @@
-angular.module( 'sailng.about', [
+angular.module( 'lobby.about', [
 ])
 
     .config( ['$stateProvider',function config( $stateProvider ) {

@@ -1,4 +1,4 @@
-angular.module( 'sailng', [
+angular.module( 'lobby', [
 	'ui.router',
 	'ngSails',
 	'angularMoment',
@@ -7,20 +7,16 @@ angular.module( 'sailng', [
 	'templates-app',
 	'services',
 	'models',
-
-    'ngTable',
-
-
-    'directive.blink',
-    'sailng.header',
-	'sailng.home',
-	'sailng.about',
-    'sailng.todos',
-    'sailng.users'
-
+  'ngTable',
+  'directive.blink',
+  'lobby.header',
+	'lobby.home',
+	'lobby.about',
+  'lobby.todos',
+  'lobby.users'
 ])
-
-     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
+.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+  function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
 
 	$urlRouterProvider.otherwise(function ($injector, $location) {
 
@@ -35,7 +31,6 @@ angular.module( 'sailng', [
 	});
 	$locationProvider.html5Mode(true);
 }])
-
 
 .run( function run () {
 	moment.lang('en');

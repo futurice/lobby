@@ -1,4 +1,4 @@
-# Electronic Receiptionist
+# Electronic Receptionist
 
 Web application to welcome and guide visitors arriving to the Futurice office in Kamppi, Helsinki. Built on [Sails.js](http://sailsjs.org) and [Angularjs](http://www.angularjs.org).
 
@@ -12,6 +12,11 @@ Download & Install Node.js and the npm package manager.
 
 ####MongoDB####
 Download & Install MongoDB, and make sure it's running on the default port (27017).
+
+####Ruby & SASS####
+Download & Install Ruby and the SASS preprocessor. Follow [these instructions](http://sass-lang.com/install), or if you already have Ruby installed, just do
+
+    $ gem install sass
 
 ####Bower####
 We're going to use the Bower Package Manager to manage the front-end packages, in order to install it make sure you've installed Node.js and npm, then install bower globally using npm:

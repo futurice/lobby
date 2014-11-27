@@ -1,4 +1,4 @@
-angular.module( 'sailng.home', [])
+angular.module( 'lobby.home', [])
 
 //.config(function config( $stateProvider ) {
     .config( ['$stateProvider',function config( $stateProvider ) {
@@ -13,9 +13,5 @@ angular.module( 'sailng.home', [])
 	});
 }])
 
-        .controller( 'HomeCtrl', ['$scope', 'titleService',function HomeController( $scope, titleService ) {
-	titleService.setTitle('Home');
-
-
-
+        .controller( 'HomeCtrl', ['$scope',function HomeController( $scope ) {
 }]);

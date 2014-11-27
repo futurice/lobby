@@ -1,4 +1,4 @@
-angular.module( 'sailng.header', [
+angular.module( 'lobby.header', [
 ])
 
 .controller( 'HeaderCtrl', ['$scope', '$state', 'config',function HeaderController( $scope, $state, config ) {

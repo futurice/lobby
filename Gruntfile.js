@@ -36,7 +36,6 @@ module.exports = function(grunt) {
 		}
 	}
 
-
 	/**
 	 * Loads Grunt configuration modules from the specified
 	 * relative path. These modules should export a function
@@ -61,9 +60,6 @@ module.exports = function(grunt) {
 			}
 		}
 	}
-
-
-
 
 	// Load task functions
 	var taskConfigurations = loadTasks('./tasks/config'),

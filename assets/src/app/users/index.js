@@ -1,4 +1,4 @@
-angular.module( 'sailng.users', [
+angular.module( 'lobby.users', [
 ])
 
        .config( ['$stateProvider',function config( $stateProvider ) {
@@ -14,7 +14,7 @@ angular.module( 'sailng.users', [
 	});
 }])
 
-    .controller( 'UserCtrl',['$scope', '$sails', 'lodash', 'config', 'titleService', 'UserModel','$filter', 'ngTableParams', function UserController( $scope, $sails, lodash, config, titleService, UserModel,$filter, ngTableParams ) {
+    .controller( 'UserCtrl',['$scope', '$sails', 'lodash', 'config', 'UserModel','$filter', 'ngTableParams', function UserController( $scope, $sails, lodash, config, UserModel,$filter, ngTableParams ) {
 
         $scope.newUser = {};
 

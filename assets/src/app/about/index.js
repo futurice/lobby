@@ -1,4 +1,4 @@
-angular.module( 'sailng.about', [
+angular.module( 'lobby.about', [
 ])
 
     .config( ['$stateProvider',function config( $stateProvider ) {
@@ -13,6 +13,5 @@ angular.module( 'sailng.about', [
 	});
 }])
 
-.controller( 'AboutCtrl',['$scope', 'titleService', function AboutController( $scope, titleService ) {
-	titleService.setTitle('About');
+.controller( 'AboutCtrl',['$scope', function AboutController( $scope ) {
 }]);

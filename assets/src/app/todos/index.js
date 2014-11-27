@@ -1,4 +1,4 @@
-angular.module( 'sailng.todos', [
+angular.module( 'lobby.todos', [
 ])
     .config( ['$stateProvider',function config( $stateProvider ) {
         $stateProvider.state( 'todos', {
@@ -13,7 +13,7 @@ angular.module( 'sailng.todos', [
 	});
 }])
 
-    .controller( 'TodoCtrl',['$scope', '$sails', 'lodash', 'config', 'titleService', 'TodoModel','$filter', 'ngTableParams','$location', function TodoController( $scope, $sails, lodash, config, titleService, TodoModel,$filter, ngTableParams,$location ) {
+    .controller( 'TodoCtrl',['$scope', '$sails', 'lodash', 'config', 'TodoModel','$filter', 'ngTableParams','$location', function TodoController( $scope, $sails, lodash, config, TodoModel,$filter, ngTableParams,$location ) {
         $scope.newTodo = {};
         $scope.todos = [];
         $scope.currentUser = config.currentUser;

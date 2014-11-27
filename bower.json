@@ -15,7 +15,6 @@
     "angular-translate-loader-static-files": "~2.1.0"
   },
   "dependencies": {
-    "angular-rx-data-table": "~0.4.10",
     "ng-table": "~0.3.2",
     "fontawesome": "~4.1.0",
     "foundation": "zurb/bower-foundation#~5.4.7",

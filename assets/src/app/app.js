@@ -4,7 +4,6 @@ angular.module( 'sailng', [
 	'angularMoment',
 	'lodash',
 	'angularMoment',
-	'ui.bootstrap',
 	'templates-app',
 	'services',
 	'models',

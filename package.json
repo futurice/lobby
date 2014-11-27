@@ -1,8 +1,8 @@
 {
-  "name": "MEANS",
+  "name": "lobby",
   "private": false,
   "version": "0.2.1",
-  "description": "MongoDB + ExpressJS + AngularJS + NodeJS + SailsJS MEANS Seed Project.",
+  "description": "Futurice Lobby Receptionist",
   "keywords": [],
   "dependencies": {
     "bcrypt": "~0.7.7",
@@ -46,7 +46,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com:SharePointOscar/MEANS.git"
+    "url": "git://github.com:futurice/lobby.git"
   },
   "author": "John Tomaselli & Oscar Medina",
   "license": "MIT",
@@ -71,7 +71,6 @@
     "karma-script-launcher": "^0.1.0",
     "requirejs": "^2.1.14",
     "karma-requirejs": "^0.2.2",
-    "bootswatch": "^3.0.0",
     "should": "^4.0.4"
   }
 }

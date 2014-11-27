@@ -13,9 +13,5 @@ angular.module( 'sailng.home', [])
 	});
 }])
 
-        .controller( 'HomeCtrl', ['$scope', 'titleService',function HomeController( $scope, titleService ) {
-	titleService.setTitle('Home');
-
-
-
+        .controller( 'HomeCtrl', ['$scope',function HomeController( $scope ) {
 }]);

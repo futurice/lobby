@@ -3,6 +3,7 @@ logs/*
 node_modules/
 bower_components/
 .tmp
+.sass-cache
 .DS_Store
 .idea
 config/local.js

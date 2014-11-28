@@ -8,7 +8,6 @@ angular.module( 'lobby', [
 	'services',
 	'models',
   'ngTable',
-  'directive.blink',
   'lobby.header',
 	'lobby.home',
 	'lobby.about',

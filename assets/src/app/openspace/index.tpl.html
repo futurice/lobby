@@ -1,0 +1,74 @@
+<section class="intro">
+  <h2>Register to Open Space</h2>
+  <p>Please fill in your personal information below.</p>
+</section>
+<div class="row">
+  <section class="medium-6 columns">
+
+    <p>You can use our Open Space for ...... Uniquely engage 2.0 intellectual capital rather than an expanded array of meta-services. Holisticly brand 24/365 sources via unique human capital. Globally promote seamless potentialities whereas global customer service. Interactively formulate leveraged experiences vis-a-vis interdependent products. Efficiently engage reliable human capital without interactive platforms.</p><p>
+
+    Globally incubate bleeding-edge e-services rather than magnetic web-readiness. Progressively provide access to technically.</p>
+  </section>
+
+  <section class="medium-6 columns">
+    <dl class="tabs" data-tab>
+      <dd ui-sref-active="active"><a ui-sref="openspace.register">Register</a></dd>
+      <dd ui-sref-active="active"><a ui-sref="openspace.checkin">Already registered? Check in.</a></dd>
+    </dl>
+    <div class="tabs-content box" ui-view></div>
+
+  </section>
+</div>
+
+<div class="row">
+  <div class="medium-4 columns">
+    <form role="form" ng-submit="createTodo(newTodo)">
+      <div class="form-group">
+        <label for="todoTitle">Your Todo</label>
+        <input type="text" ng-model="newTodo.title" class="form-control" id="todoTitle" >
+      </div>
+      <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="medium-12 columns">
+
+    <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
+    <p><strong>Sorting:</strong> {{tableParams.sorting()|json}}
+
+      <table ng-table="tableParams" class="table">
+        <tr ng-repeat="todo in $data">
+
+
+          <td data-title="'title'" sortable="'title'">
+            <span ng-class="{ 'fa fa-info-circle': todo.title == '666','fa fa-dot-circle-o': todo.title != '666' }">&nbsp; {{ todo.title}}</span>
+          </td>
+          <td  data-title="'isComplete'" sortable="'isComplete'">
+            {{todo.isComplete }}
+          </td>
+          <td sortable="'status'" data-title="'status'" >
+            {{todo.status  }} {{stats[todo.status].name}}
+          </td>
+          <td  data-title="'InProgress'">
+            <button type="button" class="btn btn-primary btn-xs" ng-click="fetchTodo(todo)"
+            ng-show="currentUser.id === todo.user.id"><i class="fa fa-exchange"></i></button>
+          </td >
+          <td data-title="'AlmostComplete'">
+            <button type="button" class="btn btn-warning btn-xs" ng-click="fetchedTodo(todo)"
+            ng-show="currentUser.id === todo.user.id"><i class="fa fa-flag-checkered"></i></button>
+          </td>
+          <td data-title="'Finished'">
+            <button type="button" class="btn btn-success btn-xs" ng-click="finishTodo(todo)"
+            ng-show="currentUser.id === todo.user.id"><i class="fa fa-graduation-cap"></i></button>
+          </td>
+          <td data-title="'Cancel'">
+            <button type="button" class="btn btn-danger btn-xs" ng-click="destroyTodo(todo)"
+            ng-show="currentUser.id === todo.user.id"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+  </div>

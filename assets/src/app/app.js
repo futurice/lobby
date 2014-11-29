@@ -10,9 +10,11 @@ angular.module( 'lobby', [
   'ngTable',
   'lobby.header',
 	'lobby.home',
-	'lobby.about',
-  'lobby.todos',
-  'lobby.users'
+	'lobby.help',
+  'lobby.employees',
+  'lobby.delivery',
+  'lobby.finish',
+  'lobby.openspace'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {

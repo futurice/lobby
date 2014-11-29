@@ -1,9 +1,7 @@
 angular.module( 'lobby.home', [])
-
-//.config(function config( $stateProvider ) {
-    .config( ['$stateProvider',function config( $stateProvider ) {
+.config( ['$stateProvider',function config( $stateProvider ) {
 	$stateProvider.state( 'home', {
-		url: '/home',
+		url: '/',
 		views: {
 			"main": {
 				controller: 'HomeCtrl',
@@ -13,5 +11,5 @@ angular.module( 'lobby.home', [])
 	});
 }])
 
-        .controller( 'HomeCtrl', ['$scope',function HomeController( $scope ) {
+.controller( 'HomeCtrl', ['$scope',function HomeController( $scope ) {
 }]);

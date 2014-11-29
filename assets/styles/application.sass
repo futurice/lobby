@@ -1,17 +1,74 @@
+$headerHeight: 3.5rem
+
 body
+  font-size: 18px
+  font-family: "proxima-nova","Helvetica Neue",Arial,sans-serif
+  font-weight: 300
+  line-height: 1.4
+  color: #210f04
+  word-break: break-word
+  -webkit-font-smoothing: antialiased
   margin: 0 auto
-  background: $futuriceGreen
-
-header
-  background: $futuriceDarkBlue
-
-.button
+  background: $futuriceLightGreen
   color: $futuriceDarkBlue
 
-.main-nav
-  ul
-    margin: 0
+header
+  height: $headerHeight
+  background: $futuriceDarkBlue
+  position: relative
 
+  h1
+    display: inline-block
+    margin: 0
+    padding: 10px 20px
+    height: 100%
+
+  img
+    display: block
+    width: auto
+    height: 100%
+
+  p.tagline
+    display: inline-block
+    position: absolute
+    top: 0
+    right: 20px
+    height: 100%
+    margin: 0
+    line-height: $headerHeight
+    color: $white
+
+  .button
+    float: right
+    margin: 0
+    display: inline-block
+    height: 100%
+    background: transparent
+    color: $white
+
+    &:hover, &:active
+      background: $futuriceLightGreen
+
+.container
+  padding: 2rem
+
+.intro
+  margin: 0 auto 3rem auto
+  text-align: center
+
+  h2
+    font-size: 32px
+    font-weight: bold
+
+textarea
+  min-height: 7rem
+
+.box
+  background: $white
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1)
+  padding: 1rem
+
+.main-nav
   li
     display: block
     float: left
@@ -21,6 +78,28 @@ header
   a
     display: block
     margin: 1rem
+    height: 10rem
+    background: $white
+    color: $futuriceDarkBlue
+    font-size: 32px
+    font-weight: bold
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1)
+    transition: all .2s ease
+    border-radius: 4px
+
+    &:hover, &:active
+      background: $futuriceDarkBlue
+      color: $white
+
+    i
+      display: block
+      text-align: center
+      width: 100%
+      margin: 1rem 0
+
+table
+  width: 100%
+
 
 // login buttons
 .social-login-btn

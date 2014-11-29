@@ -1,14 +1,8 @@
-angular.module( 'lobby.header', [
-])
+angular.module( 'lobby.header', [])
 
-.controller( 'HeaderCtrl', ['$scope', '$state', 'config',function HeaderController( $scope, $state, config ) {
-    $scope.currentUser = config.currentUser;
+.controller( 'HeaderCtrl', ['$rootScope', '$scope', '$state', 'config', function HeaderController( $rootScope, $scope, $state, config ) {
 
-    var navItems = [
-
-        {title: 'Todos', translationKey: 'navigation:todos', url: '/todos', cssClass: 'fa fa-tasks fa-lg'}
-
-    ];
-
-    $scope.navItems = navItems;
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $scope.home = $state.includes('home');
+    });
 }]);

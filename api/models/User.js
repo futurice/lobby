@@ -1,3 +1,11 @@
+/**
+ * User
+ *
+ * @module      :: Model
+ * @description :: Represents a single Open Space user
+ * @docs    :: http://sailsjs.org/#!documentation/models
+ */
+
 module.exports = {
 	attributes: {
 		username: {
@@ -12,47 +20,47 @@ module.exports = {
 		},
 		first_name: {
 			type: 'string',
-			required: false
+			required: true
 		},
-        role: {
-            type: 'INTEGER',
-            required: false
-        },
+    last_name: {
+      type: 'string',
+      required: true
+    },
+    phone: {
+      type: 'string',
+      required: false
+    },
+    role: {
+      type: 'INTEGER',
+      required: false
+    },
+    message_count: {
+     type: 'number'
+    },
+    passports : { collection: 'Passport', via: 'user' }
+  },
 
-		message_count: {
-			type: 'number'
-		},
-		passports : { collection: 'Passport', via: 'user' }
+  getAll: function() {
+    return User.find().then(function (models) {
+      return [models];
+    });
+  },
 
-	},
+  getOne: function(id) {
+    return User.findOne(id).then(function (model) {
+     return [model];
+   });
+  },
 
-	getAll: function() {
-		return User.find()
-		.then(function (models) {
-			return [models];
-		});
-	},
-
-	getOne: function(id) {
-		return User.findOne(id)
-		.then(function (model) {
-			return [model];
-		});
-	},
-    insert: function (userObject) {
-
-        User.create(userObject)
-            .exec(function(err, newUser) {
-                if (err) {
-
-                    return err;
-                }
-                else {
-                    console.log(newUser);
-                    return newUser;
-                }
-            });
-    }
-
-
+  insert: function (userObject) {
+    User.create(userObject).exec(function(err, newUser) {
+      if (err) {
+        return err;
+      }
+      else {
+        console.log(newUser);
+        return newUser;
+      }
+    });
+  }
 };

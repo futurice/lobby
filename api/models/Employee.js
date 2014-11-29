@@ -1,8 +1,8 @@
     /**
- * Todo
+ * Employee
  *
  * @module      :: Model
- * @description :: A short summary of how this model works and what it represents.
+ * @description :: Represents a single employee
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 

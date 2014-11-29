@@ -1,10 +1,10 @@
-angular.module('models.user', ['lodash', 'services', 'ngSails'])
+angular.module('models.event', ['lodash', 'services', 'ngSails'])
 
-.service('UserModel',['$q', 'lodash', 'utils', '$sails', function($q, lodash, utils, $sails) {
+.service('EventModel',['$q', 'lodash', 'utils', '$sails', function($q, lodash, utils, $sails) {
   this.getAll = function() {
 
     var deferred = $q.defer();
-    var url = utils.prepareUrl('user');
+    var url = utils.prepareUrl('event');
     $sails.get(url, function(models) {
       return deferred.resolve(models);
     });
@@ -13,7 +13,7 @@ angular.module('models.user', ['lodash', 'services', 'ngSails'])
 
   this.create = function(newModel) {
     var deferred = $q.defer();
-    var url = utils.prepareUrl('user');
+    var url = utils.prepareUrl('event');
     $sails.post(url, newModel, function(model) {
       return deferred.resolve(model);
     });
@@ -22,7 +22,7 @@ angular.module('models.user', ['lodash', 'services', 'ngSails'])
 
   this.delete = function(model) {
     var deferred = $q.defer();
-    var url = utils.prepareUrl('user/' + model.id);
+    var url = utils.prepareUrl('event/' + model.id);
     $sails.delete(url, function(model) {
       return deferred.resolve(model);
     });
@@ -31,7 +31,7 @@ angular.module('models.user', ['lodash', 'services', 'ngSails'])
 
   this.update = function(modelu) {
     var deferred = $q.defer();
-    var url = utils.prepareUrl('user');
+    var url = utils.prepareUrl('event');
 
 
     $sails.put(url, modelu, function(model) {

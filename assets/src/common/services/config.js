@@ -9,8 +9,8 @@ angular.module( 'services.config', ['lodash'])
 		// no trailing slash!
 		siteUrl: '/',
 		apiUrl: '/api',
-
-		currentUser: false
+		currentUser: false,
+    RESULTS_SHOW_THRESHOLD: 20
 	};
 
 }]);

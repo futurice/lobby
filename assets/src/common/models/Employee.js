@@ -2,9 +2,9 @@ angular.module('models.employee', ['lodash', 'services', 'ngSails'])
 
 .service('EmployeeModel',['$q', 'lodash', 'utils', '$sails', function($q, lodash, utils, $sails) {
 	this.getAll = function() {
-		var deferred = $q.defer();
-		var url = utils.prepareUrl('user');
 
+		var deferred = $q.defer();
+		var url = utils.prepareUrl('employees');
 		$sails.get(url, function(models) {
 			return deferred.resolve(models);
 		});
@@ -14,20 +14,9 @@ angular.module('models.employee', ['lodash', 'services', 'ngSails'])
 
 	this.getOne = function(id) {
 		var deferred = $q.defer();
-		var url = utils.prepareUrl('user/' + id);
+		var url = utils.prepareUrl('employees/' + id);
 
 		$sails.get(url, function(model) {
-			return deferred.resolve(model);
-		});
-
-		return deferred.promise;
-	};
-
-	this.create = function(newModel) {
-		var deferred = $q.defer();
-		var url = utils.prepareUrl('user');
-
-		$sails.post(url, newModel, function(model) {
 			return deferred.resolve(model);
 		});
 

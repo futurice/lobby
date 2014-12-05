@@ -19,7 +19,11 @@ angular.module( 'lobby', [
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
 
-	$urlRouterProvider.otherwise('/');
+  $urlRouterProvider.when('', '/');
+  $urlRouterProvider.otherwise(function ($injector, $location) {
+    // pass through to let the web server handle this request
+    window.location = $location.$$absUrl;
+  });
 }])
 
 .run( function run () {

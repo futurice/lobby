@@ -6,4 +6,5 @@ notifications:
 before_script:
   - npm install -g grunt-cli
   - npm uninstall grunt # https://github.com/npm/npm/issues/3958
-services: mongodb
+services:
+  - mongodb

@@ -47,6 +47,10 @@
     "start": "node app.js",
     "pretest": "npm install",
     "test": "grunt test:unit && grunt protractor",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor",
     "debug": "node debug app.js"
   },
   "main": "app.js",

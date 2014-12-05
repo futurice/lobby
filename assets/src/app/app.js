@@ -8,28 +8,22 @@ angular.module( 'lobby', [
 	'services',
 	'models',
   'ngTable',
-  'directive.blink',
   'lobby.header',
 	'lobby.home',
-	'lobby.about',
-  'lobby.todos',
-  'lobby.users'
+	'lobby.help',
+  'lobby.employees',
+  'lobby.delivery',
+  'lobby.finish',
+  'lobby.openspace'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
 
-	$urlRouterProvider.otherwise(function ($injector, $location) {
-
-		if ($location.$$url === '/') {
-			window.location = '/home';
-		}
-		else {
-			// pass through to let the web server handle this request
-
-			window.location = $location.$$absUrl;
-		}
-	});
-	$locationProvider.html5Mode(true);
+  $urlRouterProvider.when('', '/');
+  $urlRouterProvider.otherwise(function ($injector, $location) {
+    // pass through to let the web server handle this request
+    window.location = $location.$$absUrl;
+  });
 }])
 
 .run( function run () {

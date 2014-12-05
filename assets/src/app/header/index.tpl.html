@@ -1,3 +1,5 @@
 <header ng-controller="HeaderCtrl">
-  <img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg" alt="Futurice" style="width: 25%; padding: 20px;">
+  <h1><img src="images/futurice-logo--white.svg" alt="Futurice"></h1>
+  <p ng-if="home" class="tagline">We create digital services for people to love.</p>
+  <a ng-if="!home" ui-sref="home" class="button"><i class="fa fa-arrow-circle-left"></i> Back</a>
 </header>

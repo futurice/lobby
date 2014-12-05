@@ -1,20 +1,19 @@
-angular.module( 'lobby.users', [
+angular.module( 'lobby.employees', [
 ])
 
        .config( ['$stateProvider',function config( $stateProvider ) {
-            $stateProvider.state( 'users', {
-		url: '/users',
+            $stateProvider.state( 'employees', {
+		url: '/employees',
 		views: {
 			"main": {
-				controller: 'UserCtrl',
-				templateUrl: 'users/index.tpl.html'
+				controller: 'EmployeeCtrl',
+				templateUrl: 'employees/index.tpl.html'
 			}
 		},
-		data:{ pageTitle: 'User' }
 	});
 }])
 
-    .controller( 'UserCtrl',['$scope', '$sails', 'lodash', 'config', 'UserModel','$filter', 'ngTableParams', function UserController( $scope, $sails, lodash, config, UserModel,$filter, ngTableParams ) {
+    .controller( 'EmployeeCtrl',['$scope', '$sails', 'lodash', 'config', 'EmployeeModel','$filter', 'ngTableParams', function EmployeeController( $scope, $sails, lodash, config, EmployeeModel, $filter, ngTableParams ) {
 
         $scope.newUser = {};
 
@@ -23,7 +22,7 @@ angular.module( 'lobby.users', [
 
 
         $scope.destroyUser = function(user) {
-            UserModel.delete(user).then(function(model) {
+            EmployeeModel.delete(user).then(function(model) {
                 // todo has been deleted, and removed from $scope.todos
              //   lodash.remove($scope.todos, {id: todo.id});
             });
@@ -33,14 +32,14 @@ angular.module( 'lobby.users', [
             console.log('new ',newUser)
             newUser.user = config.currentUser.id;
 
-            UserModel.create(newUser).then(function(model) {
+            EmployeeModel.create(newUser).then(function(model) {
                 $scope.newUser.title ='';
                 //= {};
             });
         };
 
 
-        UserModel.getAll($scope).then(function(models) {
+        EmployeeModel.getAll($scope).then(function(models) {
             $scope.users = models.data;
             var data =$scope.users;
             console.log('data ',data)

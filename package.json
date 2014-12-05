@@ -41,6 +41,8 @@
     "validator": "~3.5.1"
   },
   "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
     "start": "node app.js",
     "debug": "node debug app.js"
   },

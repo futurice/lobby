@@ -3,3 +3,5 @@
    - "0.10"
  notifications:
    flowdock: 0a08322200a820a400672ad55c8e37e9
+ before_script:
+   - npm install -g bower

@@ -44,6 +44,8 @@
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "node app.js",
+    "pretest": "npm install",
+    "test": "grunt test:unit && grunt protractor",
     "debug": "node debug app.js"
   },
   "main": "app.js",

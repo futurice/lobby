@@ -60,7 +60,13 @@ module.exports.routes = {
     'get /api/user/:id': 'UserController.getOne',
     'post /api/user': 'UserController.create',
 
-  /**
+    /**
+     * Employee routes
+     *
+     */
+    'get /api/employees': 'EmployeeController.index',
+
+    /**
      * Message routes
      *
      */
@@ -69,7 +75,6 @@ module.exports.routes = {
     'post /api/message': 'MessageController.create',
     'put /api/message': 'MessageController.update',
 //    'put /api/message/:id': 'MessageController.update',
-
 
     'delete /api/message/:id': 'MessageController.destroy',
 
@@ -84,10 +89,5 @@ module.exports.routes = {
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options
   // and examples.
-
-  'get /home': 'HomeController.index',
-  'get /about': 'HomeController.index',
-  'get /messages': 'HomeController.index',
-  'get /todos': 'HomeController.index'
 
 };

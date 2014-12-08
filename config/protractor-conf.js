@@ -7,18 +7,12 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'chrome',
-      version:'',
-      platform:'ANY'
-
+    'browserName': 'chrome'
   },
 
   baseUrl: 'http://localhost:1337/',
 
-    seleniumServerJar: '../node_modules/selenium/lib/runner/selenium-server-standalone-2.20.0.jar',
-    chromeDriver: '../node_modules/chromedriver/bin/chromedriver',
-   // seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
-    framework: 'jasmine',
+  framework: 'jasmine',
 
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000,

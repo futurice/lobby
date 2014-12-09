@@ -8,10 +8,14 @@
 
 module.exports = {
 	attributes: {
-		email: {
+		phone: {
+            type: 'string',
+            required: true,
+            unique:true,
+        },
+         email: {
 			type: 'email',
 			required: true,
-			unique: true
 		},
 		first_name: {
 			type: 'string',
@@ -21,11 +25,7 @@ module.exports = {
             type: 'string',
             required: true
         },
-        phone: {
-            type: 'string',
-            required: true
-    },
-    
+            
   getAll: function() {
     return User.find().then(function (models) {
       return [models];
@@ -49,4 +49,4 @@ module.exports = {
       }
     });
   }
-};
+}}

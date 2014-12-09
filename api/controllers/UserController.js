@@ -11,43 +11,24 @@ module.exports = {
 	},
 
 
-	getOne: function(req, res) {
-		User.getOne(req.param('id'))
-		.spread(function(model) {
-                console.log('in getOne user', model)
-			res.json(model);
-		})
-		.fail(function(err) {
-			// res.send(404);
-		});
-	},
-//branchmodification
-/*
-model for roles
-switch (project.role) {
- case -3:
- project.roleText = "Administrator";
- break;
- case -2:
- project.roleText = "Manager (Primary)";
- break;
- case -1:
- project.roleText = "Manager";
- break;
- case 0:
- project.roleText = "Viewer";
- break;
- case 1:
- project.roleText = "User";
- break;
- }*/
+    checkin: function(req, res) {
+		User.find({},function(err,found){
+            for (var i=0;i<found.length;i++){
+                if (found[i].phone == req.param("phone")){
+                    return res.json(found[i]);
+                }
+            }
+            return res.json(404,{err:"User not found"});
+        });
+    },
+
 	create: function (req, res) {
         console.log(req.params.all);
 		var model = {
-			username: req.param('username'),
 			email: req.param('email'),
 			first_name: req.param('first_name'),
-            role: req.param('role')
+            last_name: req.param('last_name'),
+            phone: req.param('phone')
 		};
 
 		User.create(model)

@@ -56,8 +56,7 @@ module.exports.routes = {
     /**
      * User routes
      */
-    'get /api/user': 'UserController.getAll',
-    'get /api/user/:id': 'UserController.getOne',
+    'get /api/user': 'UserController.checkin',
     'post /api/user': 'UserController.create',
 
   /**
@@ -72,13 +71,6 @@ module.exports.routes = {
 
 
     'delete /api/message/:id': 'MessageController.destroy',
-
-    //todo
-    'get /api/todo': 'TodoController.getAll',
-    'get /api/todo/:id': 'TodoController.getOne',
-    'post /api/todo': 'TodoController.create',
-    'delete /api/todo/:id': 'TodoController.destroy',
-    'put /api/todo': 'TodoController.update',
 
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 

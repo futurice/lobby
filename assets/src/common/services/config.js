@@ -11,6 +11,7 @@ angular.module( 'services.config', ['lodash'])
     RESULTS_SHOW_AMOUNT: 20,
     RESULTS_SHOW_THRESHOLD: 20,
     EMPLOYEE_FETCH_INTERVAL: 3600000, // 1 hour
+    IDLE_TIMEOUT: 5000,
 
     // Fuzzy search options, see https://github.com/krisk/Fuse#options
     fuse: {

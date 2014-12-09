@@ -51,6 +51,13 @@ angular.module( 'lobby', [
   };
   $rootScope.getEmployees();
   setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
+
+  $scope.$on('$viewContentLoaded', function() {
+    setTimeout(function() {
+      $scope.$apply(function() { $location.path("/"); });
+    }, config.IDLE_TIMEOUT);
+  });
+
 }])
 
 .directive('backImg', function(){

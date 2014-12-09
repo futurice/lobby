@@ -22,14 +22,15 @@ angular.module( 'lobby.openspace', [])
 
     });
 }])
-.controller('OpenSpaceCtrl',['$scope', '$sails', '$http', 'config', function OpenSpaceController( $scope, $sails, $http, config) {
+.controller('OpenSpaceCtrl',['$scope', '$sails', '$http', 'config','$location', function OpenSpaceController( $scope, $sails, $http, config,$location) {
 
     $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
     $scope.errors = "";
     $scope.getUser = function(){
         $http.get("/api/user?phone="+$scope.person.phone)
             .success(function(data,status,headers,config){
-                $scope.errors = "Welcome "+ data.first_name +" "+ data.last_name+ "!";  
+                //$scope.errors = "Welcome "+ data.first_name +" "+data.last_name+ "!"; 
+                $location.path("/finish/openspace");
             })
             .error(function(data,status,headers,config){
                 $scope.errors = data.err;
@@ -40,7 +41,8 @@ angular.module( 'lobby.openspace', [])
     $scope.register = function(){
         $http.post("/api/user/",$scope.person)
             .success(function(data,status,headers,config){
-                $scope.errors = "saved succesfully"; 
+                //$scope.errors = "saved succesfully";
+                $location.path("/finish/openspace");
             })
             .error(function(data,status,headers,config){
                 $scope.errors = "registering failed";

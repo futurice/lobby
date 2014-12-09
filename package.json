@@ -46,7 +46,7 @@
     "prestart": "npm install",
     "start": "node app.js",
     "pretest": "npm install",
-    "test": "grunt test:unit && npm run protractor",
+    "test": "grunt test:unit",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",

@@ -53,8 +53,12 @@ angular.module( 'lobby', [
   setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
 
   $scope.$on('$viewContentLoaded', function() {
-    setTimeout(function() {
-      $scope.$apply(function() { $location.path("/"); });
+    // if timer already exists, destroy it so that it resets when user navigates
+    if($scope.timer){
+      $timeout.cancel($scope.timer);
+    }
+    $scope.timer = $timeout(function() {
+      $location.path("/");
     }, config.IDLE_TIMEOUT);
   });
 

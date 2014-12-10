@@ -24,6 +24,6 @@ module.exports = {
         last_name: {
             type: 'string',
             required: true
-        },
+        }
     }
 }

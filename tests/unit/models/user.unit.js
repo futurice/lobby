@@ -4,9 +4,9 @@ var User = require('../../../api/models/User'),
     should = require('should'),
     Sails = require('sails');
 
-describe('The User Model', function () {
+xdescribe('The User Model', function () {
 
-    describe('#findAll()', function () {
+    xdescribe('#findAll()', function () {
         it('should get all Users', function (done) {
             User.getAll().then(function (users) {
 
@@ -32,7 +32,7 @@ describe('The User Model', function () {
             };
 
 
-            describe('#findAll()', function () {
+            xdescribe('#findAll()', function () {
                 it('should get all Users', function (done) {
                     User.getAll().then(function (users) {
 

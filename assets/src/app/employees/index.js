@@ -1,64 +1,37 @@
-angular.module( 'lobby.employees', [
-])
+angular.module( 'lobby.employees', [])
 
-       .config( ['$stateProvider',function config( $stateProvider ) {
-            $stateProvider.state( 'employees', {
-		url: '/employees',
-		views: {
-			"main": {
-				controller: 'EmployeeCtrl',
-				templateUrl: 'employees/index.tpl.html'
-			}
-		},
-	});
+  .config( ['$stateProvider',function config( $stateProvider ) {
+    $stateProvider.state( 'employees', {
+      url: '/employees',
+      views: {
+       "main": {
+        controller: 'EmployeeCtrl',
+        templateUrl: 'employees/index.tpl.html'
+      }
+    },
+  });
 }])
 
-    .controller( 'EmployeeCtrl',['$scope', '$sails', 'lodash', 'config', 'EmployeeModel','$filter', 'ngTableParams', function EmployeeController( $scope, $sails, lodash, config, EmployeeModel, $filter, ngTableParams ) {
-
-        $scope.newUser = {};
-
-        $scope.users = [];
-        $scope.currentUser = config.currentUser;
+.controller( 'EmployeeCtrl',['$scope', 'config', 'EmployeeModel',
+  function EmployeeController( $scope, config, EmployeeModel ) {
 
 
-        $scope.destroyUser = function(user) {
-            EmployeeModel.delete(user).then(function(model) {
-                // todo has been deleted, and removed from $scope.todos
-             //   lodash.remove($scope.todos, {id: todo.id});
-            });
-        };
+  $scope.employees = [];
+  $scope.searchText = '';
+  $scope.showEmployees = false;
 
-        $scope.createUser = function(newUser) {
-            console.log('new ',newUser)
-            newUser.user = config.currentUser.id;
+  // Fetch the employee listing
+  EmployeeModel.getAll($scope).then(function(models) {
+    $scope.employees = JSON.parse(models);
+  });
 
-            EmployeeModel.create(newUser).then(function(model) {
-                $scope.newUser.title ='';
-                //= {};
-            });
-        };
+  // Check if we want to show results when the collection changes
+  $scope.$watchCollection("filteredEmployees", function( newValue, oldValue ) {
+      $scope.showEmployees = newValue.length < config.RESULTS_SHOW_THRESHOLD && newValue.length;
+    }
+  );
 
-
-        EmployeeModel.getAll($scope).then(function(models) {
-            $scope.users = models.data;
-            var data =$scope.users;
-            console.log('data ',data)
-            $scope.tableParams = new ngTableParams({
-                page: 1,            // show first page
-                count: 25,          // count per page
-                sorting: {
-
-                    title: 'asc'
-                }
-            }, {
-                 total: data.length,
-                getData: function($defer, params) {
-                    var orderedData = params.sorting() ?
-                        $filter('orderBy')(data, $scope.tableParams.orderBy()) :
-                        data;
-                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                }
-            });
-        });
-
-    }]);
+  $scope.selectEmployee = function(employee) {
+    alert("selected " + employee.name);
+  }
+}]);

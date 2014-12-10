@@ -5,7 +5,7 @@ var util = require('util');
 describe('MEANS App', function () {
 
 
-    describe('Login scenarios', function () {
+    xdescribe('Login scenarios', function () {
         var email;
         var password;
         var loginButton;

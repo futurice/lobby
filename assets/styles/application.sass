@@ -64,6 +64,7 @@ textarea
   min-height: 7rem
 
 .box
+  margin: 0 auto
   background: $white
   box-shadow: 0 1px 2px rgba(0,0,0,0.1)
   padding: 1rem
@@ -101,44 +102,23 @@ table
   width: 100%
 
 
-// login buttons
-.social-login-btn
-  margin: 5px
-  width: 20%
-  font-size: 250%
-  padding: 0
+.employees-container
+  margin: 0 auto
 
-.social-login-more
-  width: 45%
+  ul.employees
+    margin: 0
+    margin-top: 1rem
 
-.social-google
-  background-color: #da573b
-  border-color: #be5238
+    li
+      list-style-type: none
+      margin-bottom: 1rem
+      cursor: pointer
+      transition: .2s all
 
-  &:hover
-    background-color: #be5238
-    border-color: #9b4631
+      &:hover, &:focus, &:active
+        background: $futuriceGreen
+        color: $white
 
-.social-twitter
-  background-color: #1daee3
-  border-color: #3997ba
-
-  &:hover
-    background-color: #3997ba
-    border-color: #347b95
-
-.social-facebook
-  background-color: #4c699e
-  border-color: #47618d
-
-  &:hover
-    background-color: #47618d
-    border-color: #3c5173
-
-.social-linkedin
-  background-color: #4875B4
-  border-color: #466b99
-
-  &:hover
-    background-color: #466b99
-    border-color: #3b5a7c
+  .phone, .email
+    display: block
+    margin-left: 0.5rem

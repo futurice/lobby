@@ -1,49 +1,39 @@
-var User = require('../../../api/models/User'),
+//var User = require('../../../api/models/User'),
 // sinon = require('sinon'),
     assert = require('assert'),
     should = require('should'),
     Sails = require('sails');
 
-xdescribe('The User Model', function () {
+describe('openspace user model', function () {
 
-    xdescribe('#findAll()', function () {
-        it('should get all Users', function (done) {
-            User.getAll().then(function (users) {
+    describe('create', function () {
 
-                assert.notEqual(users, undefined);
-
-                done();
-
-            }).fail(done);
-        });
-    });
-
-    xdescribe('sign up', function () {
-
-        it('should create User', function (done) {
+        it('should create new openspace user', function (done) {
 
             var sampleuser = {
-                username: 'jamesH',
-                email: 'james@yahoo.com',
-                password: 'mypassword',
-                first_name: 'james',
-                role: 3
-
+                phone: '02948127519212',
+                email: 'j.ketkupolkka@pulttibois.fi',
+                last_name: 'Potkukelkka',
+                first_name: 'James',
             };
+            User.create(sampleuser, function(err, data){
+                if(err){
+                fail();
+                } 
+                describe('findOne()', function () {
+                    it('should get newly created user', function (done) {
+                        User.findOne({phone:'02948127519212'} ,function (err, found) {
 
+                            assert.notEqual(found, undefined);
+                            
+                            User.destroy({phone:'02948127519212'});
+                            done();
 
-            xdescribe('#findAll()', function () {
-                it('should get all Users', function (done) {
-                    User.getAll().then(function (users) {
-
-                        assert.notEqual(users, undefined);
-
-                        done();
-
-                    }).fail(done);
+                        });
+                    });
                 });
+            done();
             });
-
 
         });
     });

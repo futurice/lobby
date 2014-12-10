@@ -1,13 +1,11 @@
 module.exports = {
 	getAll: function(req, res) {
-		User.getAll()
-		.spread(function(models) {
-
-                res.json({data:models});
-		})
-		.fail(function(err) {
-			// An error occured
-		});
+		User.find({},function(err,found){
+            if (err){
+                return res.json(503,{err:"Error while retrieving userdata"});
+            }
+            return res.json(found);
+        });
 	},
 
 

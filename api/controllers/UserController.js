@@ -12,11 +12,9 @@ module.exports = {
 
 
     checkin: function(req, res) {
-		User.find({},function(err,found){
-            for (var i=0;i<found.length;i++){
-                if (found[i].phone == req.param("phone")){
-                    return res.json(found[i]);
-                }
+		User.findOne({phone:req.param('phone')},function(err,found){
+            if (!err && found != undefined){
+                return res.json(found);
             }
             return res.json(404,{err:"User not found"});
         });

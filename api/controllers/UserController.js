@@ -1,53 +1,30 @@
 module.exports = {
 	getAll: function(req, res) {
-		User.getAll()
-		.spread(function(models) {
-
-                res.json({data:models});
-		})
-		.fail(function(err) {
-			// An error occured
-		});
+		User.find({},function(err,found){
+            if (err){
+                return res.json(503,{err:"Error while retrieving userdata"});
+            }
+            return res.json(found);
+        });
 	},
 
 
-	getOne: function(req, res) {
-		User.getOne(req.param('id'))
-		.spread(function(model) {
-                console.log('in getOne user', model)
-			res.json(model);
-		})
-		.fail(function(err) {
-			// res.send(404);
-		});
-	},
+    checkin: function(req, res) {
+		User.findOne({phone:req.param('phone')},function(err,found){
+            if (!err && found != undefined){
+                return res.json(found);
+            }
+            return res.json(404,{err:"User not found"});
+        });
+    },
 
-/*
-model for roles
-switch (project.role) {
- case -3:
- project.roleText = "Administrator";
- break;
- case -2:
- project.roleText = "Manager (Primary)";
- break;
- case -1:
- project.roleText = "Manager";
- break;
- case 0:
- project.roleText = "Viewer";
- break;
- case 1:
- project.roleText = "User";
- break;
- }*/
 	create: function (req, res) {
         console.log(req.params.all);
 		var model = {
-			username: req.param('username'),
 			email: req.param('email'),
 			first_name: req.param('first_name'),
-            role: req.param('role')
+            last_name: req.param('last_name'),
+            phone: req.param('phone')
 		};
 
 		User.create(model)

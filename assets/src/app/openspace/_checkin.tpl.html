@@ -2,7 +2,7 @@
   <div class="row">
     <div class="medium-12 columns">
       <label>Credentials <small>Required</small>
-        <input type="text" placeholder="Type your e-mail or phone number">
+        <input type="text" ng-model="person.phone" placeholder="type your phone number">
       </label>
     </div>
   </div>
@@ -13,5 +13,5 @@
       </label>
     </div>
   </div>
-  <button type="submit" class="button success expand radius" ui-sref="finish.openspace">Check in</button>
+  <button type="submit" class="button success expand radius" ng-click="getUser()">Check in</button>
 </form>

@@ -1,4 +1,4 @@
-# Electronic Receptionist
+# Electronic Receptionist [![Build Status](https://travis-ci.org/futurice/lobby.svg?branch=master)](https://travis-ci.org/futurice/lobby)
 
 Web application to welcome and guide visitors arriving to the Futurice office in Kamppi, Helsinki. Built on [Sails.js](http://sailsjs.org) and [Angularjs](http://www.angularjs.org).
 
@@ -19,15 +19,15 @@ Download & Install Ruby and the SASS preprocessor. Follow [these instructions](h
     $ gem install sass
 
 ####Bower####
-We're going to use the Bower Package Manager to manage the front-end packages, in order to install it make sure you've installed Node.js and npm, then install bower globally using npm:
+We use the Bower Package Manager to manage the front-end packages, in order to install it make sure you've installed Node.js and npm, then install bower globally using npm:
 
     $ npm install -g bower
 
 ####Grunt####
-We're going to use the Grunt Task Runner to automate the development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
+We use the Grunt Task Runner to automate the development process, in order to install it make sure you've installed Node.js and npm, then install grunt globally using npm:
 
     $ npm install -g grunt-cli
-Note: Your user might not have the permissions to install package globally, so use a super user or sudo or run with admin privileges for windows command
+Note: Your user might not have the permissions to install package globally, so use a super user or sudo or run with admin privileges in Windows.
 
 
 Ensure you have Sails installed on your machine by executing the following commands:
@@ -43,9 +43,17 @@ This will install the CLI globally.  Once you have the Sails CLI installed, proc
     $ npm install
     $ bower install
 
-This will install all client and server side packages needed.  Upon succesfully running the commands above, you are ready to run the app. At the root of the project run the following
+This will install all client and server side packages needed.  Upon succesfully running the commands above, you are ready to run the app.
+
+# Running the application #
+
+At the root of the project, run the following
 
     $ sails lift
+
+To run using production configuration with asset minification, use
+
+    $ sails lift --prod
 
 View the app on your local machine at [http://localhost:1337](http://localhost:1337)
 
@@ -96,21 +104,21 @@ View the app on your local machine at [http://localhost:1337](http://localhost:1
 # Features #
 
 ## Asset Management ##
-MEANS asset pipeline is streamlined, including additional AngularJS or other frameworks and libraries is as easy as modifying the file located at *tasks/pipeline.js*
+The asset pipeline is streamlined, so including additional AngularJS or other frameworks and libraries is as easy as modifying the file located at *tasks/pipeline.js*
 
 ## Grunt ##
-Grunt is included with various tasks including concat, minifying, less compiling and uglify, but it is not required.  For more detail, view tasks/README.md
+Grunt is included with various tasks including concat, minifying, sass compiling and uglify, but it is not required.  For more detail, view tasks/README.md
 
 ## Unit and e2e Testing (Client-side and Server-side) ##
-We've integrated Grunt Tasks for MochaJS unit testing.
+We've integrated Grunt tasks for MochaJS unit testing.
 
 #### MochaJS Unit Testing ####
-Just use the following command for MochaJS Unit Testing
+Just use the following command to run the MochaJS unit tests
 
     $ grunt test:unit
 
 #### Protractor end-to-end Testing ####
-Just use the following command for end-to-end testing
+Just use the following command to run the Protractor end-to-end tests
 
     $ grunt protractor
 

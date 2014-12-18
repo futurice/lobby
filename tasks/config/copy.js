@@ -42,7 +42,7 @@ module.exports = function(grunt) {
                 flatten: true,
                 cwd: './assets',
                 src: [imagesToCopy],
-                dest: '.tmp/public/images/logos'
+                dest: '.tmp/public/images/'
 
             }]
 		},

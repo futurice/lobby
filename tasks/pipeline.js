@@ -38,6 +38,7 @@ var jsFilesToInject = [
     'bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
     'bower_components/ng-table/ng-table.js',
     'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/fontawesome/css/font-awesome.min.css',
     //
     // *->    you might put other dependencies like jQuery or Angular here   <-*
     //

@@ -33,6 +33,6 @@ angular.module( 'lobby.employees', [])
 
   $scope.selectEmployee = function(employee) {
     alert("selected " + employee.name);
-    $http.put("/api/notify",{"type":"flowdock", "message":employee + " valittu"});
+    $http.put("/api/notify",{"type":"flowdock", "message":employee.email + " valittu"});
   }
 }]);

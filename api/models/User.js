@@ -7,23 +7,23 @@
  */
 
 module.exports = {
-	attributes: {
-		phone: {
+    attributes: {
+        phone: {
             type: 'string',
             required: true,
-            unique:true,
+            unique: true,
         },
-         email: {
-			type: 'email',
-			required: true,
-		},
-		first_name: {
-			type: 'string',
-			required: true
-		},
+        email: {
+            type: 'email',
+            required: true,
+        },
+        first_name: {
+            type: 'string',
+            required: true
+        },
         last_name: {
             type: 'string',
             required: true
         }
     }
-}
+};

@@ -1,6 +1,6 @@
 angular.module('models.employee', ['lodash', 'services', 'ngSails'])
 
-.service('EmployeeModel',['$q', 'lodash', 'utils', '$sails', function($q, lodash, utils, $sails) {
+.service('EmployeeModel', ['$q', 'lodash', 'utils', '$sails', function($q, lodash, utils, $sails) {
 	this.getAll = function() {
 
 		var deferred = $q.defer();

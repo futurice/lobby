@@ -21,17 +21,17 @@
  * @param {Obecjt}   res
  * @param {Function} next
  */
-module.exports = function (req, res, next) {
-  // Initialize Passport
-  passport.initialize()(req, res, function () {
+module.exports = function(req, res, next) {
+    // Initialize Passport
+    passport.initialize()(req, res, function() {
 
-    // Use the built-in sessions
-    passport.session()(req, res, function () {
+        // Use the built-in sessions
+        passport.session()(req, res, function() {
 
-      // Make the user available throughout the frontend
-      res.locals.user = req.user;
+            // Make the user available throughout the frontend
+            res.locals.user = req.user;
 
-      next();
+            next();
+        });
     });
-  });
 };

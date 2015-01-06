@@ -9,20 +9,22 @@ var fs = require('fs');
 
 module.exports = {
 
-  /**
-   * `EmployeeController.index()`
-   */
-  index: function (req, res) {
-    var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
-    return res.json(employees);
-  },
+    /**
+     * `EmployeeController.index()`
+     */
+    index: function(req, res) {
+        var employees = fs.readFileSync('./employees.json', {
+            'encoding': 'utf8'
+        });
+        return res.json(employees);
+    },
 
-  /**
-   * `EmployeeController.notify()`
-   */
-  notify: function (req, res) {
-    return res.json({
-      todo: 'notify() is not implemented yet!'
-    });
-  }
+    /**
+     * `EmployeeController.notify()`
+     */
+    notify: function(req, res) {
+        return res.json({
+            todo: 'notify() is not implemented yet!'
+        });
+    }
 };

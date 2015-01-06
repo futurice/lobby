@@ -54,5 +54,5 @@ angular.module('lobby.openspace', [])
                     $scope.errors = "registering failed";
                 });
 
-        }
+        };
     }]);

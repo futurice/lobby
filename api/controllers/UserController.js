@@ -15,7 +15,7 @@ module.exports = {
         User.findOne({
             phone: req.param('phone')
         }, function(err, found) {
-            if (!err && found != undefined) {
+            if (!err && found !== undefined) {
                 return res.json(found);
             }
             return res.json(404, {

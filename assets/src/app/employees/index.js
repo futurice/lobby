@@ -32,6 +32,6 @@ angular.module('lobby.employees', [])
 
         $scope.selectEmployee = function(employee) {
             alert("selected " + employee.name);
-        }
+        };
     }
 ]);

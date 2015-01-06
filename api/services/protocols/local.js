@@ -26,9 +26,8 @@ exports.register = function(req, res, next) {
     var email = req.param('email'),
         username = req.param('username'),
         password = req.param('password'),
-        first_name = req.param('first_name')
-
-    , role = req.param('role');
+        first_name = req.param('first_name'),
+        role = req.param('role');
 
 
     if (!email) {

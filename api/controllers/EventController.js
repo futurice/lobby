@@ -81,7 +81,7 @@ module.exports = {
                     status: updated[0].status,
                     title: updated[0].title
                 });
-            })
+            });
         } else {
             if (status && req.isSocket) {
                 Event.update(id, {
@@ -91,7 +91,7 @@ module.exports = {
                     Event.publishUpdate(updated[0].id, {
                         status: updated[0].status
                     });
-                })
+                });
             }
         }
     },

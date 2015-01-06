@@ -1,17 +1,15 @@
-angular.module( 'lobby.help', [
-])
+angular.module('lobby.help', [])
 
-    .config( ['$stateProvider',function config( $stateProvider ) {
-        $stateProvider.state( 'help', {
-		url: '/help',
-		views: {
-			"main": {
-				controller: 'HelpCtrl',
-				templateUrl: 'help/index.tpl.html'
-			}
-		}
-	});
+.config(['$stateProvider', function config($stateProvider) {
+    $stateProvider.state('help', {
+        url: '/help',
+        views: {
+            "main": {
+                controller: 'HelpCtrl',
+                templateUrl: 'help/index.tpl.html'
+            }
+        }
+    });
 }])
 
-.controller( 'HelpCtrl',['$scope', function HelpController( $scope ) {
-}]);
+.controller('HelpCtrl', ['$scope', function HelpController($scope) {}]);

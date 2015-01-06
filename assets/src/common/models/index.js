@@ -1,5 +1,5 @@
 angular.module('models', [
-	'models.employee',
-  'models.user',
-  'models.event'
+    'models.employee',
+    'models.user',
+    'models.event'
 ]);

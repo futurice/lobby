@@ -12,6 +12,15 @@ module.exports = {
     checkin: function(req, res) {
 		User.findOne({phone:req.param('phone')},function(err,found){
             if (!err && found != undefined){
+				var d= new Date();
+				User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
+					if (err){
+						console.log(err);
+					}
+					else{
+						console.log(found);
+					}						
+				});
                 return res.json(found);
             }
             return res.json(404,{err:"User not found"});
@@ -19,12 +28,13 @@ module.exports = {
     },
 
 	create: function (req, res) {
-        console.log(req.params.all);
+        var d= new Date();
 		var model = {
 			email: req.param('email'),
 			first_name: req.param('first_name'),
             last_name: req.param('last_name'),
-            phone: req.param('phone')
+            phone: req.param('phone'),
+			last_seen: d.getTime(),
 		};
 
 		User.create(model)

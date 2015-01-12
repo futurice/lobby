@@ -58,6 +58,7 @@ module.exports.routes = {
      */
     'get /api/user': 'UserController.checkin',
     'post /api/user': 'UserController.create',
+    'get /api/users': 'UserController.getAll',
 
     /**
      * Employee routes

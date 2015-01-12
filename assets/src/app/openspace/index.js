@@ -20,12 +20,24 @@ angular.module( 'lobby.openspace', [])
       url: '/checkin',
       templateUrl: 'openspace/_checkin.tpl.html',
 
+    })
+    .state('openspaceadmin', {
+    url: '/osadmin',
+    views: {
+      "main": {
+        abstract: true,
+        controller: 'OpenSpaceCtrl',
+        templateUrl: 'openspace/_admin.tpl.html',
+      }
+    }
     });
 }])
 .controller('OpenSpaceCtrl',['$scope', '$sails', '$http', 'config','$location', function OpenSpaceController( $scope, $sails, $http, config,$location) {
 
     $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
     $scope.errors = "";
+	$scope.predicate = "-tstamp";
+    $scope.users = [{first_name:"Nope",last_name:"Nope",mail:"Nope"}];
     $scope.getUser = function(){
         $http.get("/api/user?phone="+$scope.person.phone)
             .success(function(data,status,headers,config){
@@ -49,5 +61,24 @@ angular.module( 'lobby.openspace', [])
             });
 
     }
+    $scope.getAll = function(){
+    $http.get("/api/users")
+            .success(function(data,status,headers,config){
+				for (var i=0;i<data.length;i++){
+					
+					
+					data[i].tstamp = data[i].last_seen ? parseInt(data[i].last_seen) :0;
+					var d = new Date(data[i].tstamp);
+					data[i].time = d.toUTCString();				
+				}                
+				$scope.users =  data;
+			
+            })
+            .error(function(data,status,headers,config){
+            $scope.errors = data.err;
+            });
+    };
+	$scope.getAll();
+    setInterval($scope.getAll,10000);
 }]);
 

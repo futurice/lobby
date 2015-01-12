@@ -24,6 +24,11 @@ module.exports = {
         last_name: {
             type: 'string',
             required: true
+        },
+	last_seen: {
+            type: 'string',
+            required: false,
         }
+	
     }
 }

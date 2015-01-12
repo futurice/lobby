@@ -10,6 +10,14 @@ module.exports = {
 
 
     checkin: function(req, res) {
+		var model = {
+			name: "checkin"			
+		};
+
+		SystemEvent.create(model).exec(function(err, model){
+			//todo stuff
+		});
+
 		User.findOne({phone:req.param('phone')},function(err,found){
             if (!err && found != undefined){
                 return res.json(found);

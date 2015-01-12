@@ -12,6 +12,7 @@ angular.module( 'lobby', [
 	'lobby.home',
 	'lobby.help',
   'lobby.employees',
+  'lobby.systemEvents',
   'lobby.delivery',
   'lobby.finish',
   'lobby.openspace'

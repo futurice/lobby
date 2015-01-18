@@ -13,7 +13,7 @@ module.exports = {
 
     date : { type: 'Date' },
 
-    user : { type: 'User' }
+    user : { type: 'string' }
   }
 };
 

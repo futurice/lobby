@@ -12,18 +12,9 @@ module.exports = {
     checkin: function(req, res) {
 		User.findOne({phone:req.param('phone')},function(err,found){
             if (!err && found != undefined){
-            	var model = {
-					name: "checkin",
-					date: new Date(),
-					user: found.first_name + " " + found.last_name
-				};
+            	
+            	SystemEvent.addSystemEvent("CheckIn", found);
 
-				SystemEvent.create(model).exec(function(err, model){
-					//todo stuff
-					if (err) {
-						console.log(err);
-					}
-				});
                 return res.json(found);
             }
             return res.json(404,{err:"User not found"});
@@ -38,6 +29,8 @@ module.exports = {
             last_name: req.param('last_name'),
             phone: req.param('phone')
 		};
+
+		SystemEvent.addSystemEvent("UserCreate",  model);
 
 		User.create(model)
 		.exec(function(err, model) {

@@ -14,6 +14,23 @@ module.exports = {
     date : { type: 'Date' },
 
     user : { type: 'string' }
-  }
+  },
+
+addSystemEvent: function (eventName, user) {
+    var model = {
+					name: eventName,
+					date: new Date(),
+					user: user.first_name + " " + user.last_name
+				};
+
+				SystemEvent.create(model).exec(function(err, model){
+					//todo stuff
+					if (err) {
+						console.log(err);
+					}
+				});
+}
+
+
 };
 

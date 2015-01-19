@@ -27,6 +27,15 @@ header
     display: block
     width: auto
     height: 100%
+    float: left
+    position: absolute
+    left: 20px
+    top: 0px
+    padding-top: 10px
+    padding-bottom: 10px 
+
+  p
+    float: right
 
   p.tagline
     display: inline-block
@@ -38,11 +47,16 @@ header
     line-height: $headerHeight
     color: $white
 
+  i
+    float: right
+    padding: 5px
+
   .button
     float: right
     margin: 0
     display: inline-block
     height: 100%
+    width: 100%
     background: transparent
     color: $white
 
@@ -74,29 +88,31 @@ textarea
     display: block
     float: left
     list-style-type: none
-    width: 50%
+    width: 100%
 
   a
     display: block
     margin: 1rem
-    height: 10rem
+    height: 8rem
     background: $white
     color: $futuriceDarkBlue
     font-size: 32px
     font-weight: bold
     box-shadow: 0 1px 2px rgba(0,0,0,0.1)
-    transition: all .2s ease
     border-radius: 4px
+    text-align: center
+    line-height: 6rem
 
     &:hover, &:active
-      background: $futuriceGreen
-      color: $white
+      background: $white
+      color: $futuriceDarkBlue
 
     i
-      display: block
-      text-align: center
-      width: 100%
-      margin: 1rem 0
+      display: inline
+      width: 2rem
+      margin: 2rem
+      position: fixed
+      left: 5.5rem
 
 table
   width: 100%

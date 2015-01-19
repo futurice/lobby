@@ -1,5 +1,6 @@
 <header ng-controller="HeaderCtrl">
-  <h1><img src="images/futurice-logo--white.svg" alt="Futurice"></h1>
+  <h1 ng-if="home"><img src="images/futurice-logo--white.svg" alt="Futurice"></h1>
   <p ng-if="home" class="tagline">We create digital services for people to love.</p>
-  <a ng-if="!home" ui-sref="home" class="button"><i class="fa fa-arrow-circle-left"></i> Back</a>
+  <!--<a ng-if="!home" ui-sref="home" class="button" style="width:79%;"><i class="fa fa-arrow-circle-left"></i> Back</a>-->
+  <a ng-if="!home" ui-sref="home" class="button"><img src="images/futurice-logo--white.svg" alt="Futurice"><p>Back</p><i class="fa fa-arrow-circle-left"></i></a>
 </header>

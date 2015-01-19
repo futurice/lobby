@@ -6,7 +6,7 @@
 </section>
 
 <section class="employees-container medium-6">
-  <ul class="employees" ng-show="showEmployees">
+  <ul class="employees" ng-show="searchText.length">
     <li
       ng-repeat="employee in filteredEmployees = (employees | filter:searchText)"
       class="box" ng-click="selectEmployee(employee)">
@@ -19,8 +19,4 @@
 
   <div class="box alert medium-6" ng-if="!filteredEmployees.length && searchText.length">
     No results match your search.
-  </div>
-
-  <div class="box alert medium-6" ng-if="!showEmployees && searchText.length && filteredEmployees.length">
-    Too many results, please refine your search.
   </div>

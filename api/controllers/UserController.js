@@ -40,11 +40,10 @@ module.exports = {
 		User.create(model)
 		.exec(function(err, model) {
 			if (err) {
-				return console.log(err);
+				return res.json(503,{{err:"User creation failed for unknown reason"}})
 			}
 			else {
-				User.publishCreate(model.toJSON());
-				res.json(model);
+			    return res.json({msg:"user created successfully!"})
 			}
 		});
 	}

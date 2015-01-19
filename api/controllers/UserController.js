@@ -40,7 +40,7 @@ module.exports = {
 		User.create(model)
 		.exec(function(err, model) {
 			if (err) {
-				return res.json(503,{{err:"User creation failed for unknown reason"}})
+				return res.json(503,{err:"User creation failed for unknown reason"})
 			}
 			else {
 			    return res.json({msg:"user created successfully!"})

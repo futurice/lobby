@@ -1,9 +1,14 @@
 <form>
   <div class="row">
     <div class="medium-12 columns">
-      <label>Credentials <small>Required</small>
+      <label>Credentials <span class="asterisk">*</span>
         <input type="text" ng-model="person.phone" placeholder="type your phone number">
       </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns">
+      <label style="display:inline; float:right;"><span class="asterisk">*</span> Required</label>
     </div>
   </div>
   <div class="row">

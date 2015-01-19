@@ -1,26 +1,31 @@
 <form id="openspace_register">
   <div class="row">
     <div class="medium-6 columns">
-      <label>First Name <small>Required</small>
+      <label>First Name <span class="asterisk">*</span>
         <input type="text" ng-model="person.first_name" />
       </label>
     </div>
     <div class="medium-6 columns">
-      <label>Last Name <small>Required</small>
+      <label>Last Name <span class="asterisk">*</span>
         <input type="text" ng-model="person.last_name" />
       </label>
     </div>
   </div>
   <div class="row">
     <div class="medium-6 columns">
-      <label>Phone Number <small>Required</small>
+      <label>Phone Number <span class="asterisk">*</span>
         <input type="text" ng-model="person.phone" />
       </label>
     </div>
     <div class="medium-6 columns">
-      <label>E-Mail <small>Required</small>
+      <label>E-Mail <span class="asterisk">*</span>
         <input type="text" ng-model="person.email" />
       </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns">
+      <label style="display:inline; float:right;"><span class="asterisk">*</span> Required</label>
     </div>
   </div>
   <div class="row">

@@ -1,4 +1,5 @@
 angular.module( 'lobby', [
+	'ngTouch',
 	'ui.router',
 	'ngSails',
 	'angularMoment',

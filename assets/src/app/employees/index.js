@@ -12,8 +12,8 @@ angular.module( 'lobby.employees', [])
   });
 }])
 
-.controller( 'EmployeeCtrl',['$scope', 'config', 'EmployeeModel',
-  function EmployeeController( $scope, config, EmployeeModel ) {
+.controller( 'EmployeeCtrl',['$scope', '$http', 'config', 'EmployeeModel',
+  function EmployeeController( $scope, $http, config, EmployeeModel ) {
 
 
   $scope.employees = [];
@@ -26,5 +26,6 @@ angular.module( 'lobby.employees', [])
 
   $scope.selectEmployee = function(employee) {
     alert("selected " + employee.name);
+    $http.put("/api/notify",{"type":"flowdock", "message":employee.email + " valittu"});
   }
 }]);

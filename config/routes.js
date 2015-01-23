@@ -22,14 +22,14 @@
 module.exports.routes = {
 
 
-    /**
-     * We set the default language for all routes
-     * **/
-    '/*': function(req, res, next) {
-       // res.setLocale(req.param('lang') || sails.config.i18n.defaultLocale);
-        res.setLocale(sails.config.i18n.defaultLocale);
-        return next();
-    },
+  /**
+   * We set the default language for all routes
+   * **/
+  '/*': function(req, res, next) {
+     // res.setLocale(req.param('lang') || sails.config.i18n.defaultLocale);
+      res.setLocale(sails.config.i18n.defaultLocale);
+      return next();
+  },
   // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
   // default view engine) your home page.
   // 
@@ -47,36 +47,40 @@ module.exports.routes = {
   'post /auth/local': 'AuthController.callback',
   'post /auth/local/:action': 'AuthController.callback',
 
-   'get /auth/:provider': 'AuthController.provider',
-   'get /auth/:provider/callback': 'AuthController.callback',
+  'get /auth/:provider': 'AuthController.provider',
+  'get /auth/:provider/callback': 'AuthController.callback',
 
 
-    // Custom routes here...
+  // Custom routes here...
 
-    /**
-     * User routes
-     */
-    'get /api/user': 'UserController.checkin',
-    'post /api/user': 'UserController.create',
+  /**
+  * User routes
+  */
+  'get /api/user': 'UserController.checkin',
+  'post /api/user': 'UserController.create',
 
-    /**
-     * Employee routes
-     *
-     */
-    'get /api/employees': 'EmployeeController.index',
+  /**
+  * Employee routes
+  *
+  */
+  'get /api/employees': 'EmployeeController.index',
 
-    /**
-     * Message routes
-     *
-     */
-    'get /api/message': 'MessageController.getAll',
-    'get /api/message/:id': 'MessageController.getOne',
-    'post /api/message': 'MessageController.create',
-    'put /api/message': 'MessageController.update',
-//    'put /api/message/:id': 'MessageController.update',
+  /**
+  * Message routes
+  *
+  */
+  'get /api/message': 'MessageController.getAll',
+  'get /api/message/:id': 'MessageController.getOne',
+  'post /api/message': 'MessageController.create',
+  'put /api/message': 'MessageController.update',
+  // 'put /api/message/:id': 'MessageController.update',
 
-    'delete /api/message/:id': 'MessageController.destroy',
+  'delete /api/message/:id': 'MessageController.destroy',
 
+  /**
+   * Notify routes
+   */
+  'put /api/notify' : 'NotifyController.notify',
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 
   // against Sails route blueprints.  See `config/blueprints.js` for configuration options

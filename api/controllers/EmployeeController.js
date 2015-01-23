@@ -6,15 +6,27 @@
  */
 
 var fs = require('fs');
+var https = require('https');
+var _ = require('lodash');
 
 module.exports = {
-
   /**
    * `EmployeeController.index()`
    */
   index: function (req, res) {
-    var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
-    return res.json(employees);
+    https.get("https://api.fum.futurice.com/v1/list/employees/", function(fum) {
+      var body = '';
+      fum.on('data', function(chunk) {
+        body += chunk;
+      });
+      fum.on('end', function() {
+        return res.json(body);  //_.pick(body, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1'));
+      });
+    }).on('error', function(e) {
+      return res.json({'error': e});
+    });
+    //var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
+    //return res.json(employees);
   },
 
   /**

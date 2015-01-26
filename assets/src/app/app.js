@@ -31,11 +31,6 @@ angular.module( 'lobby', [
 	moment.lang('en');
 })
 
-// Logging
-.run(function($rootScope, $log){
-	$rootScope.$log = $log;
-})
-
 .controller( 'AppCtrl',['$scope', 'config', function AppCtrl ( $scope, config ) {
 	config.currentUser = window.currentUser;
 }]);

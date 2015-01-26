@@ -11,24 +11,34 @@ module.exports = {
 
     name : { type: 'string' },
 
-    date : { type: 'Date' },
+    date : { type: 'string' },
 
-    user : { type: 'string' }
+    details : { type: 'string' }
   },
 
-addSystemEvent: function (eventName, user) {
-    var model = {
-					name: eventName,
-					date: new Date(),
-					user: user.first_name + " " + user.last_name
-				};
+addSystemEvent: function (eventName, eventDetails) {
+	var d = new Date();
+	if (eventDetails != undefined) {
+	    var model = {
+			name: eventName,
+			date: d.toString(),
+			details: eventDetails
+		};
+	}
+	else{
+		var model = {
+			name:eventName,
+			date: d.toString(),
+			details: ""
+		}
+	}
 
-				SystemEvent.create(model).exec(function(err, model){
-					//todo stuff
-					if (err) {
-						console.log(err);
-					}
-				});
+	SystemEvent.create(model).exec(function(err, model){
+		//todo stuff
+		if (err) {
+			console.log(err);
+		}
+	});
 }
 
 

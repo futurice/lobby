@@ -13,7 +13,13 @@ module.exports = {
    * `EmployeeController.index()`
    */
   index: function (req, res) {
-    var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
+    var employees;
+    try {
+      employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
+    } catch (err) {
+      SystemEvent.addSystemEvent("ERROR", err);
+      return res.json(503,{err:"Error while retrieving employee list"});
+    }
     return res.json(employees);
   },
 

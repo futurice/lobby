@@ -12,8 +12,8 @@ angular.module( 'lobby.employees', [])
   });
 }])
 
-.controller( 'EmployeeCtrl',['$rootScope', '$scope', 'config', 'EmployeeModel',
-  function EmployeeController( $rootScope, $scope, config, EmployeeModel ) {
+.controller( 'EmployeeCtrl',[ '$scope', 'config', 'EmployeeModel',
+  function EmployeeController( $scope, config, EmployeeModel ) {
 
 
   $scope.employees = [];
@@ -25,7 +25,6 @@ angular.module( 'lobby.employees', [])
   });
 
   $scope.selectEmployee = function(employee) {
-    $rootScope.$log.debug("employee jeejee");
     alert("selected " + employee.name);
   }
 }]);

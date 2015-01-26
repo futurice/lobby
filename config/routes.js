@@ -19,17 +19,6 @@
  * http://sailsjs.org/#documentation
  */
 
-function logSystemEvent(path){
-      var model = {
-        name: path
-      };
-
-      SystemEvent.create(model).exec(function(err, model){
-        //todo stuff
-      });
-
-}
-
 module.exports.routes = {
 
 
@@ -78,7 +67,7 @@ module.exports.routes = {
      *
      */
     'get /api/employees': 'EmployeeController.index',
-    'get /api/systemEvents': 'SystemEventController.index',
+    'get /api/systemEvents': 'SystemEventController.getAll',
  
 
     /**

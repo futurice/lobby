@@ -19,17 +19,6 @@
  * http://sailsjs.org/#documentation
  */
 
-function logSystemEvent(path){
-      var model = {
-        name: path
-      };
-
-      SystemEvent.create(model).exec(function(err, model){
-        //todo stuff
-      });
-
-}
-
 module.exports.routes = {
   /**
    * We set the default language for all routes
@@ -98,21 +87,22 @@ module.exports.routes = {
   'post /api/feedback' : 'FeedbackController.create',
 
   'get /api/systemEvents': 'SystemEventController.index',
+  //'get /api/systemEvents': 'SystemEventController.getAll',
 
-    /**
-     * Message routes
-     *
-     */
-    'get /api/message': 'MessageController.getAll',
-    'get /api/message/:id': 'MessageController.getOne',
-    'post /api/message': 'MessageController.create',
-    'put /api/message': 'MessageController.update',
+  /**
+   * Message routes
+   *
+   */
+  'get /api/message': 'MessageController.getAll',
+  'get /api/message/:id': 'MessageController.getOne',
+  'post /api/message': 'MessageController.create',
+  'put /api/message': 'MessageController.update',
 //    'put /api/message/:id': 'MessageController.update',
 
-    'delete /api/message/:id': 'MessageController.destroy',
+  'delete /api/message/:id': 'MessageController.destroy',
 
-  // If a request to a URL doesn't match any of the custom routes above, it is matched
-  // against Sails route blueprints.  See `config/blueprints.js` for configuration options
-  // and examples.
+// If a request to a URL doesn't match any of the custom routes above, it is matched
+// against Sails route blueprints.  See `config/blueprints.js` for configuration options
+// and examples.
 
 };

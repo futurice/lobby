@@ -20,3 +20,4 @@ nbproject
 .idea
 employees.json
 config/futurice.sample.js
+log.json

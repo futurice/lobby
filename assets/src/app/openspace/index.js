@@ -39,7 +39,7 @@ angular.module( 'lobby.openspace', [])
 	$scope.predicate = "-tstamp";
     $scope.users = [{first_name:"Nope",last_name:"Nope",mail:"Nope"}];
     $scope.getUser = function(){
-        $http.get("/api/user?phone="+$scope.person.phone)
+        $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
             .success(function(data,status,headers,config){
                 //$scope.errors = "Welcome "+ data.first_name +" "+data.last_name+ "!"; 
                 $location.path("/finish/openspace");

@@ -11,7 +11,7 @@ module.exports = {
 	    var now = new Date();
 	    var d= new Date(now.getFullYear(),now.getMonth(),now.getDate());
 
-		User.find({time:{&gt:d.getTime()}},function(err,found){
+		User.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
@@ -22,7 +22,7 @@ module.exports = {
 		var now = new Date();
 	    var d= new Date(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()-now.getDay()*86400000);
 
-		User.find({time:{&gt:d.getTime()}},function(err,found){
+		User.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
@@ -33,7 +33,7 @@ module.exports = {
 	    var now = new Date();
 	    var d= new Date(now.getFullYear(),now.getMonth());
 
-		User.find({time:{&gt:d.getTime()}},function(err,found){
+		User.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }

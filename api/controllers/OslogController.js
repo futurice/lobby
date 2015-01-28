@@ -1,17 +1,33 @@
 module.exports = {
 	getAll: function(req, res) {
-		User.find({},function(err,found){
+		Ospacelog.find({},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
-            return res.json(found);
+            var cb =function(found,i){
+                return function(err,user){
+                    if (err){
+                        return res.json(503,{err:"Error while retrieving userlog"});
+                    }
+                    found[i].user = user;
+                    i++;
+                    if (i<found.length){
+                        User.findOne({id:found[i].userid},cb(found,i));
+                    }
+                    else{
+                        return res.json(found);
+                    }
+                };
+  
+            };
+            User.findOne({id:found[0].userid},cb(found,0))
         });
 	},
-	getDay:function(req, res) {
+	/*getDay:function(req, res) {
 	    var now = new Date();
 	    var d= new Date(now.getFullYear(),now.getMonth(),now.getDate());
 
-		User.find({time:{$gt:d.getTime()}},function(err,found){
+		Ospacelog.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
@@ -22,7 +38,7 @@ module.exports = {
 		var now = new Date();
 	    var d= new Date(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()-now.getDay()*86400000);
 
-		User.find({time:{$gt:d.getTime()}},function(err,found){
+		Ospacelog.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
@@ -33,11 +49,11 @@ module.exports = {
 	    var now = new Date();
 	    var d= new Date(now.getFullYear(),now.getMonth());
 
-		User.find({time:{$gt:d.getTime()}},function(err,found){
+		Ospacelog.find({time:{$gt:d.getTime()}},function(err,found){
             if (err){
                 return res.json(503,{err:"Error while retrieving userlog"});
             }
             return res.json(found);
         });
-	},
+	},*/
 };

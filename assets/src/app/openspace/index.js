@@ -36,8 +36,7 @@ angular.module( 'lobby.openspace', [])
 
     $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
     $scope.errors = "";
-	$scope.predicate = "-tstamp";
-    $scope.users = [{first_name:"Nope",last_name:"Nope",mail:"Nope"}];
+	$scope.predicate = "-timestamp";
     $scope.getUser = function(){
         $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
             .success(function(data,status,headers,config){
@@ -62,16 +61,16 @@ angular.module( 'lobby.openspace', [])
 
     }
     $scope.getAll = function(){
-    $http.get("/api/users")
+    $http.get("/api/oslogins")
             .success(function(data,status,headers,config){
 				for (var i=0;i<data.length;i++){
 					
 					
-					data[i].tstamp = data[i].last_seen ? parseInt(data[i].last_seen) :0;
-					var d = new Date(data[i].tstamp);
+					data[i].timestamp = data[i].timestamp ? parseInt(data[i].timestamp) :0;
+					var d = new Date(data[i].timestamp);
 					data[i].time = d.toUTCString();				
 				}                
-				$scope.users =  data;
+				$scope.logins =  data;
 			
             })
             .error(function(data,status,headers,config){

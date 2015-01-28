@@ -13,8 +13,10 @@ module.exports = {
 		User.findOne({phone:req.param('phone')},function(err,found){
             if (!err && found != undefined){
 				var d= new Date();
-			    var oslog = {userid:found.id,time: d.getTime(),comment:req.param("comment")};
-			    Ospacelog.create(oslog);
+			    var oslog = {userid:found.id,timestamp: d.getTime(),comment:req.param("comment")};
+			    Ospacelog.create(oslog,function(created,err){
+                    console.log(created);
+                });
 				User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
 					if (err){
 						console.log(err);

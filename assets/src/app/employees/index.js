@@ -21,7 +21,16 @@ angular.module( 'lobby.employees', [])
 
   // Fetch the employee listing
   EmployeeModel.getAll($scope).then(function(models) {
-    $scope.employees = JSON.parse(models);
+    var employeesJson = JSON.parse(models);
+    
+    
+    for (var i = 0; i < employeesJson.length; i++) { 
+        employeesJson[i].full_name = employeesJson[i].first_name + " " + employeesJson[i].last_name;
+        //employeesJson[i].first_name = "ASDF22";//employeesJson[i].first_name + " " + employeesJson[i].last_name;
+    }
+
+    $scope.employees = employeesJson;
+
   });
 
   $scope.selectEmployee = function(employee) {

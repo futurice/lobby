@@ -15,7 +15,8 @@ angular.module( 'lobby', [
   'lobby.employees',
   'lobby.delivery',
   'lobby.finish',
-  'lobby.openspace'
+  'lobby.openspace',
+  'lobby.feedback'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {

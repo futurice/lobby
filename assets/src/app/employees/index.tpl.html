@@ -1,22 +1,23 @@
-<section class="intro medium-6">
+<section class="intro medium-8">
   <h2>Employee lookup</h2>
   <p>Let's see if we can find what you're looking for.<br>Type the name of the person below.</p>
 
-  <input type="text" class="large-6" placeholder="Who should we find?" ng-model="searchText">
+  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText">
 </section>
 
-<section class="employees-container medium-6">
+<section class="employees-container medium-8">
   <ul class="employees" ng-show="searchText.length">
     <li
       ng-repeat="employee in filteredEmployees = (employees | filter:searchText)"
-      class="box" ng-click="selectEmployee(employee)">
-      <strong> {{employee.name}}</strong>
-      <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email }}</span>
-      <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone }}</span>
+      class="box clearfix" ng-click="selectEmployee(employee)">
+      <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
+      <strong> {{employee.first_name}} {{employee.last_name}} </strong>
+      <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email}}</span>
+      <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone1}}</span>
     </li>
   </ul>
 </section>
 
-  <div class="box alert medium-6" ng-if="!filteredEmployees.length && searchText.length">
+  <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">
     No results match your search.
   </div>

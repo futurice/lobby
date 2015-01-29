@@ -49,8 +49,10 @@ module.exports = {
 			}
 			else {
 			    var d= new Date();
-			    var oslog = {userid:model.id,time: d.getTime(),comment:req.param("comment")};
-			    Ospacelog.create(oslog);
+			    var oslog = {userid:model.id,timestamp: d.getTime(),comment:req.param("comment")};
+			    Ospacelog.create(oslog,function(created,err){
+                    console.log(created);
+                });
 			    return res.json({msg:"user created successfully!"})
 			}
 		});

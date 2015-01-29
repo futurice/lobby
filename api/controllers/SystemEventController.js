@@ -37,11 +37,17 @@ module.exports = {
               if (err) console.log(err);
               else console.log('Writing log to file...');
             });
-            for (i = 0; i < found.length; i++) {
-              fs.appendFile('./log.json', found[i].date+' '+found[i].name+' '+found[i].details+'\n',
-                function(err) {
-                  if (err) console.log(err);
-              });
+            try {
+              for (i = found.length - 1; i >= 0 ; i--) {
+                fs.appendFile('./log.json', found[i].date+' '+found[i].name+': '+found[i].details+'\n',
+                  function(err) {
+                    if (err) {
+                      console.log(err);
+                    }
+                });
+              }
+            } catch(e) {
+              console.log(e);
             }
             return res.json(found);
         });

@@ -18,6 +18,22 @@
   </ul>
 </section>
 
-  <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">
-    No results match your search.
+<div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">
+  No results match your search.
+</div>
+
+<div id="employeeSelect" class="reveal-modal" data-reveal>
+  <div class="profile-image" back-img="{{selected.portrait_thumb_url}}"></div>
+  <h2>{{selected.first_name}} {{selected.last_name}}</h2>
+  <p class="lead">{{selected.email}}</p>
+  <p>You can notify {{selected.first_name}} of your presence by using the form below.</p>
+
+  <label>Message <small>(optional)</small>
+    <textarea placeholder="" ng-model="notificationMessage"></textarea>
+  </label>
+  <div class="right">
+    <a class="button success" ng-click="notify(selected)">Send Notification</a>
+    <a class="button secondary" ng-click="closeModal()">Cancel</a>
   </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

@@ -36,5 +36,5 @@ angular.module( 'lobby.systemEvents', [])
   }
 
   $scope.getAll();
-
+  setInterval($scope.getAll,10000);
 }]);

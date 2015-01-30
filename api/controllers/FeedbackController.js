@@ -22,7 +22,7 @@ module.exports = {
 	getAll: function (req, res) {
 		Feedback.find({},function(err,found){
             if (err){
-                return res.json(503,{err:"Error while retrieving userdata"});
+                return res.json(503,{err:"Error while retrieving feedback"});
             }
             return res.json(found);
         });

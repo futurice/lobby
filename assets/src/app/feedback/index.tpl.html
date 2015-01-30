@@ -1,0 +1,22 @@
+<section class="intro">
+  <h2>Send feedback</h2>
+  <p>Please fill in your feedback below.</p>
+</section>
+
+
+
+<div class="row">
+  <section class="medium-12 columns">
+    <form>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>How do you like this application?
+            <textarea ng-model="feedback.comments" placeholder="Feel free to leave any comments here."></textarea>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="button success expand radius" ng-click="sendFeedback()">Submit</button>
+    </form>
+    <div id="errors" ng-bind="errors"></div>
+  </section>
+</div>

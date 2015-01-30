@@ -26,6 +26,11 @@ angular.module( 'lobby.finish', [])
   .state( 'finish.openspace', {
     url: '/openspace',
     templateUrl: 'finish/_openspace.tpl.html'
+  })
+
+  .state( 'finish.feedback', {
+    url: '/feedback',
+    templateUrl: 'finish/_feedback.tpl.html'
   });
 }])
 

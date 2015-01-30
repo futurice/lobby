@@ -23,6 +23,7 @@ module.exports = {
         return res.json(body);  //_.pick(body, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1'));
       });
     }).on('error', function(e) {
+      SystemEvent.addSystemEvent("ERROR", e);
       return res.json({'error': e});
     });
     //var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});

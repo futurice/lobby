@@ -38,6 +38,7 @@ angular.module( 'lobby.openspace', [])
     $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
     $scope.errors = "";
 	$scope.predicate = "-timestamp";
+    $scope.timeWindow = 0;
     $scope.getUser = function(){
         $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
             .success(function(data,status,headers,config){
@@ -77,6 +78,17 @@ angular.module( 'lobby.openspace', [])
             .error(function(data,status,headers,config){
             $scope.errors = data.err;
             });
+    };
+    $scope.tstampgt = function(actual,expected){
+        return actual > expected;
+    };
+    $scope.filterDay = function(){
+        var now = new Date();
+        $scope.timeWindow = new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+    };
+    $scope.filterMonth = function(){
+        var now = new Date();
+        $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
     };
 	$scope.getAll();
     setInterval($scope.getAll,10000);

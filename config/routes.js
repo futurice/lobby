@@ -30,6 +30,7 @@ module.exports.routes = {
       res.setLocale(sails.config.i18n.defaultLocale);
       return next();
   },
+
   // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
   // default view engine) your home page.
   // 
@@ -60,10 +61,16 @@ module.exports.routes = {
   'post /api/user': 'UserController.create',
 
   /**
-  * Employee routes
-  *
-  */
+   * Employee routes
+   *
+   */
   'get /api/employees': 'EmployeeController.index',
+
+  /**
+   * System event routes
+   *
+   */
+  'get /api/systemEvents': 'SystemEventController.getAll',
 
   /**
   * Message routes

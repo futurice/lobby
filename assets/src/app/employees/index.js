@@ -11,7 +11,7 @@ angular.module( 'lobby.employees', [])
           }
         },
       });
-    }])
+  }])
 
 .controller( 'EmployeeCtrl',['$scope', '$http', 'config', 'EmployeeModel', '$state',
   function EmployeeController( $scope, $http, config, EmployeeModel, $state ) {

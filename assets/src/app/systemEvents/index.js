@@ -12,16 +12,29 @@ angular.module( 'lobby.systemEvents', [])
   });
 }])
 
-.controller( 'SystemEventCtrl',['$scope', 'config', 'SystemEventModel', 
- function SystemEventController( $scope, config, SystemEventModel ) {
+.controller( 'SystemEventCtrl',['$scope', '$sails', '$http', 'config', 'SystemEventModel', 
+ function SystemEventController( $scope, $sails, $http, config, SystemEventModel ) {
 
-
-  $scope.systemEvents = [];
-  
+  //$scope.systemEvents = [];
+  $scope.errors = "";
 
   // Fetch the employee listing
+  /*
   SystemEventModel.getAll($scope).then(function(models) {
     $scope.systemEvents = models;
   })
+  */
+  $scope.getAll = function() {
+    $http.get("/api/systemEvents")
+      .success(function(data,status,headers,config){
+        $scope.systemEvents = data;
+      })
+
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+      });
+  }
+
+  $scope.getAll();
 
 }]);

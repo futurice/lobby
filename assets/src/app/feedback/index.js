@@ -10,6 +10,16 @@ angular.module( 'lobby.feedback', [])
         templateUrl: 'feedback/index.tpl.html'
       }
     },
+    })
+    .state('feedbackadmin', {
+      url: '/fbadmin',
+      views: {
+        "main": {
+          abstract: true,
+          controller: 'FeedbackCtrl',
+          templateUrl: 'feedback/_admin.tpl.html'
+        }
+      }
     });
 }])
 .controller('FeedbackCtrl', ['$scope', '$sails', '$http', 'config','$state',
@@ -19,15 +29,25 @@ angular.module( 'lobby.feedback', [])
     $scope.errors = "";
    
     $scope.sendFeedback = function(){
-        $http.post("/api/feedback/",$scope.feedback)
-            .success(function(data,status,headers,config){
-                //$scope.errors = "saved succesfully";
-                $state.go("finish.feedback");
-            })
-            .error(function(data,status,headers,config){
-                $scope.errors = "feedback sending failed";
-            });
-
+      $http.post("/api/feedback/",$scope.feedback)
+          .success(function(data,status,headers,config){
+              //$scope.errors = "saved succesfully";
+              $state.go("finish.feedback");
+          })
+          .error(function(data,status,headers,config){
+              $scope.errors = "feedback sending failed";
+          });
     }
+
+    $scope.getAll = function() {
+      $http.get("/api/feedback")
+        .success(function(data,status,headers,config){
+              $scope.feedbacklist = data;
+          })
+          .error(function(data,status,headers,config){
+              $scope.errors = data.err;
+          });
+    };
+    $scope.getAll();
 }]);
 

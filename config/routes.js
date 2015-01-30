@@ -85,6 +85,7 @@ module.exports.routes = {
   /**
    * Feedback routes
    */
+  'get /api/feedback' : 'FeedbackController.getAll',
   'post /api/feedback' : 'FeedbackController.create',
 
   // If a request to a URL doesn't match any of the custom routes above, it is matched 

@@ -9,13 +9,14 @@
 <nav class="main-nav">
   <ul>
     <li>
-      <a class="button" ui-sref="finish.delivery"><i class="fa fa-cutlery"></i> Food</a>
+      <a class="button" ng-click="notify('food')"><i class="fa fa-cutlery"></i> Food</a>
     </li>
     <li>
-      <a class="button" ui-sref="finish.delivery"><i class="fa fa-envelope"></i> Package</a>
+      <a class="button" ng-click="notify('package')"><i class="fa fa-envelope"></i> Package</a>
     </li>
     <li>
-      <a class="button" ui-sref="finish.delivery"><i class="fa fa-question-circle"></i> Other</a>
+      <a class="button" ng-click="notify('other')"><i class="fa fa-question-circle"></i> Other</a>
     </li>
+    <p> {{debug}} </p>
   </ul>
 </nav>

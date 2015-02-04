@@ -1,4 +1,5 @@
 angular.module( 'lobby', [
+	'ngTouch',
 	'ui.router',
 	'ngSails',
 	'angularMoment',
@@ -14,7 +15,8 @@ angular.module( 'lobby', [
   'lobby.employees',
   'lobby.delivery',
   'lobby.finish',
-  'lobby.openspace'
+  'lobby.openspace',
+  'lobby.feedback'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
@@ -32,4 +34,15 @@ angular.module( 'lobby', [
 
 .controller( 'AppCtrl',['$scope', 'config', function AppCtrl ( $scope, config ) {
 	config.currentUser = window.currentUser;
-}]);
+}])
+
+.directive('backImg', function(){
+    return function(scope, element, attrs){
+        attrs.$observe('backImg', function(value) {
+            element.css({
+                'background-image': 'url(' + value +')',
+                'background-size' : 'cover'
+            });
+        });
+    };
+});

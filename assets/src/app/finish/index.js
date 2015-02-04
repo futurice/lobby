@@ -18,9 +18,19 @@ angular.module( 'lobby.finish', [])
     templateUrl: 'finish/_delivery.tpl.html'
   })
 
+  .state( 'finish.notification', {
+    url: '/notification',
+    templateUrl: 'finish/_notification.tpl.html'
+  })
+
   .state( 'finish.openspace', {
     url: '/openspace',
     templateUrl: 'finish/_openspace.tpl.html'
+  })
+
+  .state( 'finish.feedback', {
+    url: '/feedback',
+    templateUrl: 'finish/_feedback.tpl.html'
   });
 }])
 

@@ -64,7 +64,6 @@
     "mocha": "^1.21.3",
     "assert": "^1.1.1",
     "sinon": "^1.10.3",
-    "grunt-contrib-sass": "^0.8.1",
     "grunt-mocha-istanbul": "^1.5.0",
     "grunt-mocha-test": "^0.11.0",
     "protractor": "^1.1.1",

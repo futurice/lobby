@@ -1,26 +1,39 @@
-<section class="intro medium-6">
+<section class="intro medium-8">
   <h2>Employee lookup</h2>
   <p>Let's see if we can find what you're looking for.<br>Type the name of the person below.</p>
 
-  <input type="text" class="large-6" placeholder="Who should we find?" ng-model="searchText">
+  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText">
 </section>
 
-<section class="employees-container medium-6">
-  <ul class="employees" ng-show="showEmployees">
+<section class="employees-container medium-8">
+  <ul class="employees" ng-show="searchText.length">
     <li
-      ng-repeat="employee in filteredEmployees = (employees | filter:searchText)"
-      class="box" ng-click="selectEmployee(employee)">
-      <strong> {{employee.name}}</strong>
-      <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email }}</span>
-      <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone }}</span>
+      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText})"
+      class="box clearfix" ng-click="selectEmployee(employee)">
+      <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
+      <strong>{{employee.first_name}} {{employee.last_name}}</strong>
+      <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email}}</span>
+      <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone1}}</span>
     </li>
   </ul>
 </section>
 
-  <div class="box alert medium-6" ng-if="!filteredEmployees.length && searchText.length">
-    No results match your search.
-  </div>
+<div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">
+  No results match your search.
+</div>
 
-  <div class="box alert medium-6" ng-if="!showEmployees && searchText.length && filteredEmployees.length">
-    Too many results, please refine your search.
+<div id="employeeSelect" class="reveal-modal" data-reveal>
+  <div class="profile-image" back-img="{{selected.portrait_thumb_url}}"></div>
+  <h2>{{selected.first_name}} {{selected.last_name}}</h2>
+  <p class="lead">{{selected.email}}</p>
+  <p>You can notify {{selected.first_name}} of your presence by using the form below.</p>
+
+  <label>Message <small>(optional)</small>
+    <textarea placeholder="" ng-model="notificationMessage"></textarea>
+  </label>
+  <div class="right">
+    <a class="button success" ng-click="notify(selected)">Send Notification</a>
+    <a class="button secondary" ng-click="closeModal()">Cancel</a>
   </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>

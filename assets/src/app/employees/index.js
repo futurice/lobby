@@ -23,9 +23,8 @@ angular.module( 'lobby.employees', [])
   // Fetch the employee listing
   EmployeeModel.getAll($scope).then(function(models) {
     var employeesJson = JSON.parse(models);
-    
-    
-    for (var i = 0; i < employeesJson.length; i++) { 
+
+    for (var i = 0; i < employeesJson.length; i++) {
         employeesJson[i].full_name = employeesJson[i].first_name + " " + employeesJson[i].last_name;
         //employeesJson[i].first_name = "ASDF22";//employeesJson[i].first_name + " " + employeesJson[i].last_name;
     }
@@ -40,18 +39,19 @@ angular.module( 'lobby.employees', [])
   };
 
   $scope.notify = function(employee) {
-    /*
+
     var msg = "Futurice Lobby - You have a visitor";
     if ($scope.notificationMessage != "") {
-      msg += ': "'' + $scope.notificationMessage + '"';
+      msg += ': "' + $scope.notificationMessage + '"';
     }
     $http.put("/api/notify",
       {
-        "type": "flowdock",
+        "type": "sms",
+        "recipient": employee.phone,
         "message": msg
       }
     );
-    */
+
     $scope.closeModal();
     $state.go("finish.notification");
   }

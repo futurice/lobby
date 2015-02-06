@@ -19,7 +19,7 @@ module.exports = {
     },
 
 	create: function (req, res) {
-        console.log(req.params.all);
+        console.log(req.params.all());
 		var model = {
 			email: req.param('email'),
 			first_name: req.param('first_name'),

@@ -47,7 +47,7 @@ angular.module( 'lobby.employees', [])
     $http.put("/api/notify",
       {
         "type": "sms",
-        "recipient": employee.phone,
+        "recipient": employee.phone1,
         "message": msg
       }
     );

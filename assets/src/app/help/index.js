@@ -13,10 +13,16 @@ angular.module( 'lobby.help', [
 	});
 }])
 
-.controller( 'HelpCtrl',['$scope', '$http', function HelpController( $scope, $http ) {
-	var init = function() {
+.controller( 'HelpCtrl',['$scope', '$http', '$state', 
+  function HelpController( $scope, $http, $state ) {
+	$scope.comments = "";
 
-		var msg = "Futurice Lobby - Someone needs help.";
+	$scope.helpMessage = function() {
+
+		var msg = "Someone needs help";
+		if ($scope.comments != "") {
+			msg = msg+": "+$scope.comments;
+		}
 
 		$http.put("/api/notify",
 	      {
@@ -24,7 +30,6 @@ angular.module( 'lobby.help', [
 	        "message": msg
 	      }
 	    );
+	    $state.go("finish.help");
 	}
-
-	init();
 }]);

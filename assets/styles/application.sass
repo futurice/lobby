@@ -1,4 +1,4 @@
-$headerHeight: 3.5rem
+$headerHeight: 4.5rem
 
 body
   font-size: 18px
@@ -38,11 +38,12 @@ header
 
   p
     float: right
+    padding: 5px
 
   p.tagline
     display: inline-block
     position: absolute
-    top: 0
+    top: -5px
     right: 20px
     height: 100%
     margin: 0
@@ -138,6 +139,15 @@ table
         background: $futuriceGreen
         color: $white
 
+  .portrait
+    float: left
+    margin-right: 1rem
+    width: 5rem
+    max-height: 10rem
+    -webkit-filter: grayscale(.5)
+    border-radius: 4px
+    border: 2px white solid
+
   .phone, .email
     display: block
     margin-left: 0.5rem
@@ -148,3 +158,11 @@ table
 
 .asterisk
   color: red
+
+.profile-image
+  width: 100px
+  height: 100px
+  float: left
+  margin-right: 1rem
+  border: #fff 1px solid
+  border-radius: 4px

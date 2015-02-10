@@ -19,3 +19,4 @@ npm-debug.log
 nbproject
 .idea
 employees.json
+config/futurice.sample.js

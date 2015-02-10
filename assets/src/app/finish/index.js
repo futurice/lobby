@@ -28,6 +28,11 @@ angular.module( 'lobby.finish', [])
     templateUrl: 'finish/_openspace.tpl.html'
   })
 
+  .state( 'finish.help', {
+    url: '/help',
+    templateUrl: 'finish/_help.tpl.html'
+  })
+
   .state( 'finish.feedback', {
     url: '/feedback',
     templateUrl: 'finish/_feedback.tpl.html'

@@ -15,7 +15,9 @@ body
 header
   height: $headerHeight
   background: $futuriceGreen
-  position: relative
+  position: fixed
+  width: 100%
+  z-index: 10000
 
   h1
     display: inline-block
@@ -66,6 +68,7 @@ header
 
 .container
   padding: 2rem
+  padding-top: $headerHeight+2rem
 
 .intro
   margin: 0 auto 3rem auto

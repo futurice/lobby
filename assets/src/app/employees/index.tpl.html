@@ -8,7 +8,7 @@
 <section class="employees-container medium-8">
   <ul class="employees" ng-show="searchText.length">
     <li
-      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText})"
+      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText}) track by $index"
       class="box clearfix" ng-click="selectEmployee(employee)">
       <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
       <strong>{{employee.first_name}} {{employee.last_name}}</strong>

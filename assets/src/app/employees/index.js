@@ -16,6 +16,7 @@ angular.module( 'lobby.employees', [])
 .controller( 'EmployeeCtrl',['$scope', '$http', 'config', 'EmployeeModel', '$state',
   function EmployeeController( $scope, $http, config, EmployeeModel, $state ) {
 
+  $scope.show_i = 15;
   $scope.employees = [];
   $scope.searchText = '';
   $scope.notificationMessage = '';
@@ -33,6 +34,10 @@ angular.module( 'lobby.employees', [])
     $scope.employees = employeesJson;
 
   });
+
+  $scope.loadMore = function() {
+    $scope.show_i += 20;
+  };
 
   $scope.selectEmployee = function(employee) {
     $scope.selected = employee;

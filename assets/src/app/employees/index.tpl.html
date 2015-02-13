@@ -30,7 +30,7 @@
   <p>You can notify {{selected.first_name}} of your presence by using the form below.</p>
 
   <label>Message (optional)
-    <textarea placeholder="Optional message for the recipient" maxlength="120" ng-model="notificationMessage" required highlight-on-error></textarea>
+    <textarea placeholder="Optional message for the recipient" maxlength="120" ng-trim="false" ng-model="notificationMessage" required highlight-on-error></textarea>
   </label>
   <div class="right">
     <p ng-if="notificationMessage.length">{{notificationMessage.length}}/120 characters</p>

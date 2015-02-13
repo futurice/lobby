@@ -16,23 +16,19 @@ angular.module( 'lobby.employees', [])
 .controller( 'EmployeeCtrl',['$scope', '$http', 'config', 'EmployeeModel', '$state',
   function EmployeeController( $scope, $http, config, EmployeeModel, $state ) {
 
+  $scope.show_i = config.RESULTS_SHOW_AMOUNT;
   $scope.employees = [];
   $scope.searchText = '';
   $scope.notificationMessage = '';
 
   // Fetch the employee listing
   EmployeeModel.getAll($scope).then(function(models) {
-    var employeesJson = JSON.parse(models);
-    
-    
-    for (var i = 0; i < employeesJson.length; i++) { 
-        employeesJson[i].full_name = employeesJson[i].first_name + " " + employeesJson[i].last_name;
-        //employeesJson[i].first_name = "ASDF22";//employeesJson[i].first_name + " " + employeesJson[i].last_name;
-    }
-
-    $scope.employees = employeesJson;
-
+    $scope.employees = models;
   });
+
+  $scope.loadMore = function() {
+    $scope.show_i += config.RESULTS_SHOW_AMOUNT;
+  };
 
   $scope.selectEmployee = function(employee) {
     $scope.selected = employee;

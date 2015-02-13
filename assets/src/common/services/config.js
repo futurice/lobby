@@ -6,10 +6,9 @@ angular.module( 'services.config', ['lodash'])
 
 	return {
 		siteName: 'Electronic Receptionist',
-		// no trailing slash!
 		siteUrl: '/',
 		apiUrl: '/api',
-		currentUser: false,
+    RESULTS_SHOW_AMOUNT: 20,
     RESULTS_SHOW_THRESHOLD: 20
 	};
 

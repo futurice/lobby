@@ -15,16 +15,11 @@ module.exports = {
       }
 
       var params = qs.stringify({
-        to: req.body.recipient,
+        to: sails.config.futurice.sms_override_number ? sails.config.futurice.sms_override_number : req.body.recipient,
         text: req.body.message, //'You have a visitor in Futurice lobby',
         username: sails.config.futurice.sms_user,
         password: sails.config.futurice.sms_password
       });
-	console.log(sails.config.futurice.sms_user);
-	console.log(sails.config.futurice.sms_password);
-	console.log(req.body.recipient);
-	console.log(req.body.message);
-	console.log(params);
       https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
         var body = '';
         sms.on('data', function(chunk) {
@@ -39,7 +34,11 @@ module.exports = {
       }).on('error', function(e) {
         return res.json({'error': e});
       });
-    }
+    } console.log(sails.config.futurice.sms_user);
+  console.log(sails.config.futurice.sms_password);
+  console.log(req.body.recipient);
+  console.log(req.body.message);
+  console.log(params);
 
   	else if (req.body.type==="flowdock") {
   		console.log(sails.config.futurice.flowdock_key);

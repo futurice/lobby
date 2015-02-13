@@ -28,10 +28,11 @@
   <p class="lead">{{selected.email}}</p>
   <p>You can notify {{selected.first_name}} of your presence by using the form below.</p>
 
-  <label>Message <small>(optional)</small>
-    <textarea placeholder="" ng-model="notificationMessage"></textarea>
+  <label>Message (optional)
+    <textarea placeholder="Optional message for the recipient" maxlength="120" ng-model="notificationMessage" required highlight-on-error></textarea>
   </label>
   <div class="right">
+    <p ng-if="notificationMessage.length">{{notificationMessage.length}}/120 characters</p>
     <a class="button success" ng-click="notify(selected)">Send Notification</a>
     <a class="button secondary" ng-click="closeModal()">Cancel</a>
   </div>

@@ -19,6 +19,11 @@ header
   width: 100%
   z-index: 10000
 
+  a
+    display: block
+    width: 100%
+    height: 100%
+
   h1
     display: inline-block
     margin: 0
@@ -34,25 +39,20 @@ header
     left: 20px
     top: 0px
     padding-top: 10px
-    padding-bottom: 10px 
-
-  p
-    float: right
-    padding: 5px
-
-  p.tagline
-    display: inline-block
-    position: absolute
-    top: -5px
-    right: 20px
-    height: 100%
-    margin: 0
-    line-height: $headerHeight
-    color: $white
+    padding-bottom: 10px
 
   i
+    line-height: $headerHeight !important
+    padding: 0
+    padding-right: 10px
     float: right
-    padding: 5px
+
+  p
+    line-height: $headerHeight
+    float: right
+    padding: 0
+    padding-right: 10px
+    color: white
 
   .button
     float: right

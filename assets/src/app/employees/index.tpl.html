@@ -8,7 +8,7 @@
 <section class="employees-container medium-8">
   <ul class="employees" ng-show="searchText.length">
     <li
-      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText})"
+      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText}).slice(0, show_i)"
       class="box clearfix" ng-click="selectEmployee(employee)">
       <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
       <strong>{{employee.first_name}} {{employee.last_name}}</strong>
@@ -16,6 +16,7 @@
       <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone1}}</span>
     </li>
   </ul>
+  <button ng-if="filteredEmployees.length == show_i" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
 </section>
 
 <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">

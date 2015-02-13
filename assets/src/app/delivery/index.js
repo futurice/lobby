@@ -12,5 +12,31 @@ angular.module( 'lobby.delivery', [
 	});
 }])
 
-.controller( 'DeliveryCtrl',['$scope', function DeliveryController( $scope ) {
+.controller( 'DeliveryCtrl',['$scope', '$http', 'config', '$state', 
+  function DeliveryController( $scope, $http, config, $state ) {
+
+  	$scope.dType = "other";
+
+	$scope.notify = function(dType) {
+	    
+	    switch (dType) {
+			case "food":
+				var msg = "Food has arrived!";
+				break;
+			case "package":
+				var msg = "A package has arrived!";
+				break;
+			default:
+				var msg = "You've got a delivery";
+	    }
+
+	    $http.put("/api/notify",
+	      {
+	        "type": "flowdock",
+	        "message": msg
+	      }
+	    );
+	    
+	    $state.go("finish.delivery");
+	}
 }]);

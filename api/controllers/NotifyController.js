@@ -42,26 +42,41 @@ module.exports = {
     }
 
   	else if (req.body.type==="flowdock") {
-		console.log(sails.config.futurice.flowdock_key);
+  		console.log(sails.config.futurice.flowdock_key);
   		var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);
-  		var users = session.get(
-  			'/users', "",
-  			function (err, flow, response){
-  				if(err)
-  					console.log(err)
-  				else if (response) {
-			      var users = response.body;
-			      var user = users.filter(function(usr){
-			         return usr.email==="miki.tolonen@gmail.com"
-			      })[0];
-			      if(!user){
-			         console.log("User not found");
-			         return
-			      }
-			      session.privateMessage(user.id, req.body.message);
-			      res.ok("Sent message to : " + user.name);		   		}
-				}
-			);
+      request.post(
+        'https://api.flowdock.com/v1/messages/chat/'+sails.config.futurice.flowdock_flow_api_key,
+        {form:{'external_user_name':'lobby','content':req.body.message,'tags': ""}},
+        function (error, response, body) {
+          console.log("in the request")
+          if(error)
+            console.log(error);
+          else {
+              console.log(body);
+              console.log(response);
+          }
+        }
+      );
+        //this is for sending messages to single person
+        /*
+        var users = session.get(
+    			'/users', "",
+    			function (err, flow, response){
+    				if(err)
+    					console.log(err)
+    				else if (response) {
+  			      var users = response.body;
+  			      var user = users.filter(function(usr){
+  			         return usr.email==="miki.tolonen@gmail.com"
+  			      })[0];
+  			      if(!user){
+  			         console.log("User not found");
+  			         return
+  			      }
+  			      session.privateMessage(user.id, req.body.message);
+  			      res.ok("Sent message to : " + user.name);		   		}
+  				}
+  			);*/
 		}
 	}
 };

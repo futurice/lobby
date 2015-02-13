@@ -15,10 +15,8 @@
       <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email}}</span>
       <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone1}}</span>
     </li>
-    <li ng-if="filteredEmployees.length == show_i">
-      <button type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
-    </li>
   </ul>
+  <button ng-if="filteredEmployees.length == show_i" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
 </section>
 
 <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">

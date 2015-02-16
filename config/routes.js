@@ -37,6 +37,10 @@ module.exports.routes = {
     action: 'index'
   },
 
+  'get /media': { 
+    controller: 'MediaScreenController',
+    action: 'index'
+  },
 
   'GET /login': 'AuthController.login',
   'GET /logout': 'AuthController.logout',

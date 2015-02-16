@@ -8,9 +8,10 @@ module.exports = {
   		var users = session.get(
   			'/users', "",
   			function (err, flow, response){
-  				if(err)
+  				if(err) {
   					console.log(err)
-  				else if (response) {
+  					SystemEvent.add("ERROR", err);
+  				} else if (response) {
 			      var users = response.body;
 			      var user = users.filter(function(usr){
 			         return usr.email==="miki.tolonen@gmail.com"
@@ -20,6 +21,7 @@ module.exports = {
 			         return
 			      }
 			      session.privateMessage(user.id, req.body.message);
+			      SystemEvent.add("Flowdock Message", "Sent to " + user.name + ": " + req.body.message);
 			      res.ok("Sent message to : " + user.name);		   		}
 				}
 			);

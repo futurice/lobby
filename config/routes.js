@@ -20,8 +20,6 @@
  */
 
 module.exports.routes = {
-
-
   /**
    * We set the default language for all routes
    * **/
@@ -32,7 +30,7 @@ module.exports.routes = {
   },
   // Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, etc. depending on your
   // default view engine) your home page.
-  // 
+  //
   // (Alternatively, remove this and add an `index.html` file in your `assets` directory)
   'get /': {
     controller: 'HomeController',
@@ -88,8 +86,23 @@ module.exports.routes = {
   'get /api/feedback' : 'FeedbackController.getAll',
   'post /api/feedback' : 'FeedbackController.create',
 
-  // If a request to a URL doesn't match any of the custom routes above, it is matched 
-  // against Sails route blueprints.  See `config/blueprints.js` for configuration options
-  // and examples.
+  'get /api/systemEvents': 'SystemEventController.getAll',
+  //'get /api/systemEvents': 'SystemEventController.getAll',
+
+  /**
+   * Message routes
+   *
+   */
+  'get /api/message': 'MessageController.getAll',
+  'get /api/message/:id': 'MessageController.getOne',
+  'post /api/message': 'MessageController.create',
+  'put /api/message': 'MessageController.update',
+//    'put /api/message/:id': 'MessageController.update',
+
+  'delete /api/message/:id': 'MessageController.destroy',
+
+// If a request to a URL doesn't match any of the custom routes above, it is matched
+// against Sails route blueprints.  See `config/blueprints.js` for configuration options
+// and examples.
 
 };

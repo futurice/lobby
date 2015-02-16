@@ -21,7 +21,7 @@ module.exports = {
 			         return
 			      }
 			      session.privateMessage(user.id, req.body.message);
-			      SystemEvent.addSystemEvent("Flowdock Message", user.name);
+			      SystemEvent.addSystemEvent("Flowdock Message", "Sent to " + user.name + ": " + req.body.message);
 			      res.ok("Sent message to : " + user.name);		   		}
 				}
 			);

@@ -5,8 +5,6 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-fs = require('fs');
-
 module.exports = {
 
   /**

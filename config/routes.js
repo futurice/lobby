@@ -86,7 +86,7 @@ module.exports.routes = {
   'get /api/feedback' : 'FeedbackController.getAll',
   'post /api/feedback' : 'FeedbackController.create',
 
-  'get /api/systemEvents': 'SystemEventController.index',
+  'get /api/systemEvents': 'SystemEventController.getAll',
   //'get /api/systemEvents': 'SystemEventController.getAll',
 
   /**

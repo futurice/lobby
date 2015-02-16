@@ -10,30 +10,16 @@ module.exports = {
   attributes: {
 
     name : { type: 'string' },
-
-    date : { type: 'string' },
-
     details : { type: 'string' }
   },
 
 	addSystemEvent: function (eventName, eventDetails) {
-		var d = new Date();
-		if (eventDetails != undefined) {
-		    var model = {
-				name: eventName,
-				date: d.toString(),
-				details: eventDetails
-			};
-		}
-		else{
-			var model = {
-				name:eventName,
-				date: d.toString(),
-				details: ""
-			}
-		}
+		var model = {
+			name: eventName,
+			details: eventDetails != undefined ? eventDetails : ""
+		};
 
-		SystemEvent.create(model).exec(function(err, model){
+		SystemEvent.create(model).exec(function(err, model) {
 			if (err) {
 				console.log(err);
 			}
@@ -42,29 +28,25 @@ module.exports = {
 		/*
 		*	Update log file
 		*/
-		SystemEvent.find({},function(err,found){
-			if (err){
+		SystemEvent.find({}, function(err, events){
+			if (err) {
 			  console.log(err);
 			  return res.json(503,{err:"Error while retrieving system events"});
 			}
 			else console.log("System Event");
 
-			fs.writeFile('./log.json', "", function(err) {
-				if (err) console.log(err);
-			});
-		    try {
-				for (i = found.length - 1; i >= 0 ; i--) {
-					fs.appendFile('./log.json', found[i].date+' '+found[i].name+': '+found[i].details+'\n',
-					  function(err) {
-					    if (err) {
-					      console.log(err);
-					    }
-					});
-				}
-		    } catch(e) {
-		      console.log(e);
-		    }
+			return events;
+			/*
+
+			for (i = found.length - 1; i >= 0 ; i--) {
+				fs.appendFile('./log.json', found[i].date+' '+found[i].name+': '+found[i].details+'\n',
+				  function(err) {
+				    if (err) {
+				      console.log(err);
+				    }
+				});
+			}
+			*/
 		});
 	}
 };
-

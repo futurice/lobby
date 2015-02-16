@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mediascreen</title>
+    <link href="styles/mediascreen.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript">
+    function GetClock(){
+      var d=new Date();
+      var nhour=d.getHours(),nmin=d.getMinutes();
+      if(nmin<=9) nmin="0"+nmin
+
+      document.getElementById('kello').innerHTML=""+nhour+":"+nmin+"";
+    }
+
+    window.onload=function(){
+      GetClock();
+      setInterval(GetClock,1000);
+    }
+  </script>
+  <script type="text/javascript">
+    (function bjson() {
+      var blogAPI = "https://flockler.com/api/sections/1992/articles?count=5";
+      jQuery.getJSON(blogAPI, function(json){
+        var title=json.articles[0].title;
+        $('#title').text(title);
+      });
+    })();
+  </script>
+  <script type="text/javascript">
+    (function wjson() {
+      var wAPI = "http://api.openweathermap.org/data/2.5/weather?id=658225";
+      jQuery.getJSON(wAPI, function(json){
+        var pic=json.weather[0].icon;
+        var temp=json.main.temp;
+        var desc=json.weather[0].main;
+        var picture = "<img src =\"http://openweathermap.org/img/w/"+pic+".png\" style=\"width:100%\"/>";
+        $('#wpic').append(picture);
+        $('#weather').text(desc+" "+(parseFloat(temp)-273).toFixed(1)+" °C");
+      });
+    })();
+  </script>
+</head>
+<header>
+<div id="ylapalkki">Yläpalkki, jos haluaa jotain tekstiä</div>
+
+<div id="wpic"></div>
+<div id="weather"></div>
+
+<div id="logo"><img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg">
+</div>  
+
+<div id="kello"></div>
+
+</header>
+
+
+<section>
+<div class="box_left">
+  <h1 id="title">OTSIKKO</h1>
+  <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec luctus lorem. Donec eget orci malesuada, blandit lectus sodales, iaculis lorem. Nulla porta sodales velit sed scelerisque. Cras metus leo, porta eu aliquam sit amet, vestibulum sed urna. Phasellus massa nisi, cursus ac tincidunt porta, vulputate eget mi. Praesent ut cursus odio. Praesent eleifend gravida risus vitae rutrum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In gravida dolor eu lectus euismod, quis maximus massa ornare. Aenean at purus et magna lacinia molestie. Aliquam sed accumsan lorem, nec pulvinar arcu. Nullam vel sollicitudin diam.
+</p>
+
+
+<article>
+  <h1>OTSIKKO</h1>
+<p>Sed iaculis feugiat orci ut mollis. Pellentesque id lorem at metus aliquam lacinia sed non mauris. In sed consectetur elit, at dignissim ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tincidunt convallis interdum. Integer pretium orci ut sem fermentum fringilla. Aenean laoreet enim nibh, vitae tempor eros rutrum mattis. Cras non risus in turpis bibendum lobortis non at erat. Suspendisse luctus pharetra arcu, facilisis congue velit imperdiet eget. Aliquam imperdiet pellentesque mollis. Mauris quis blandit ex. Mauris sem quam, tincidunt vestibulum pharetra sit amet, ultricies quis est. Sed cursus lacus ac vestibulum sagittis. Sed non urna non dui fermentum ornare. </p>
+</article>
+
+</div>
+
+<div class="box_right">
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin suscipit mollis tellus sit amet malesuada. Proin hendrerit vestibulum dui ac consequat. Praesent varius a sem nec facilisis. Fusce magna nisi, ornare sit amet aliquet eget, dignissim non tellus. Vestibulum mollis aliquam maximus. Fusce facilisis pharetra massa non iaculis. Quisque malesuada pulvinar mauris ac molestie. Pellentesque lacinia odio in purus ultricies lobortis in ut nulla. Pellentesque eu dignissim tortor. Cras vitae sapien in mi laoreet laoreet eget feugiat arcu.</p>
+
+<p>Proin lectus tortor, convallis in euismod eu, malesuada vel leo. Morbi vehicula hendrerit arcu eu dapibus. Vestibulum dolor velit, eleifend et eros in, scelerisque commodo turpis. Pellentesque nec efficitur nibh. Morbi non finibus ligula, vitae ultrices turpis. Duis eu risus nisl. In sed cursus est.</p>
+
+<p>Maecenas bibendum cursus mattis. Mauris facilisis justo vel erat consequat, quis bibendum lectus vestibulum. In a nisi eget dui posuere consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id sollicitudin dolor. Sed congue feugiat venenatis. Donec faucibus turpis et erat ullamcorper scelerisque. Curabitur ac eleifend lectus, sit amet egestas risus.</p>
+
+<p>In efficitur, turpis laoreet porta maximus, nunc libero ultricies augue, eget interdum mi mauris eget neque. Suspendisse maximus risus eros, nec egestas enim viverra ut. Curabitur et lacus turpis. In tincidunt nunc et posuere posuere. Nulla viverra gravida ex, quis tempor erat pretium ac. Vivamus faucibus tortor in lectus feugiat eleifend. Integer sodales magna quis neque pharetra, eget sagittis quam eleifend. Mauris orci nunc, luctus nec mi non, accumsan aliquam nulla. Sed in dui bibendum, blandit enim suscipit, porttitor sapien. Etiam placerat dolor nec mi commodo bibendum. Mauris quis hendrerit urna. Cras maximus pharetra mi id pretium. Duis feugiat nunc non felis condimentum porta.</p>
+
+</div>
+</section>
+
+
+<footer></footer>
+
+</body>
+</html>

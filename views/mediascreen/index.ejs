@@ -1,55 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>mediascreen</title>
-    <link href="styles/mediascreen.css" rel="stylesheet">
-    <meta charset="utf-8">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script type="text/javascript">
-    function GetClock(){
-      var d=new Date();
-      var nhour=d.getHours(),nmin=d.getMinutes();
-      if(nmin<=9) nmin="0"+nmin
-
-      document.getElementById('kello').innerHTML=""+nhour+":"+nmin+"";
-    }
-
-    window.onload=function(){
-      GetClock();
-      setInterval(GetClock,1000);
-    }
-  </script>
-  <script type="text/javascript">
-    (function bjson() {
-      var blogAPI = "https://flockler.com/api/sections/1992/articles?count=5";
-      jQuery.getJSON(blogAPI, function(json){
-        var title=json.articles[0].title;
-        $('#title').text(title);
-      });
-    })();
-  </script>
-  <script type="text/javascript">
-    (function wjson() {
-      var wAPI = "http://api.openweathermap.org/data/2.5/weather?id=658225";
-      jQuery.getJSON(wAPI, function(json){
-        var pic=json.weather[0].icon;
-        var temp=json.main.temp;
-        var desc=json.weather[0].main;
-        var picture = "<img src =\"http://openweathermap.org/img/w/"+pic+".png\" style=\"width:100%\"/>";
-        $('#wpic').append(picture);
-        $('#weather').text(desc+" "+(parseFloat(temp)-273).toFixed(1)+" °C");
-      });
-    })();
-  </script>
-</head>
 <header>
-<div id="ylapalkki">Yläpalkki, jos haluaa jotain tekstiä</div>
+  <div id="ylapalkki">Yläpalkki, jos haluaa jotain tekstiä</div>
 
-<div id="wpic"></div>
-<div id="weather"></div>
+  <div id="wpic"></div>
+  <div id="weather"></div>
 
-<div id="logo"><img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg">
-</div>  
+  <div id="logo"><img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg">
+</div>
 
 <div id="kello"></div>
 
@@ -83,8 +39,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec luctus l
 </div>
 </section>
 
-
 <footer></footer>
-
-</body>
-</html>

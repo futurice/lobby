@@ -10,7 +10,7 @@ module.exports = {
   			function (err, flow, response){
   				if(err) {
   					console.log(err)
-  					SystemEvent.addSystemEvent("ERROR", err);
+  					SystemEvent.add("ERROR", err);
   				} else if (response) {
 			      var users = response.body;
 			      var user = users.filter(function(usr){
@@ -21,7 +21,7 @@ module.exports = {
 			         return
 			      }
 			      session.privateMessage(user.id, req.body.message);
-			      SystemEvent.addSystemEvent("Flowdock Message", "Sent to " + user.name + ": " + req.body.message);
+			      SystemEvent.add("Flowdock Message", "Sent to " + user.name + ": " + req.body.message);
 			      res.ok("Sent message to : " + user.name);		   		}
 				}
 			);

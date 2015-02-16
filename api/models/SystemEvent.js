@@ -13,7 +13,7 @@ module.exports = {
     details : { type: 'string' }
   },
 
-	addSystemEvent: function (eventName, eventDetails) {
+	add: function (eventName, eventDetails) {
 		var model = {
 			name: eventName,
 			details: eventDetails != undefined ? eventDetails : ""

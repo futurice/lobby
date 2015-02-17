@@ -24,6 +24,7 @@ module.exports = {
 
 			User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
 				if (err) {
+          SystemEvent.add("ERROR", err);
 					console.log(err);
 				}
 				else {

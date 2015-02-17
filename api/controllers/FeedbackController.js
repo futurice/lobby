@@ -10,6 +10,7 @@ module.exports = {
 		Feedback.create(model)
 		.exec(function(err, model) {
 			if (err) {
+                SystemEvent.add("ERROR", err);
 				return console.log(err);
 			}
 			else {
@@ -22,6 +23,7 @@ module.exports = {
 	getAll: function (req, res) {
 		Feedback.find({},function(err,found){
             if (err){
+                SystemEvent.add("ERROR", err);
                 return res.json(503,{err:"Error while retrieving feedback"});
             }
             return res.json(found);

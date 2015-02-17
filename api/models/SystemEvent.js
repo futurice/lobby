@@ -7,12 +7,11 @@
 
 module.exports = {
 
-  attributes: {
-
-    name : { type: 'string' },
-    details : { type: 'string' },
-    timestamp: {type: 'int' }
-  },
+    attributes: {
+        name : { type: 'string' },
+        details : { type: 'string' },
+        timestamp: { type: 'int' }
+    },
 
 	add: function (eventName, eventDetails) {
 		var model = {

@@ -14,6 +14,7 @@ module.exports = {
     })
     .fail(function(err) {
       // An error occured
+      SystemEvent.add("ERROR", err);
       res.json(err);
     });
   },
@@ -30,6 +31,7 @@ module.exports = {
     })
     .fail(function(err) {
       // An error occured
+      SystemEvent.add("ERROR", err);
     });
   },
   getOne: function(req, res) {
@@ -39,6 +41,7 @@ module.exports = {
       res.json(model);
     })
     .fail(function(err) {
+      SystemEvent.add("ERROR", err);
       res.send(404);
     });
   },
@@ -54,6 +57,7 @@ module.exports = {
     // TODO: upon message creation, how to populate the user here, so the associated user gets sent back as a property of the message
     Event.create(model).exec(function(err, model) {
       if (err) {
+        SystemEvent.add("ERROR", err);
         return console.log(err);
       }
       else {
@@ -92,6 +96,7 @@ module.exports = {
     // Otherwise, find and destroy the model in question
     Event.findOne(id).exec(function(err, model) {
       if (err) {
+        SystemEvent.add("ERROR", err);
         return res.serverError(err);
       }
       if (!model) {
@@ -110,6 +115,7 @@ module.exports = {
       */
       Event.destroy(id, function(err) {
         if (err) {
+          SystemEvent.add("ERROR", err);
           return res.serverError(err);
         }
         console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'Event destroy \'.',model.id);

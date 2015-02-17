@@ -28,6 +28,7 @@ module.exports = {
         }));
       });
     }).on('error', function(e) {
+      SystemEvent.add("ERROR", e);
       return res.json({'error': e});
     });
     //var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});

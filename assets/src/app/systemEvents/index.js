@@ -17,6 +17,8 @@ angular.module( 'lobby.systemEvents', [])
 
   //$scope.systemEvents = [];
   $scope.errors = "";
+  $scope.predicate = "-createdAt";
+  $scope.timeWindow = 0;
 
   // Fetch the employee listing
   /*
@@ -33,6 +35,18 @@ angular.module( 'lobby.systemEvents', [])
       .error(function(data,status,headers,config){
         $scope.errors = data.err;
       });
+  }
+
+  $scope.tstampgt = function(actual,expected){
+    return actual > expected;
+  };
+  $scope.filterDay = function(){
+    var now = new Date();
+    $scope.timeWindow = new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+  };
+  $scope.filterMonth = function(){
+    var now = new Date();
+    $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
   }
 
   $scope.getAll();

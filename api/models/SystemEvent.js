@@ -10,7 +10,8 @@ module.exports = {
   attributes: {
 
     name : { type: 'string' },
-    details : { type: 'string' }
+    details : { type: 'string' },
+    timestamp: {type: 'int' }
   },
 
 	add: function (eventName, eventDetails) {
@@ -24,5 +25,6 @@ module.exports = {
 				console.log(err);
 			}
 		});
+
 	}
 };

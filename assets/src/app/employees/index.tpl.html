@@ -16,7 +16,7 @@
       <span class="phone"><i class="fa fa-phone-square"></i> {{employee.phone1}}</span>
     </li>
   </ul>
-  <button ng-if="filteredEmployees.length == show_i" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
+  <button ng-if="filteredEmployees.length == show_i && searchText.length" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
 </section>
 
 <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">
@@ -29,10 +29,11 @@
   <p class="lead">{{selected.email}}</p>
   <p>You can notify {{selected.first_name}} of your presence by using the form below.</p>
 
-  <label>Message <small>(optional)</small>
-    <textarea placeholder="" ng-model="notificationMessage"></textarea>
+  <label>Message (optional)
+    <textarea placeholder="Optional message for the recipient" maxlength="120" ng-trim="false" ng-model="notificationMessage" required highlight-on-error></textarea>
   </label>
   <div class="right">
+    <p ng-if="notificationMessage.length">{{notificationMessage.length}}/120 characters</p>
     <a class="button success" ng-click="notify(selected)">Send Notification</a>
     <a class="button secondary" ng-click="closeModal()">Cancel</a>
   </div>

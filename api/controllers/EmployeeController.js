@@ -22,7 +22,7 @@ module.exports = {
       fum.on('end', function() {
         var employees = JSON.parse(body);
         return res.json(_.map(employees, function(employee) {
-          employeee = _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
+          employee = _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
           employee.full_name = employee.first_name + " " + employee.last_name;
           return employee;
         }));

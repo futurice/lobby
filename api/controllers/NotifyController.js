@@ -20,7 +20,7 @@ module.exports = {
         username: sails.config.futurice.sms_user,
         password: sails.config.futurice.sms_password
       });
-      https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
+      /*https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
         var body = '';
         sms.on('data', function(chunk) {
           body += chunk;
@@ -33,14 +33,13 @@ module.exports = {
         });
       }).on('error', function(e) {
         return res.json({'error': e});
-      });
-    } console.log(sails.config.futurice.sms_user);
-  console.log(sails.config.futurice.sms_password);
-  console.log(req.body.recipient);
-  console.log(req.body.message);
-  console.log(params);
-
-  	else if (req.body.type==="flowdock") {
+      });*/
+      console.log(sails.config.futurice.sms_user);
+      console.log(sails.config.futurice.sms_password);
+      console.log(req.body.recipient);
+      console.log(req.body.message);
+      console.log(params);
+    } else if (req.body.type==="flowdock") {
   		console.log(sails.config.futurice.flowdock_key);
   		var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);
       request.post(
@@ -76,6 +75,6 @@ module.exports = {
   			      res.ok("Sent message to : " + user.name);		   		}
   				}
   			);*/
-		}
-	}
+	   }
+  }
 };

@@ -13,11 +13,15 @@ module.exports = {
   checkin: function(req, res) {
 	User.findOne({phone:req.param('phone')},function(err,found){
     if (!err && found != undefined) {
-			var d= new Date();
-	    var oslog = {userid:found.id,timestamp: d.getTime(),comment:req.param("comment")};
-	    Ospacelog.create(oslog,function(created,err){
+      var d = new Date();
+	    OpenSpaceLog.create({
+        userid: found.id,
+        timestamp: d.getTime(),
+        comment: req.param("comment")
+      }, function(created,err) {
         console.log(created);
       });
+
 			User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
 				if (err) {
 					console.log(err);
@@ -59,7 +63,7 @@ module.exports = {
             timestamp: d.getTime(),
             comment:req.param("comment")
           };
-			    Ospacelog.create(oslog,function(created,err) {
+			    OpenSpaceLog.create(oslog,function(created,err) {
             console.log(created);
           });
 			    return res.json({msg:"user created successfully!"})

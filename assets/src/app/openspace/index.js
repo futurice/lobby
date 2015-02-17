@@ -33,64 +33,58 @@ angular.module( 'lobby.openspace', [])
     });
 }])
 .controller('OpenSpaceCtrl', ['$scope', '$sails', '$http', 'config','$state',
-      function OpenSpaceController( $scope, $sails, $http, config, $state) {
+  function OpenSpaceController( $scope, $sails, $http, config, $state) {
 
-    $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
-    $scope.errors = "";
-	$scope.predicate = "-timestamp";
-    $scope.timeWindow = 0;
-    $scope.getUser = function(){
-        $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
-            .success(function(data,status,headers,config){
-                //$scope.errors = "Welcome "+ data.first_name +" "+data.last_name+ "!"; 
-                $state.go("finish.openspace");
-            })
-            .error(function(data,status,headers,config){
-                $scope.errors = data.err;
-            });
-    };
-    
-   
-    $scope.register = function(){
-        $http.post("/api/user/",$scope.person)
-            .success(function(data,status,headers,config){
-                //$scope.errors = "saved succesfully";
-                $state.go("finish.openspace");
-            })
-            .error(function(data,status,headers,config){
-                $scope.errors = "registering failed";
-            });
+  $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
+  $scope.errors = "";
+  $scope.predicate = "-timestamp";
+  $scope.timeWindow = 0;
 
-    }
-    $scope.getAll = function(){
-    $http.get("/api/oslogins")
-            .success(function(data,status,headers,config){
-				for (var i=0;i<data.length;i++){
-					
-					
-					data[i].timestamp = data[i].timestamp ? parseInt(data[i].timestamp) :0;
-					var d = new Date(data[i].timestamp);
-					data[i].time = d.toUTCString();				
-				}                
-				$scope.logins =  data;
-			
-            })
-            .error(function(data,status,headers,config){
-            $scope.errors = data.err;
-            });
-    };
-    $scope.tstampgt = function(actual,expected){
-        return actual > expected;
-    };
-    $scope.filterDay = function(){
-        var now = new Date();
-        $scope.timeWindow = new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
-    };
-    $scope.filterMonth = function(){
-        var now = new Date();
-        $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
-    };
-	$scope.getAll();
-    setInterval($scope.getAll,10000);
+  $scope.getUser = function() {
+    $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
+      .success(function(data,status,headers,config) {
+        $state.go("finish.openspace");
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+      });
+  };
+
+  $scope.register = function() {
+    $http.post("/api/user/", $scope.person).success(function(data,status,headers,config){
+        $state.go("finish.openspace");
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = "registering failed";
+      });
+  }
+
+  $scope.getAll = function(){
+    $http.get("/api/oslogins").success(function(data,status,headers,config) {
+      for (var i=0;i<data.length;i++) {
+
+    		data[i].timestamp = data[i].timestamp ? parseInt(data[i].timestamp) : 0;
+    		var d = new Date(data[i].timestamp);
+    		data[i].time = d.toUTCString();
+      }
+      $scope.logins =  data;
+    })
+    .error(function(data,status,headers,config){
+      $scope.errors = data.err;
+    });
+  };
+  $scope.tstampgt = function(actual,expected){
+    return actual > expected;
+  };
+  $scope.filterDay = function(){
+    var now = new Date();
+    $scope.timeWindow = new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
+  };
+  $scope.filterMonth = function(){
+    var now = new Date();
+    $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
+  };
+$scope.getAll();
+setInterval($scope.getAll,10000);
 }]);
 

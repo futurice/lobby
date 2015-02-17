@@ -59,8 +59,12 @@ angular.module( 'lobby', [
     }
     $scope.timer = $timeout(function() {
       $location.path("/");
-    }, config.IDLE_TIMEOUT);
+    }, 500);
   });
+
+  $('body').mousemove($.throttle(function(e) {
+    $timeout.cancel($scope.timer);
+  }), 1000);
 
 }])
 

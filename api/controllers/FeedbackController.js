@@ -1,9 +1,7 @@
 module.exports = {
     create: function (req, res) {
         console.log(req.params.all());
-        var d = new Date();
         var model = {
-            date: d.toString(),
             comments: req.param('comments')
         };
 

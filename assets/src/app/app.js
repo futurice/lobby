@@ -13,9 +13,11 @@ angular.module( 'lobby', [
 	'lobby.home',
 	'lobby.help',
   'lobby.employees',
+  'lobby.systemEvents',
   'lobby.delivery',
   'lobby.finish',
-  'lobby.openspace'
+  'lobby.openspace',
+  'lobby.feedback'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
@@ -31,8 +33,19 @@ angular.module( 'lobby', [
 	moment.lang('en');
 })
 
-.controller( 'AppCtrl',['$scope', 'config', function AppCtrl ( $scope, config ) {
-	config.currentUser = window.currentUser;
+.controller( 'AppCtrl',['$scope', '$rootScope', 'EmployeeModel', 'config',
+ function AppCtrl ( $scope, $rootScope, EmployeeModel, config ) {
+
+  $rootScope.employees = [];
+
+  $rootScope.getEmployees = function() {
+    // Fetch the employee listing
+    EmployeeModel.getAll($scope).then(function(models) {
+      $rootScope.employees = models;
+    });
+  };
+  $rootScope.getEmployees();
+  setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
 }])
 
 .directive('backImg', function(){

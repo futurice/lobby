@@ -13,17 +13,16 @@ angular.module( 'lobby.employees', [])
       });
     }])
 
-.controller( 'EmployeeCtrl',['$scope', '$http', 'config', 'EmployeeModel', '$state',
-  function EmployeeController( $scope, $http, config, EmployeeModel, $state ) {
+.controller( 'EmployeeCtrl',['$scope', '$rootScope', '$http', 'config', '$state',
+  function EmployeeController( $scope, $rootScope, $http, config, $state ) {
 
-  $scope.employees = [];
+  $scope.show_i = config.RESULTS_SHOW_AMOUNT;
   $scope.searchText = '';
   $scope.notificationMessage = '';
 
-  // Fetch the employee listing
-  EmployeeModel.getAll($scope).then(function(models) {
-    $scope.employees = JSON.parse(models);
-  });
+  $scope.loadMore = function() {
+    $scope.show_i += config.RESULTS_SHOW_AMOUNT;
+  };
 
   $scope.selectEmployee = function(employee) {
     $scope.selected = employee;
@@ -45,7 +44,7 @@ angular.module( 'lobby.employees', [])
     */
     $scope.closeModal();
     $state.go("finish.notification");
-  }
+  };
 
   $scope.closeModal = function() {
     $('#employeeSelect').foundation('reveal', 'close');

@@ -1,0 +1,19 @@
+<section class="intro medium-6">
+  <h2>Event log</h2>
+
+</section>
+
+<table>
+	<tr class="row">
+		<th class="small-2 columns"> Time</td>
+		<th class="small-2 columns"> Event </td>
+		<th class="small-8 columns"> Details </td>
+	</tr>
+	<tr class="row" ng-repeat="event in systemEvents">
+		<td class="small-2 columns"> {{event.createdAt | amCalendar}} </td>
+		<td class="small-2 columns"> {{event.name}}</td>
+		<td class="small-8 columns"> {{event.details}}</td>
+	</tr>
+</table>
+
+<div> {{errors}}</div>

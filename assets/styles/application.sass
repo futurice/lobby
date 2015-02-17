@@ -1,4 +1,4 @@
-$headerHeight: 3.5rem
+$headerHeight: 4.5rem
 
 body
   font-size: 18px
@@ -15,7 +15,9 @@ body
 header
   height: $headerHeight
   background: $futuriceGreen
-  position: relative
+  position: fixed
+  width: 100%
+  z-index: 10000
 
   h1
     display: inline-block
@@ -36,11 +38,12 @@ header
 
   p
     float: right
+    padding: 5px
 
   p.tagline
     display: inline-block
     position: absolute
-    top: 0
+    top: -5px
     right: 20px
     height: 100%
     margin: 0
@@ -65,6 +68,7 @@ header
 
 .container
   padding: 2rem
+  padding-top: $headerHeight+2rem
 
 .intro
   margin: 0 auto 3rem auto

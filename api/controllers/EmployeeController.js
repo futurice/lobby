@@ -20,7 +20,12 @@ module.exports = {
         body += chunk;
       });
       fum.on('end', function() {
-        return res.json(body);  //_.pick(body, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1'));
+        var employees = JSON.parse(body);
+        return res.json(_.map(employees, function(employee) {
+          employee = _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
+          employee.full_name = employee.first_name + " " + employee.last_name;
+          return employee;
+        }));
       });
     }).on('error', function(e) {
       return res.json({'error': e});

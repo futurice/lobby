@@ -1,7 +1,24 @@
-<section class="intro box">
-
-  <h2>Relax, take a cup of coffee.</h2>
-
-  <p>You can also use our free WiFi.. Dramatically repurpose best-of-breed infrastructures whereas multifunctional imperatives. Proactively disintermediate top-line innovation before B2B experiences. Assertively grow superior core competencies whereas market positioning data. Phosfluorescently leverage.
-  </p>
+<section class="intro">
+  <h2>Need help?</h2>
 </section>
+<section class="intro">
+  <h2><small>Relax, take a cup of coffee.</small></h2>
+  <p>You can also use our free WiFi.. </p>
+  <p>If you would like, you can message our staff about any problem:</p>
+</section>
+
+<div class="row">
+  <section class="medium-12 columns">
+    <form>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Additional details (optional)
+            <textarea ng-model="details" placeholder="Feel free to leave details here"></textarea>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="button success expand radius" ng-click="helpMessage()">Submit</button>
+    </form>
+    <div id="errors" ng-bind="errors"></div>
+  </section>
+</div>

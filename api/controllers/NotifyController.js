@@ -1,6 +1,7 @@
 var https = require('https');
 var qs = require('querystring');
 var _ = require('lodash');
+var request = require('request');
 
 module.exports = {
   /**
@@ -20,25 +21,23 @@ module.exports = {
         username: sails.config.futurice.sms_user,
         password: sails.config.futurice.sms_password
       });
-      /*https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+      https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
         var body = '';
         sms.on('data', function(chunk) {
           body += chunk;
         });
         sms.on('end', function() {
           if ([200,201,202].indexOf(sms.statusCode) != -1) {
+            console.log("SMS Message sent with these parameters: " + params);
             return res.json({status: 'Message sent.'});
           };
           return res.json({'error': '?'});
         });
       }).on('error', function(e) {
+        console.log("Error while sending sms message: " +e);
         return res.json({'error': e});
-      });*/
-      console.log(sails.config.futurice.sms_user);
-      console.log(sails.config.futurice.sms_password);
-      console.log(req.body.recipient);
-      console.log(req.body.message);
-      console.log(params);
+      });
     } else if (req.body.type==="flowdock") {
   		console.log(sails.config.futurice.flowdock_key);
   		var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);

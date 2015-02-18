@@ -133,3 +133,26 @@ Just use the following command to run the Protractor end-to-end tests
 * Remember to write tests and make sure all tests pass when you're finished with your feature
 * Once feature is finished, push your changes and create a pull request in GitHub
 * Don't merge your own features, someone else should review them
+
+
+# Notification settings
+
+Used settings are stored in config/futurice.sample.js in json format.
+The different options are listed below, and after that there is a sample file.
+    
+    sms_user: This is the username for Futurice's sms system
+    sms_password: And this is the password
+    sms_override_number: This is used in testing. If specified, overrides any chosen number. Leave blank when in production.
+    
+    flowdock_key: This is users api-key to flowdock, so it can send messages directly to people
+    flowdock_flow_api_key: This is api-key to a single flow, allows sending messages without setupping a user
+
+Sample file:
+
+    module.exports.futurice = {
+      sms_user: "foo",
+      sms_password: "bar",
+      sms_override_number: "+35840999999",
+      flowdock_key: "asdgasdg",
+      flowdock_flow_api_key: "sdfgh9s6dasdasfa25wq2"
+    };

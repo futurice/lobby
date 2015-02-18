@@ -5,8 +5,8 @@
   "description": "Futurice Lobby Receptionist",
   "keywords": [],
   "dependencies": {
-    "bower": "^1.3.1",
     "bcrypt": "~0.7.7",
+    "bower": "^1.3.1",
     "ejs": "~0.8.4",
     "flowdock": "^0.9.0",
     "grunt": "0.4.2",
@@ -35,6 +35,7 @@
     "passport-local": "~1.0.0",
     "passport-twitter": "^1.0.2",
     "rc": "~0.3.3",
+    "request": "^2.53.0",
     "sails": "~0.10.3",
     "sails-disk": "~0.10.1",
     "sails-generate-auth": "~0.1.2",

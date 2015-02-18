@@ -30,18 +30,19 @@ angular.module( 'lobby.employees', [])
   };
 
   $scope.notify = function(employee) {
-    /*
+
     var msg = "Futurice Lobby - You have a visitor";
     if ($scope.notificationMessage != "") {
-      msg += ': "'' + $scope.notificationMessage + '"';
+      msg += ': "' + $scope.notificationMessage + '"';
     }
     $http.put("/api/notify",
       {
-        "type": "flowdock",
+        "type": "sms",
+        "recipient": employee.phone1,
         "message": msg
       }
     );
-    */
+
     $scope.closeModal();
     $state.go("finish.notification");
   };

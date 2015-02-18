@@ -19,6 +19,7 @@ angular.module( 'lobby.employees', [])
   $scope.show_i = config.RESULTS_SHOW_AMOUNT;
   $scope.searchText = '';
   $scope.notificationMessage = '';
+  $scope.filteredEmployees = [];
 
   $scope.loadMore = function() {
     $scope.show_i += config.RESULTS_SHOW_AMOUNT;
@@ -28,6 +29,10 @@ angular.module( 'lobby.employees', [])
     $scope.selected = employee;
     $('#employeeSelect').foundation('reveal', 'open');
   };
+
+  $scope.filterEmployees = function() {
+    $scope.filteredEmployees = $rootScope.fuse.search($scope.searchText);
+  }
 
   $scope.notify = function(employee) {
 

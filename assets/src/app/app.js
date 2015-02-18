@@ -46,6 +46,10 @@ angular.module( 'lobby', [
     // Fetch the employee listing
     EmployeeModel.getAll($scope).then(function(models) {
       $rootScope.employees = models;
+      $rootScope.fuse = new Fuse(models, {
+        keys: ['first_name', 'last_name'],
+        threshold: config.FUSE_THRESHOLD
+      });
     });
   };
   $rootScope.getEmployees();

@@ -7,12 +7,9 @@
  */
 
 module.exports = {
-	attributes: {
-		date: {
-            type: 'string'
-        },
+    attributes: {
         comments: {
-			type: 'string'
-		}
+            type: 'string'
+        }
     }
 }

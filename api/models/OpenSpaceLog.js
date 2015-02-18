@@ -7,19 +7,19 @@
  */
 
 module.exports = {
-	attributes: {
-		userid: {
+  attributes: {
+    userid: {
       type: 'string',
       required: true,
       unique: true,
     },
     timestamp: {
-		  type: 'string',
-		  required: true,
-		},
-		comment: {
-			type: 'string',
-			required: false,
-		}
+      type: 'string',
+      required: true,
+    },
+    comment: {
+      type: 'string',
+      required: false,
+    }
   }
 }

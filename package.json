@@ -8,6 +8,7 @@
     "bcrypt": "~0.7.7",
     "bower": "^1.3.1",
     "ejs": "~0.8.4",
+    "fastclick": "^1.0.6",
     "flowdock": "^0.9.0",
     "grunt": "0.4.2",
     "grunt-contrib-clean": "~0.5.0",

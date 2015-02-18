@@ -33,6 +33,10 @@ angular.module( 'lobby', [
 	moment.lang('en');
 })
 
+.run(function() {
+  FastClick.attach(document.body);
+})
+
 .controller( 'AppCtrl',['$scope', '$rootScope', 'EmployeeModel', 'config',
  function AppCtrl ( $scope, $rootScope, EmployeeModel, config ) {
 

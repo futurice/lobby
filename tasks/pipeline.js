@@ -40,6 +40,7 @@ var jsFilesToInject = [
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/angular-touch/angular-touch.min.js',
     'bower_components/foundation/js/foundation.min.js',
+    'bower_components/fastclick/lib/fastclick.js',
     //
     // *->    you might put other dependencies like jQuery or Angular here   <-*
     //

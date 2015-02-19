@@ -21,7 +21,7 @@
   </script>
   <script type="text/javascript">
     (function bjson() {
-      var blogAPI = "https://flockler.com/api/sections/1992/articles?count=5";
+      var blogAPI = "/api/blog";
       jQuery.getJSON(blogAPI, function(json){
         var title=json.articles[0].title;
         $('#title').text(title);

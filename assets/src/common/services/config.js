@@ -14,7 +14,7 @@ angular.module( 'services.config', ['lodash'])
 
     // Fuzzy search options, see https://github.com/krisk/Fuse#options
     fuse: {
-      keys: ['fist_name', 'last_name'],
+      keys: ['first_name', 'last_name'],
       threshold: 0.4
     }
 	};

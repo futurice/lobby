@@ -49,7 +49,7 @@ module.exports.routes = {
   'get /api/oslogins': 'OpenSpaceLogController.getAll',
 
   // Employees
-  'get /api/employees': 'EmployeeController.index',
+  'get /api/employees': 'EmployeeController.getAll',
 
   // Notifications
   'put /api/notify' : 'NotifyController.notify',

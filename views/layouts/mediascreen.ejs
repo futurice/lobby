@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>mediascreen</title>
-    <link href="styles/mediascreen.css" rel="stylesheet">
+    <link href="../styles/mediascreen.css" rel="stylesheet">
     <meta charset="utf-8">
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   <script type="text/javascript">
     function GetClock(){
       var d=new Date();
@@ -21,10 +22,21 @@
   </script>
   <script type="text/javascript">
     (function bjson() {
-      var blogAPI = "/api/blog";
-      jQuery.getJSON(blogAPI, function(json){
-        var title=json.articles[0].title;
-        $('#title').text(title);
+      _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+      };
+      var tpl = _.template(
+        "<article>" +
+          "<h1>{{title}}</h1>" +
+          "{{body}}" +
+        "</article>");
+      $.getJSON("/api/blog", function(json) {
+        for (i = 0; i < json.articles.length; i++) {
+          var entry = json.articles[i];
+          console.log(tpl(entry));
+          
+          $('.blog').append(tpl(entry));
+        }
       });
     })();
   </script>

@@ -11,9 +11,9 @@ var _ = require('lodash');
 
 module.exports = {
   /**
-   * `EmployeeController.index()`
+   * `EmployeeController.getAll()`
    */
-  index: function (req, res) {
+  getAll: function (req, res) {
     https.get("https://api.fum.futurice.com/v1/list/employees/", function(fum) {
       var body = '';
       fum.on('data', function(chunk) {
@@ -22,24 +22,12 @@ module.exports = {
       fum.on('end', function() {
         var employees = JSON.parse(body);
         return res.json(_.map(employees, function(employee) {
-          employee = _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
-          return employee;
+          return _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
         }));
       });
     }).on('error', function(e) {
       SystemEvent.add("ERROR", e);
       return res.json({'error': e});
     });
-    //var employees = fs.readFileSync('./employees.json', { 'encoding': 'utf8'});
-    //return res.json(employees);
   },
-
-  /**
-   * `EmployeeController.notify()`
-   */
-  notify: function (req, res) {
-    return res.json({
-      todo: 'notify() is not implemented yet!'
-    });
-  }
 };

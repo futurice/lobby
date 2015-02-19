@@ -20,10 +20,15 @@ module.exports = {
         body += chunk;
       });
       fum.on('end', function() {
-        var employees = JSON.parse(body);
-        return res.json(_.map(employees, function(employee) {
-          return _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
-        }));
+        try {
+          var employees = JSON.parse(body);
+          return res.json(_.map(employees, function(employee) {
+            return _.pick(employee, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
+          }));
+        }
+        catch(e) {
+          return res.json(503, {'error': "Couldn't parse response."});
+        }
       });
     }).on('error', function(e) {
       SystemEvent.add("ERROR", e);

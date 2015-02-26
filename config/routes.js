@@ -41,6 +41,7 @@ module.exports.routes = {
     controller: 'MediaScreenController',
     action: 'index'
   },
+  'get /api/blog': 'MediaScreenController.blog',
 
   // Open Space Users
   'get /api/user': 'UserController.checkin',

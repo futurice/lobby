@@ -4,5 +4,25 @@ module.exports = {
     res.view({
       layout: '/layouts/mediascreen'
     });
-  }
+  },
+
+  blog: function (req, res) {
+    https.get("https://flockler.com/api/sections/1992/articles?count=8", function(blog) {
+      var body = '';
+      blog.on('data', function(chunk) {
+        body += chunk;
+      });
+      blog.on('end', function() {
+        try {
+          return res.json(JSON.parse(body));
+        }
+        catch(e) {
+          return res.json(503, {'error': "Couldn't parse response."});
+        }
+      });
+    }).on('error', function(e) {
+      SystemEvent.add("ERROR", e);
+      return res.json({'error': e});
+    });
+  },
 };

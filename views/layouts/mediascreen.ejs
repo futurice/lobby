@@ -21,10 +21,22 @@
   </script>
   <script type="text/javascript">
     (function bjson() {
-      var blogAPI = "https://flockler.com/api/sections/1992/articles?count=5";
-      jQuery.getJSON(blogAPI, function(json){
-        var title=json.articles[0].title;
-        $('#title').text(title);
+      _.templateSettings = {
+        interpolate : /\{\{(.+?)\}\}/g
+      };
+      var tpl = _.template(
+        "<article>" +
+          "<div style='background-image:url({{cover_url}})'></div>" +
+          "<h1>{{title}}</h1>" +
+          "{{summary}} <span>by {{authors[0].firstname}} {{authors[0].lastname}}</span>" +
+        "</article>");
+      $.getJSON("/api/blog", function(json) {
+        for (i = 0; i < json.articles.length; i++) {
+          var entry = json.articles[i];
+          console.log(tpl(entry));
+
+          $('.blog').append(tpl(entry));
+        }
       });
     })();
   </script>

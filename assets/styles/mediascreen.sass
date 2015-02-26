@@ -27,12 +27,14 @@ header
   box-shadow: 0px 0px 3px grey
 
 #weather
-  padding-top: 50px
+  padding-top: 60px
   padding-bottom: 20px
   padding-left: 20px
   padding-right: 20px
   float: left
   width: 200px
+  font-size: 16px
+  font-weight: bold
 
 #wpic
   padding-top: 30px
@@ -44,9 +46,6 @@ header
   padding-bottom: 20px
   float: left
   width: 500px
-
-h1
-  color: white
 
 #logo img
   max-width: 100%
@@ -61,15 +60,38 @@ section.blog
   width: 100%
   max-height: 100%
   overflow: hidden
+  margin: 0 auto
 
   article
-    display: inline-block
-    width: 45%
-    background-color: #349D4A
+    display: block
+    position: relative
+    float: left
+    width: 400px
+    height: 400px
+    background-color: white
     border-radius: 5px
     padding: 5px
     box-shadow: 0px 0px 3px grey
     margin: 1rem
 
-    img
-      max-width: 100%
+    h1
+      color: #349D4A
+
+    span
+      display: block
+      position: absolute
+      bottom: 10px
+      right: 10px
+      color: #666
+
+    div
+      background-size: cover
+      background-position: top
+      height: 12rem
+      margin-bottom: 1rem
+
+footer
+  text-align: center
+  font-weight: bold
+  font-size: 20px
+  color: #349D4A

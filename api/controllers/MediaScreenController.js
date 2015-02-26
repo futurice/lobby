@@ -8,7 +8,8 @@ module.exports = {
   },
 
   blog: function (req, res) {
-    https.get("https://flockler.com/api/sections/1992/articles?count=5", function(blog) {
+    https.get("https://flockler.com/api/sections/1992/articles?count=8", function(blog) {
+
       var body = '';
       blog.on('data', function(chunk) {
         body += chunk;
@@ -16,11 +17,6 @@ module.exports = {
       blog.on('end', function() {
         try {
           return res.json(JSON.parse(body));
-          /*
-          return res.json(_.map(employees, function(employee) {
-            return _.pick(entries, 'first_name', 'last_name', 'portrait_thumb_url', 'email', 'phone1');
-          }));
-          */
         }
         catch(e) {
           return res.json(503, {'error': "Couldn't parse response."});

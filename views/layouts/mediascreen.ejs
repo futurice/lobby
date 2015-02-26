@@ -27,14 +27,13 @@
       };
       var tpl = _.template(
         "<article>" +
+          "<div style='background-image:url({{cover_url}})'></div>" +
           "<h1>{{title}}</h1>" +
-          "{{body}}" +
+          "{{summary}} <span>by {{authors[0].firstname}} {{authors[0].lastname}}</span>" +
         "</article>");
       $.getJSON("/api/blog", function(json) {
         for (i = 0; i < json.articles.length; i++) {
           var entry = json.articles[i];
-          console.log(tpl(entry));
-          
           $('.blog').append(tpl(entry));
         }
       });

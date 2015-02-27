@@ -49,13 +49,14 @@ module.exports = {
         {form:{'external_user_name':'lobby','content':req.body.message,'tags': ""}},
         function (error, response, body) {
           console.log("in the request")
-          if(error)
+          if(error) {
             SystemEvent.add("ERROR", "Sending Flowdock message: "+error);
             console.log(error);
+          }
           else {
-              SystemEvent.add("Flowdock message", "Flowdock message ok: "+response+" "+body);
-              console.log(body);
-              console.log(response);
+            SystemEvent.add("Flowdock message", "Flowdock message ok: "+response+" "+body);
+            console.log(body);
+            console.log(response);
           }
         }
       );

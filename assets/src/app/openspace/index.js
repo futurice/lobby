@@ -84,7 +84,11 @@ angular.module( 'lobby.openspace', [])
     var now = new Date();
     $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
   };
-$scope.getAll();
-setInterval($scope.getAll,10000);
+
+  if (!$state.includes('openspaceadmin')) { // When in other state than admin
+    $scope.filterDay(); // (To list users checked in today)
+  }
+  $scope.getAll();
+  setInterval($scope.getAll,10000);
 }]);
 

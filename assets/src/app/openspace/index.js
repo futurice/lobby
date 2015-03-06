@@ -59,6 +59,15 @@ angular.module( 'lobby.openspace', [])
       });
   }
 
+  $scope.getAllUsers = function () {
+    $http.get("/api/users").success(function(data,status,headers,config) {
+      $scope.users = data;
+    })
+    .error(function(data,status,headers,config){
+      $scope.errors = data.err;
+    });
+  };
+
   $scope.getAll = function(){
     $http.get("/api/oslogins").success(function(data,status,headers,config) {
       for (var i=0;i<data.length;i++) {
@@ -87,8 +96,10 @@ angular.module( 'lobby.openspace', [])
 
   if (!$state.includes('openspaceadmin')) { // When in other state than admin
     $scope.filterDay(); // (To list users checked in today)
+    $scope.getAllUsers();
   }
-  $scope.getAll();
+  else
+    $scope.getAll();
   setInterval($scope.getAll,10000);
 }]);
 

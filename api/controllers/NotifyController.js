@@ -29,12 +29,15 @@ module.exports = {
         });
         sms.on('end', function() {
           if ([200,201,202].indexOf(sms.statusCode) != -1) {
+            SystemEvent.add("SMS message", "Message sent to: "+params.to);
             console.log("SMS Message sent with these parameters: " + params);
             return res.json({status: 'Message sent.'});
           };
+          SystemEvent.add("ERROR", "Sending SMS message: sms.on 'end' unknown error");
           return res.json({'error': '?'});
         });
       }).on('error', function(e) {
+        SystemEvent.add("ERROR", "Sending SMS message: "+e);
         console.log("Error while sending sms message: " +e);
         return res.json({'error': e});
       });
@@ -46,11 +49,14 @@ module.exports = {
         {form:{'external_user_name':'lobby','content':req.body.message,'tags': ""}},
         function (error, response, body) {
           console.log("in the request")
-          if(error)
+          if(error) {
+            SystemEvent.add("ERROR", "Sending Flowdock message: "+error);
             console.log(error);
+          }
           else {
-              console.log(body);
-              console.log(response);
+            SystemEvent.add("Flowdock message", "Flowdock message ok: "+response+" "+body);
+            console.log(body);
+            console.log(response);
           }
         }
       );

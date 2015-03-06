@@ -2,7 +2,7 @@ module.exports = {
   getAll: function(req, res) {
 	User.find({},function(err,found){
       if (err){
-      	SystemEvent.add("ERROR", err);
+      	SystemEvent.add("ERROR", "Error while retrieving userdata: "+err);
         return res.json(503,{err:"Error while retrieving userdata"});
       }
       return res.json(found);
@@ -24,7 +24,7 @@ module.exports = {
 
 			User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
 				if (err) {
-          SystemEvent.add("ERROR", err);
+          SystemEvent.add("ERROR", "User update: "+err);
 					console.log(err);
 				}
 				else {
@@ -34,7 +34,6 @@ module.exports = {
     	SystemEvent.add("CheckIn", found.first_name +' '+ found.last_name);
       return res.json(found);
     }
-    SystemEvent.add("ERROR", err);
     return res.json(404,{err:"User not found"});
     });
   },
@@ -54,7 +53,7 @@ module.exports = {
     User.create(model)
       .exec(function(err, model) {
         if (err) {
-          SystemEvent.add("ERROR", err);
+          SystemEvent.add("ERROR", "User creation failed: "+err);
         	return res.json(503,{err:"User creation failed for unknown reason"})
         }
         else {

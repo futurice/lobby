@@ -27,11 +27,12 @@ module.exports = {
           }));
         }
         catch(e) {
+          SystemEvent.add("ERROR", "Employee list: couldn't parse response. "+e);
           return res.json(503, {'error': "Couldn't parse response."});
         }
       });
     }).on('error', function(e) {
-      SystemEvent.add("ERROR", e);
+      SystemEvent.add("ERROR", "EmployeeController getAll: "+e);
       return res.json({'error': e});
     });
   },

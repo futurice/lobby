@@ -48,7 +48,14 @@ module.exports = {
 		  last_seen: d.getTime(),
     };
 
-    SystemEvent.add("UserCreate",  model.first_name+' '+model.last_name);
+    
+    User.findOne({phone:req.param('phone')},function(err,found){
+	    if (!err && found != undefined) {
+		     	return res.json(503,{err:"User with phone number '" + req.param('phone') + "' has already registered"});
+	    }
+	});
+
+	SystemEvent.add("UserCreate",  model.first_name+' '+model.last_name);
 
     User.create(model)
       .exec(function(err, model) {

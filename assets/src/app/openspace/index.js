@@ -55,7 +55,12 @@ angular.module( 'lobby.openspace', [])
         $state.go("finish.openspace");
       })
       .error(function(data,status,headers,config){
-        $scope.errors = "registering failed";
+        if(data.err != undefined){
+          $scope.errors = "registering failed - " + data.err;
+        }
+        else{
+          $scope.errors = "registering failed"; 
+        }
       });
   }
 

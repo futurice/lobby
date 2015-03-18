@@ -26,7 +26,12 @@ describe('systemevent model', function () {
                             assert.notEqual(found, undefined);
                             assert.equal(found.name, 'System Event Test');
                             
-                            SystemEvent.destroy({id:id});
+                            SystemEvent.destroy({id:id}).exec(function(err){
+                                if(err){
+                                    fail();
+                                }
+                            });
+
                             done();
 
                         });

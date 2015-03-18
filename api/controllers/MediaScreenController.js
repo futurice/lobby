@@ -19,11 +19,12 @@ module.exports = {
           return res.json(JSON.parse(body));
         }
         catch(e) {
+          SystemEvent.add("ERROR", "Media screen: couldn't parse response. "+e);
           return res.json(503, {'error': "Couldn't parse response."});
         }
       });
     }).on('error', function(e) {
-      SystemEvent.add("ERROR", e);
+      SystemEvent.add("ERROR", "Media screen: get blog: "+e);
       return res.json({'error': e});
     });
   },

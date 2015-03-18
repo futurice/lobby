@@ -19,6 +19,7 @@ angular.module( 'lobby.employees', [])
   $scope.show_i = config.RESULTS_SHOW_AMOUNT;
   $scope.searchText = '';
   $scope.notificationMessage = '';
+  $scope.filteredEmployees = [];
 
   $scope.loadMore = function() {
     $scope.show_i += config.RESULTS_SHOW_AMOUNT;
@@ -29,19 +30,24 @@ angular.module( 'lobby.employees', [])
     $('#employeeSelect').foundation('reveal', 'open');
   };
 
+  $scope.filterEmployees = function() {
+    $scope.filteredEmployees = $rootScope.fuse.search($scope.searchText);
+  }
+
   $scope.notify = function(employee) {
-    /*
+
     var msg = "Futurice Lobby - You have a visitor";
     if ($scope.notificationMessage != "") {
-      msg += ': "'' + $scope.notificationMessage + '"';
+      msg += ': "' + $scope.notificationMessage + '"';
     }
     $http.put("/api/notify",
       {
-        "type": "flowdock",
+        "type": "sms",
+        "recipient": employee.phone1,
         "message": msg
       }
     );
-    */
+
     $scope.closeModal();
     $state.go("finish.notification");
   };

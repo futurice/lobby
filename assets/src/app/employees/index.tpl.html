@@ -2,13 +2,13 @@
   <h2>Employee lookup</h2>
   <p>Let's see if we can find what you're looking for.<br>Type the name of the person below.</p>
 
-  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText">
+  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText" ng-change="filterEmployees()">
 </section>
 
 <section class="employees-container medium-8">
   <ul class="employees" ng-show="searchText.length">
     <li
-      ng-repeat="employee in filteredEmployees = (employees | filter:{full_name: searchText}).slice(0, show_i)"
+      ng-repeat="employee in filteredEmployees.slice(0, show_i)"
       class="box clearfix" ng-click="selectEmployee(employee)">
       <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
       <strong>{{employee.first_name}} {{employee.last_name}}</strong>

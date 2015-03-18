@@ -4,8 +4,8 @@
     <th class="small-8 columns"> Comment</td>
   </tr>
 
-  <tr class="row" ng-repeat="feedb in feedbacklist">
-    <td class="small-3 columns"> {{feedb.date}}</td>
+  <tr class="row" ng-repeat="feedb in feedbacklist | orderBy:predicate">
+    <td class="small-3 columns"> {{feedb.createdAt | amCalendar}}</td>
     <td class="small-8 columns"> {{feedb.comments}}</td>
   </tr>
 </table>

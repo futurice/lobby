@@ -1,30 +1,79 @@
+var https = require('https');
+var qs = require('querystring');
+var _ = require('lodash');
+var request = require('request');
+
 module.exports = {
   /**
    * `NotifyController.notify()`
    */
-  notify: function(req, res){
-  	if(req.body.type==="flowdock"){
-  		var session = new sails.flowdock.Session("9d6386bafaa7bdaed8125e58572ee749");
-  		var users = session.get(
-  			'/users', "",
-  			function (err, flow, response){
-  				if(err) {
-  					console.log(err)
-  					SystemEvent.add("ERROR", err);
-  				} else if (response) {
-			      var users = response.body;
-			      var user = users.filter(function(usr){
-			         return usr.email==="miki.tolonen@gmail.com"
-			      })[0];
-			      if(!user){
-			         console.log("User not found");
-			         return
-			      }
-			      session.privateMessage(user.id, req.body.message);
-			      SystemEvent.add("Flowdock Message", "Sent to " + user.name + ": " + req.body.message);
-			      res.ok("Sent message to : " + user.name);		   		}
-				}
-			);
-		}
-	}
+  notify: function(req, res) {
+    console.log("notify");
+	if (req.body.type === "sms") {
+      //TODO validate number / only pass user id here?
+      if (!req.body.recipient) {
+        return res.json({'error': 'Invalid recipient'});
+      }
+
+      var params = qs.stringify({
+        to: sails.config.futurice.sms_override_number ? sails.config.futurice.sms_override_number : req.body.recipient,
+        text: req.body.message, //'You have a visitor in Futurice lobby',
+        username: sails.config.futurice.sms_user,
+        password: sails.config.futurice.sms_password
+      });
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+      https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
+        var body = '';
+        sms.on('data', function(chunk) {
+          body += chunk;
+        });
+        sms.on('end', function() {
+          if ([200,201,202].indexOf(sms.statusCode) != -1) {
+            console.log("SMS Message sent with these parameters: " + params);
+            return res.json({status: 'Message sent.'});
+          };
+          return res.json({'error': '?'});
+        });
+      }).on('error', function(e) {
+        console.log("Error while sending sms message: " +e);
+        return res.json({'error': e});
+      });
+    } else if (req.body.type==="flowdock") {
+  		console.log(sails.config.futurice.flowdock_key);
+  		var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);
+      request.post(
+        'https://api.flowdock.com/v1/messages/chat/'+sails.config.futurice.flowdock_flow_api_key,
+        {form:{'external_user_name':'lobby','content':req.body.message,'tags': ""}},
+        function (error, response, body) {
+          console.log("in the request")
+          if(error)
+            console.log(error);
+          else {
+              console.log(body);
+              console.log(response);
+          }
+        }
+      );
+        //this is for sending messages to single person
+        /*
+        var users = session.get(
+    			'/users', "",
+    			function (err, flow, response){
+    				if(err)
+    					console.log(err)
+    				else if (response) {
+  			      var users = response.body;
+  			      var user = users.filter(function(usr){
+  			         return usr.email==="miki.tolonen@gmail.com"
+  			      })[0];
+  			      if(!user){
+  			         console.log("User not found");
+  			         return
+  			      }
+  			      session.privateMessage(user.id, req.body.message);
+  			      res.ok("Sent message to : " + user.name);		   		}
+  				}
+  			);*/
+	   }
+  }
 };

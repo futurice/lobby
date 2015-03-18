@@ -1,13 +1,13 @@
 module.exports = {
-	getAll: function(req, res) {
-		User.find({},function(err,found){
+  getAll: function(req, res) {
+	User.find({},function(err,found){
       if (err){
       	SystemEvent.add("ERROR", err);
         return res.json(503,{err:"Error while retrieving userdata"});
       }
       return res.json(found);
     });
-	},
+  },
 
 
   checkin: function(req, res) {
@@ -24,6 +24,7 @@ module.exports = {
 
 			User.update({id:found.id},{last_seen:d.getTime()},function(err,found){
 				if (err) {
+          SystemEvent.add("ERROR", err);
 					console.log(err);
 				}
 				else {
@@ -38,36 +39,36 @@ module.exports = {
     });
   },
 
-	create: function (req, res) {
+  create: function (req, res) {
     var d= new Date();
-		var model = {
-			email: req.param('email'),
-			first_name: req.param('first_name'),
+    var model = {
+		  email: req.param('email'),
+		  first_name: req.param('first_name'),
       last_name: req.param('last_name'),
       phone: req.param('phone'),
-			last_seen: d.getTime(),
-		};
+		  last_seen: d.getTime(),
+    };
 
-		SystemEvent.add("UserCreate",  model.first_name+' '+model.last_name);
+    SystemEvent.add("UserCreate",  model.first_name+' '+model.last_name);
 
-		User.create(model)
-		.exec(function(err, model) {
-			if (err) {
-        SystemEvent.add("ERROR", err);
-				return res.json(503,{err:"User creation failed for unknown reason"})
-			}
-			else {
-			    var d= new Date();
-			    var oslog = {
+    User.create(model)
+      .exec(function(err, model) {
+        if (err) {
+          SystemEvent.add("ERROR", err);
+        	return res.json(503,{err:"User creation failed for unknown reason"})
+        }
+        else {
+          var d= new Date();
+          var oslog = {
             userid:model.id,
             timestamp: d.getTime(),
             comment:req.param("comment")
           };
-			    OpenSpaceLog.create(oslog,function(created,err) {
+          OpenSpaceLog.create(oslog,function(created,err) {
             console.log(created);
           });
-			    return res.json({msg:"user created successfully!"})
-			}
-		});
-	}
+          return res.json({msg:"user created successfully!"})
+        }
+    });
+  }
 };

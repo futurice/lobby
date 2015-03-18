@@ -16,6 +16,11 @@ module.exports = {
           console.log(err);
           return res.json(503,{err:"Error while retrieving system events"});
       }
+
+      // Create timestamps
+      for (var i=0;i<found.length;i++) {
+        found[i].timestamp = found[i].createdAt.getTime();
+      }
       return res.json(found);
     });
   }

@@ -33,6 +33,10 @@ angular.module( 'lobby', [
 	moment.lang('en');
 })
 
+.run(function() {
+  FastClick.attach(document.body);
+})
+
 .controller( 'AppCtrl',['$scope', '$rootScope', 'EmployeeModel', 'config',
  function AppCtrl ( $scope, $rootScope, EmployeeModel, config ) {
 
@@ -42,6 +46,7 @@ angular.module( 'lobby', [
     // Fetch the employee listing
     EmployeeModel.getAll($scope).then(function(models) {
       $rootScope.employees = models;
+      $rootScope.fuse = new Fuse(models, config.fuse);
     });
   };
   $rootScope.getEmployees();

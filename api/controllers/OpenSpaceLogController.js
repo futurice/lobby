@@ -3,6 +3,7 @@ module.exports = {
   	OpenSpaceLog.find({},function(err,found){
       //return if error occurs while fetching log
       if (err){
+          SystemEvent.add("ERROR", err);
           return res.json(503,{err:"Error while retrieving userlog"});
       }
       // Callback that  matches every log entry to a corresponding user
@@ -10,6 +11,7 @@ module.exports = {
         //"callback" retuns actual callback given to findOne function
         return function(err, user) {
           if (err){
+            SystemEvent.add("ERROR", err);
             return res.json(503,{err:"Error while retrieving userlog"});
           }
 

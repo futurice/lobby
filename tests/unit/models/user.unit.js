@@ -27,7 +27,9 @@ describe('openspace user model', function () {
                 it('findOne() should get newly created user', function (done) {
                     User.findOne({id:id, phone:'02948127519212', last_name:'Potkukelkka', first_name:'James'},
                       function (err, found) {
-
+                        if(err){
+                            fail();
+                        }
                         assert.notEqual(found, undefined);
                         assert.notDeepEqual(found, []);
                     });
@@ -72,7 +74,9 @@ describe('openspace user model 2', function () {
                 it('findOne() should get newly created user', function (done) {
                     User.findOne({id:id, phone:'02948127519213', last_name:'Snow', first_name:'Jon'},
                       function (err, found) {
-
+                        if(err){
+                            fail();
+                        }
                         assert.notEqual(found, undefined);
                         assert.notDeepEqual(found, []);
 

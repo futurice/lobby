@@ -38,7 +38,7 @@ after(function (done) {
 });
 
 
-describe('The User Controller', function () {
+describe('UserController', function () {
 
     describe('when we create a user', function () {
 
@@ -55,15 +55,14 @@ describe('The User Controller', function () {
                 fail();
             }
             id = data.id;
-            describe('findOne()', function () {
-                it('should get newly created user', function (done) {
-                    User.findOne({phone:'02948127519212'} ,function (err, found) {
+            
+            it('findOne() should get newly created user', function (done) {
+                User.findOne({phone:'02948127519212'} ,function (err, found) {
 
-                        assert.notEqual(found, undefined);
-                        assert.notDeepEqual(found, []);
-                    });
-                    done();
+                    assert.notEqual(found, undefined);
+                    assert.notDeepEqual(found, []);
                 });
+                done();
             });
         });
 
@@ -80,6 +79,10 @@ describe('The User Controller', function () {
             done();
         });
 
+        it('todo: should create an openspacelog entry'), function (done) {
+            done();
+        }
+
         it('should destroy the system event from database', function (done) {
             SystemEvent.destroy({name:"UserCreate", details:sampleuser.first_name+' '+sampleuser.last_name})
               .exec(function(err, deleted){
@@ -90,6 +93,10 @@ describe('The User Controller', function () {
             });
             done();
         });
+
+        it('todo: should destroy the openspacelog entry from database'), function (done) {
+            done();
+        }
 
         it('should destroy the sample user from database', function (done) {
             User.destroy({id:id}).exec(function(err, deleted){

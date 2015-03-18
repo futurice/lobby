@@ -6,40 +6,41 @@ describe('systemevent model', function () {
 
     describe('add', function () {
 
-        it('should create new system event', function (done) {
+        var sysevent = {
+            name: 'System Event Test'
+        };
 
-            var sysevent = {
-                name: 'System Event Test'
-            };
+        it('should create new system event', function (done) {
+            
             SystemEvent.create(sysevent, function(err, data){
                 if(err){
                     fail();
                 }
-                var id = data.id;
-                describe('findOne()', function () {
-                    it('should get newly created system event', function (done) {
-                        SystemEvent.findOne({id:id} ,function (err, found) {
-                            if(err){
-                                fail();
-                            }
+                id = data.id;
+                
+                it('find() should get newly created system event', function (done) {
+                    SystemEvent.find(sysevent, function (err, found) {
+                        if(err){
+                            fail();
+                        }
 
-                            assert.notEqual(found, undefined);
-                            assert.equal(found.name, 'System Event Test');
-                            
-                            SystemEvent.destroy({id:id}).exec(function(err){
-                                if(err){
-                                    fail();
-                                }
-                            });
-
-                            done();
-
-                        });
+                        assert.notEqual(found, undefined);
+                        assert.notDeepEqual(found, []);
                     });
+                    done();
                 });
-                done();
             });
+            done();
+        });
 
+        it('should destroy the sample system event', function (done) {
+            SystemEvent.destroy(sysevent).exec(function(err, deleted){
+                if(err){
+                    fail();
+                }
+                assert.notDeepEqual(deleted, []);
+            });
+            done();
         });
     });
 

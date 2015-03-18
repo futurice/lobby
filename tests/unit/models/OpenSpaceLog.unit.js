@@ -2,38 +2,41 @@ assert = require('assert'),
 should = require('should'),
 Sails = require('sails');
 
-describe('feedback model', function () {
+describe('OpenSpaceLog model', function () {
 
     describe('create', function () {
 
-        var feedback = {
-            comments: 'Feedback Unit Test'
+        var opevent = {
+            userid: 'OpenSpaceLog Event Test',
+            timestamp: '18.03.2015'
         };
+        var id;
 
-        it('should create new feedback', function (done) {
+        it('should create new OpenSpaceLog event', function (done) {
 
-            Feedback.create(feedback, function(err, data){
+            OpenSpaceLog.create(opevent, function(err, data){
                 if(err){
                     fail();
                 }
                 id = data.id;
-                it('find() should get newly created feedback', function (done) {
-                    Feedback.find(feedback ,function (err, found) {
+                it('findOne() should get newly created OpenSpaceLog event', function (done) {
+                    OpenSpaceLog.findOne({id:id, userid: 'OpenSpaceLog Event Test', timestamp: '18.03.2015'},
+                      function (err, found) {
                         if(err){
                             fail();
                         }
+
                         assert.notEqual(found, undefined);
                         assert.notDeepEqual(found, []);
                     });
                     done();
                 });
-                
             });
             done();
         });
 
-        it('should destroy the sample feedback', function (done) {
-            Feedback.destroy(feedback).exec(function(err, deleted){
+        it('should delete the OpenSpaceLog sample event', function (done) {
+            OpenSpaceLog.destroy({id:id}).exec(function(err, deleted){
                 if(err){
                     fail();
                 }

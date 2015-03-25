@@ -43,6 +43,12 @@ module.exports.routes = {
   },
   'get /api/blog': 'MediaScreenController.blog',
 
+  // Media Screen messages
+  'get /api/messages': 'MessagesController.getAll',
+  'post /api/messages': 'MessagesController.create',
+  'delete /api/messages': 'MessagesController.delete',
+  'put /api/messages': 'MessagesController.update',
+
   // Open Space Users
   'put /api/user': 'UserController.checkin',
   'post /api/user': 'UserController.create',

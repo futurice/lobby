@@ -18,7 +18,8 @@ angular.module( 'lobby', [
   'lobby.finish',
   'lobby.openspace',
   'lobby.feedback',
-  'lobby.admin'
+  'lobby.admin',
+  'lobby.messageCreator'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {
@@ -68,7 +69,7 @@ angular.module( 'lobby', [
     $timeout.cancel($scope.timer);
     $scope.timer = $timeout(function() {
       $location.path("/");
-    }, config.IDLE_TIMEOUT);    
+    }, config.IDLE_TIMEOUT);
   }, 1000));
 
 }])

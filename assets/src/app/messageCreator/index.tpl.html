@@ -1,0 +1,31 @@
+<section class="intro">
+  <h2>Create media screen message</h2>
+</section>
+
+<div class="row">
+  <section class="medium-12 columns">
+    <form>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Header
+            <textarea ng-model="message.header"></textarea>
+          </label>
+          <label>Body text
+            <textarea ng-model="message.body"></textarea>
+          </label>
+          <label>Visibility time
+            <p>Current: {{visibilityTime/60000}} minutes</p>
+            <a class="button secondary" ng-click="setVisibility(5)">5 min</a>
+            <a class="button secondary" ng-click="setVisibility(10)">10 min</a>
+            <a class="button secondary" ng-click="setVisibility(20)">20 min</a>
+            <a class="button secondary" ng-click="setVisibility(30)">30 min</a>
+            <a class="button secondary" ng-click="setVisibility(60)">1 hour</a>
+            <a class="button secondary" ng-click="setVisibility(180)">3 hours</a>
+          </label>
+        </div>
+      </div>
+      <button type="submit" class="button success expand radius" ng-click="createMessage()">Create message</button>
+    </form>
+    <div id="errors" ng-bind="errors"></div>
+  </section>
+</div>

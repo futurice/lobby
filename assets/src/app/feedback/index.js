@@ -23,7 +23,7 @@ angular.module( 'lobby.feedback', [])
     });
 }])
 .controller('FeedbackCtrl', ['$scope', '$sails', '$http', 'config','$state',
-      function OpenSpaceController( $scope, $sails, $http, config, $state) {
+      function FeedbackController( $scope, $sails, $http, config, $state) {
 
     $scope.feedback = {comments: ""};
     $scope.predicate = "-createdAt";

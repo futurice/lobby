@@ -1,4 +1,4 @@
-'use strict';
+erb'use strict';
 
 describe('Deliveries', function () {
 
@@ -8,7 +8,7 @@ describe('Deliveries', function () {
 
     browser.get("/").then(function() {
       deliveryButton = element(by.css('.main-nav li:nth-child(2) a'));
-      expect(deliveryButton.getText()).toEqual('I have a delivery');
+      expect(deliveryButton.getText()).toEqual('Deliveries');
       deliveryButton.click();
     });
   });

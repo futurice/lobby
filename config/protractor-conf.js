@@ -19,5 +19,9 @@ exports.config = {
     includeStackTrace : true,
     isVerbose : true,
     showColors:true
-  }
+  },
+
+  chromeDriver: 'C:/futurice/chromedriver.exe',
+  seleniumServerJar: 'C:/futurice/lobby/node_modules/selenium/lib/runner/selenium-server-standalone-2.20.0.jar',
+  baseUrl: 'http://localhost:1337/'
 };

@@ -39,6 +39,9 @@ after(function (done) {
 
 
 describe('UserController', function () {
+    var json = sinon.spy();
+    var req = {};
+    var res = {json:json};
 
     describe('when we create a user', function () {
 
@@ -48,22 +51,21 @@ describe('UserController', function () {
             last_name: 'Potkukelkka',
             first_name: 'James',
         };
+        req.param = sampleuser;
 
-        var id;
-        UserController.create(sampleuser, function(err, data){
-            if(err){
-                fail();
-            }
-            id = data.id;
-            
-            it('findOne() should get newly created user', function (done) {
-                User.findOne({phone:'02948127519212'} ,function (err, found) {
+        UserController.create(req, res);
+        it('should respond succesfully', function() {
+            assertEqual(res.msg, "user created successfully!");
+        });
 
-                    assert.notEqual(found, undefined);
-                    assert.notDeepEqual(found, []);
-                });
-                done();
+        it('findOne() should get newly created user', function (done) {
+            User.findOne({phone:'02948127519212', last_name:'Potkukelkka', first_name:'James'},
+              function (err, found) {
+
+                assert.notEqual(found, undefined);
+                assert.notDeepEqual(found, []);
             });
+            done();
         });
 
         it('should create new system event of user creation', function (done) {
@@ -99,7 +101,8 @@ describe('UserController', function () {
         }
 
         it('should destroy the sample user from database', function (done) {
-            User.destroy({id:id}).exec(function(err, deleted){
+            User.destroy({phone:'02948127519212', last_name:'Potkukelkka', first_name:'James'})
+              .exec(function(err, deleted){
                 if(err){
                     fail();
                 }

@@ -47,6 +47,13 @@ module.exports = {
 
   create: function (req, res) {
     var params = req.params.all()
+    var model = {
+      title:params.header,
+      description:params.body
+    }
+    // Calculate visibility time
+    var d = new Date();
+    model.visibleUntil = d.getTime() + params.visibility; // If d.getTime() gives time in milliseconds?
 
     // TODO: upon message creation, how to populate the user here, so the associated user gets sent back as a property of the message
     Message.create(params).exec(function(err, model) {

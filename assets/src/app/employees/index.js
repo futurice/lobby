@@ -18,7 +18,6 @@ angular.module( 'lobby.employees', [])
 
   $scope.show_i = config.RESULTS_SHOW_AMOUNT;
   $scope.searchText = '';
-  $scope.notificationMessage = '';
   $scope.filteredEmployees = [];
 
   $scope.loadMore = function() {
@@ -35,11 +34,9 @@ angular.module( 'lobby.employees', [])
   }
 
   $scope.notify = function(employee) {
-
+    $scope.selected = employee;
     var msg = "Futurice Lobby - You have a visitor";
-    if ($scope.notificationMessage != "") {
-      msg += ': "' + $scope.notificationMessage + '"';
-    }
+
     $http.put("/api/notify",
       {
         "type": "sms",

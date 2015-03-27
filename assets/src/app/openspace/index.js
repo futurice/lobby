@@ -56,6 +56,7 @@ angular.module( 'lobby.openspace', [])
       })
       .error(function(data,status,headers,config){
         $scope.errors = data.err;
+        $('#errorPopup').foundation('reveal', 'open');
       });
   };
 
@@ -65,6 +66,7 @@ angular.module( 'lobby.openspace', [])
       })
       .error(function(data,status,headers,config){
         $scope.errors = "registering failed";
+        $('#errorPopup').foundation('reveal', 'open');
       });
   };
 
@@ -89,6 +91,7 @@ angular.module( 'lobby.openspace', [])
     })
     .error(function(data,status,headers,config){
       $scope.errors = data.err;
+      $('#errorPopup').foundation('reveal', 'open');
     });
   };
   $scope.tstampgt = function(actual,expected){
@@ -102,13 +105,18 @@ angular.module( 'lobby.openspace', [])
     var now = new Date();
     $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
   };
-  
+
+  $scope.closeModal = function() {
+    $('#errorPopup').foundation('reveal', 'close');
+  };
+
   if (!$state.includes('openspaceadmin')) { // When in other state than admin
     $scope.filterDay(); // (To list users checked in today)
-    $scope.getAllUsers();
+    $scope.getUsers();
     $scope.predicate = "-last_seen";
   }
   else {
+    $state.go("openspaceadmin.users");
     $scope.getUsers();
     $scope.getLogins();
     setInterval($scope.getLogins,10000);

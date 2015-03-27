@@ -47,6 +47,7 @@ angular.module( 'lobby.openspace', [])
       })
       .error(function(data,status,headers,config){
         $scope.errors = data.err;
+        $('#errorPopup').foundation('reveal', 'open');
       });
   };
 
@@ -56,8 +57,19 @@ angular.module( 'lobby.openspace', [])
       })
       .error(function(data,status,headers,config){
         $scope.errors = "registering failed";
+        $('#errorPopup').foundation('reveal', 'open');
       });
   }
+
+  $scope.getAllUsers = function () {
+    $http.get("/api/users").success(function(data,status,headers,config) {
+      $scope.users = data;
+    })
+    .error(function(data,status,headers,config){
+      $scope.errors = data.err;
+      $('#errorPopup').foundation('reveal', 'open');
+    });
+  };
 
   $scope.getAll = function(){
     $http.get("/api/oslogins").success(function(data,status,headers,config) {
@@ -71,6 +83,7 @@ angular.module( 'lobby.openspace', [])
     })
     .error(function(data,status,headers,config){
       $scope.errors = data.err;
+      $('#errorPopup').foundation('reveal', 'open');
     });
   };
   $scope.tstampgt = function(actual,expected){
@@ -84,7 +97,19 @@ angular.module( 'lobby.openspace', [])
     var now = new Date();
     $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
   };
-$scope.getAll();
-setInterval($scope.getAll,10000);
+
+  $scope.closeModal = function() {
+    $('#errorPopup').foundation('reveal', 'close');
+  };
+
+  if (!$state.includes('openspaceadmin')) { // When in other state than admin
+    $scope.filterDay(); // (To list users checked in today)
+    $scope.getAllUsers();
+    $scope.predicate = "-last_seen";
+  }
+  else {
+    $scope.getAll();
+    setInterval($scope.getAll,10000);
+  }
 }]);
 

@@ -16,6 +16,7 @@ module.exports = {
           }
 
           found[i].user = user;
+          found[i].last_seen = user.last_seen;
           i++;
 
           //if user wasnt last, fetch next.

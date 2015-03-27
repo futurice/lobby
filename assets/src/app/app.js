@@ -37,8 +37,8 @@ angular.module( 'lobby', [
   FastClick.attach(document.body);
 })
 
-.controller( 'AppCtrl',['$scope', '$rootScope', 'EmployeeModel', 'config',
- function AppCtrl ( $scope, $rootScope, EmployeeModel, config ) {
+.controller( 'AppCtrl',['$scope', '$rootScope', '$location', '$timeout', 'EmployeeModel', 'config',
+ function AppCtrl ( $scope, $rootScope, $location, $timeout, EmployeeModel, config ) {
 
   $rootScope.employees = [];
 
@@ -51,6 +51,25 @@ angular.module( 'lobby', [
   };
   $rootScope.getEmployees();
   setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
+
+  $scope.$on('$viewContentLoaded', function() {
+    // if timer already exists, destroy it so that it resets when user navigates
+    if($scope.timer) {
+      $timeout.cancel($scope.timer);
+    }
+    $scope.timer = $timeout(function() {
+      $location.path("/");
+    }, config.IDLE_TIMEOUT);
+  });
+
+  // reset timer when clicking/moving mouse etc
+  $('body').mousemove(_.throttle(function() {
+    $timeout.cancel($scope.timer);
+    $scope.timer = $timeout(function() {
+      $location.path("/");
+    }, config.IDLE_TIMEOUT);    
+  }, 1000));
+
 }])
 
 .directive('backImg', function(){

@@ -44,7 +44,7 @@ module.exports.routes = {
   'get /api/blog': 'MediaScreenController.blog',
 
   // Open Space Users
-  'get /api/user': 'UserController.checkin',
+  'put /api/user': 'UserController.checkin',
   'post /api/user': 'UserController.create',
   'get /api/users': 'UserController.getAll',
   'get /api/oslogins': 'OpenSpaceLogController.getAll',

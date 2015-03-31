@@ -11,12 +11,17 @@ module.exports = {
 
 
   checkin: function(req, res) {
-	User.findOne({phone:req.param('phone')},function(err,found){
+	    console.log("checkin0");
+
+  User.findOne({phone:req.param('phone')},function(err,found){
+    console.log("checkin");
     if (!err && found != undefined) {
+          console.log("checkin2");
+
       var d = new Date();
 	    OpenSpaceLog.create({
-        userid: found.id,
-        timestamp: d.getTime(),
+        user: found.id,
+        //timestamp: d.getTime(),
         comment: req.param("comment")
       }, function(created,err) {
         console.log(created);
@@ -59,7 +64,7 @@ module.exports = {
         else {
           var d= new Date();
           var oslog = {
-            userid:model.id,
+            user:model.id,
             timestamp: d.getTime(),
             comment:req.param("comment")
           };

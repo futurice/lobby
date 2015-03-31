@@ -49,8 +49,8 @@ angular.module( 'lobby.openspace', [])
   $scope.predicate = "-createdAt";
   $scope.timeWindow = 0;
 
-  $scope.getUser = function() {
-    $http.get("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
+  $scope.checkIn = function() {
+    $http.put("/api/user?phone="+$scope.person.phone+"&comment="+$scope.person.comment)
       .success(function(data,status,headers,config) {
         $state.go("finish.openspace");
       })

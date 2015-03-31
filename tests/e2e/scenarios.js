@@ -19,6 +19,14 @@ describe('Deliveries', function () {
       expect(header.isDisplayed()).toBe(true);
       expect(header.getText()).toEqual('Bringing a delivery?');
     });
+    element(by.css('.main-nav a')).then(function(notifyButton) {
+      expect(notifyButton.isDisplayed()).toBe(true);
+      notifyButton.click();
+    });
+  });
+
+  it('should show the finish page on success', function() {
+    expect(window.document.location.hash).toEqual("#/finish/delivery");
   });
 });
 /*

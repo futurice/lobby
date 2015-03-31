@@ -1,5 +1,5 @@
 <section class="intro">
-  <h2>Register to Open Space</h2>
+  <h2>Check in to Open Space</h2>
   <p>Please fill in your personal information below.</p>
 </section>
 
@@ -7,16 +7,33 @@
   <section class="medium-12 columns">
     <dl class="tabs" data-tab>
       <dd ui-sref-active="active"><a ui-sref="openspace.checkin">Already registered? Check in.</a></dd>
-      <dd ui-sref-active="active"><a ui-sref="openspace.register">Create account</a></dd>
+      <dd ui-sref-active="active"><a ui-sref="openspace.register">Create an account</a></dd>
     </dl>
     <div class="tabs-content box" ui-view></div>
-    <div id="errors" ng-bind="errors"></div>
   </section>
 </div>
 
 <div class="row">
   <section class="medium-12 columns">
     <br/>
-    <p>You can use our Open Space for ...</p>
+    <h3>Users checked in today:</h3>
+    <table>
+      <tr class="row">
+        <th class="small-2 columns"> Name</td>
+        <th class="small-3 columns"> Last seen</td>
+      </tr>
+      <tr class="row" ng-repeat="user in users | filter :{last_seen:timeWindow} :tstampgt |  orderBy:predicate">
+        <td class="small-2 columns"> {{user.first_name}} {{user.last_name}}</td>
+        <td class="small-3 columns"> {{user.last_seen | amCalendar}}</td>
+      </tr>
+    </table>
   </section>
+</div>
+
+<div id="errorPopup" class="reveal-modal" data-reveal>
+  <h2><i class="fa fa-warning"></i> {{errors}}</h2>
+  <div class="right">
+    <a class="button secondary" ng-click="closeModal()">OK</a>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>

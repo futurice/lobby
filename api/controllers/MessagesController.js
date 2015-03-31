@@ -1,8 +1,9 @@
+var _ = require('lodash');
 
 module.exports = {
 
   find: function(req, res) {
-    Message.getAll().spread(function(models) {
+    Message.find().spread(function(models) {
       Message.watch(req);
 
       //  Message.watch(req.socket, models);
@@ -20,17 +21,22 @@ module.exports = {
   },
 
   getAll: function(req, res) {
-    Message.getAll().spread(function(models) {
+    console.log("getall msgs");
+    Message.find().exec(function(err, models) {
+      if (err) {
+        SystemEvent.add("ERROR", err);
+        res.send(400);
+      }
+      else {
+        // Watch for model changes
+        Message.watch(req);
 
-      Message.watch(req);
-      Message.subscribe(req.socket,models);
+        // Subscribe the client
+        Message.subscribe(req.socket,models);
 
-      console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'messages\'.');
-      res.json({data: models});
-    })
-    .fail(function(err) {
-      // An error occured
-      SystemEvent.add("ERROR", err);
+        console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'messages\'.');
+        res.json({data: models});
+      }
     });
   },
   getOne: function(req, res) {
@@ -46,16 +52,11 @@ module.exports = {
   },
 
   create: function (req, res) {
-    var params = req.params.all()
-    var model = {
-      title:params.header,
-      description:params.body
-    }
-    // Calculate visibility time
-    var d = new Date();
-    model.visibleUntil = d.getTime() + params.visibility; // If d.getTime() gives time in milliseconds?
+    var params = req.params.all();
 
-    // TODO: upon message creation, how to populate the user here, so the associated user gets sent back as a property of the message
+    // Calculate visibility time
+    model.visibleUntil = (new Date()).getTime() + params.visibility;
+
     Message.create(params).exec(function(err, model) {
       if (err) {
         SystemEvent.add("ERROR", err);
@@ -64,6 +65,7 @@ module.exports = {
       else {
         // publish create to subscribers
         Message.publishCreate(model);
+        console.log("msg publish create", model);
         res.json(model);
       }
     });

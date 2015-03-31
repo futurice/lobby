@@ -15,7 +15,7 @@ angular.module( 'lobby.systemEvents', [])
 .controller( 'SystemEventCtrl',['$scope', '$sails', '$http', 'config', 'SystemEventModel', 
  function SystemEventController( $scope, $sails, $http, config, SystemEventModel ) {
 
-  //$scope.systemEvents = [];
+  $scope.systemEvents = [];
   $scope.errors = "";
   $scope.predicate = "-createdAt";
   $scope.timeWindow = 0;
@@ -27,14 +27,20 @@ angular.module( 'lobby.systemEvents', [])
   })
   */
   $scope.getAll = function() {
-    $http.get("/api/systemEvents")
-      .success(function(data,status,headers,config){
+    $sails.get("/api/systemEvents")
+      .success(function(data, status, headers, config) {
         $scope.systemEvents = data;
       })
-
-      .error(function(data,status,headers,config){
+      .error(function(data, status, headers, config) {
         $scope.errors = data.err;
+        console.log("error!", data.err);
       });
+
+    $sails.on("systemEvent", function(message) {
+      if (message.verb == "created") {
+        $scope.systemEvents.push(message.data);
+      }
+    });
   }
 
   $scope.tstampgt = function(actual,expected){

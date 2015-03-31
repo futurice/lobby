@@ -71,16 +71,24 @@ angular.module( 'lobby.openspace', [])
   };
 
   $scope.getUsers = function() {
-    $http.get("/api/users").success(function(data,status,headers,config) {
+    $sails.get("/api/users").success(function(data,status,headers,config) {
       $scope.users = data;
+      console.log("users fetched");
     })
     .error(function(data,status,headers,config){
       $scope.errors = data.err;
     });
+    $sails.on('user', function(message) {
+      console.log(message);
+      if (message.verb == "created") {
+        console.log("user created!", message.data);
+      }
+    });
   };
 
   $scope.getLogins = function(){
-    $http.get("/api/oslogins").success(function(data,status,headers,config) {
+    $sails.get("/api/oslogins").success(function(data,status,headers,config) {
+      console.log("getlogins");
       for (var i=0;i<data.length;i++) {
 
     		data[i].timestamp = data[i].timestamp ? parseInt(data[i].timestamp) : 0;
@@ -92,6 +100,12 @@ angular.module( 'lobby.openspace', [])
     .error(function(data,status,headers,config){
       $scope.errors = data.err;
       $('#errorPopup').foundation('reveal', 'open');
+    });
+    $sails.on('openspacelog', function(message) {
+      console.log(message);
+      if (message.verb == "created") {
+        console.log("new checkin!", message.data);
+      }
     });
   };
   $scope.tstampgt = function(actual,expected){

@@ -7,9 +7,11 @@ module.exports = {
       	SystemEvent.add("ERROR", "Error while retrieving userdata: "+err);
         return res.json(503,{err:"Error while retrieving userdata"});
       }
-      User.watch(req);
-      User.subscribe(req.socket, found);
-      console.log(req.socket.id, "subscribed to user upd");
+      if (req.isSocket) {
+        User.watch(req);
+        User.subscribe(req.socket, found);
+        console.log(req.socket.id, "subscribed to user upd");
+      }
       res.json(found);
     });
   },

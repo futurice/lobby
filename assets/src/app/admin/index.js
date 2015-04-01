@@ -42,7 +42,7 @@ angular.module( 'lobby.admin', [])
   function AdminController( $scope, $sails, $http, config, $state) {
 
     $scope.getFeedback = function() {
-      $http.get("/api/feedback")
+      $sails.get("/api/feedback")
         .success(function(data,status,headers,config){
           $scope.feedbacklist = data;
         })
@@ -51,9 +51,7 @@ angular.module( 'lobby.admin', [])
         });
     };
 
-    if ($state.includes('feedback')) {
-      $scope.getFeedback();
-    }
+    $scope.getFeedback();
 }])
 
 .controller( 'SystemEventCtrl',['$scope', '$sails', '$http', 'config', 'SystemEventModel', 

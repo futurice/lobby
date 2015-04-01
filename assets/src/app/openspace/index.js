@@ -20,25 +20,6 @@ angular.module( 'lobby.openspace', [])
       url: '/checkin',
       templateUrl: 'openspace/_checkin.tpl.html',
 
-    })
-    .state('openspaceadmin', {
-    url: '/osadmin',
-    //abstract: true,
-    views: {
-      "main": {
-        abstract: true,
-        controller: 'OpenSpaceCtrl',
-        templateUrl: 'openspace/_admin.tpl.html',
-      }
-    },
-    })
-    .state('openspaceadmin.users', {
-      url: '/users',
-      templateUrl: 'openspace/_admin_users.tpl.html',
-    })
-    .state('openspaceadmin.checkins', {
-      url: '/checkins',
-      templateUrl: 'openspace/_admin_checkins.tpl.html',
     });
 }])
 .controller('OpenSpaceCtrl', ['$scope', '$sails', '$http', 'config','$state',

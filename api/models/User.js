@@ -28,6 +28,10 @@ module.exports = {
         last_seen: {
             type: 'string',
             required: false,
+        },
+        checkins: {
+            model: 'openspacelog',
+            via: 'user'
         }
     }
 }

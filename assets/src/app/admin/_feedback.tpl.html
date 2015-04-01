@@ -1,0 +1,13 @@
+<table>
+  <tr class="row">
+    <th class="small-3 columns"> Time</td>
+    <th class="small-8 columns"> Comment</td>
+  </tr>
+
+  <tr class="row" ng-repeat="feedb in feedbacklist | orderBy:predicate">
+    <td class="small-3 columns"> {{feedb.createdAt | amCalendar}}</td>
+    <td class="small-8 columns"> {{feedb.comments}}</td>
+  </tr>
+</table>
+
+<div> {{errors}}</div>

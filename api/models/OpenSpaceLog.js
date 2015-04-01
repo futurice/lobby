@@ -8,14 +8,8 @@
 
 module.exports = {
   attributes: {
-    userid: {
-      type: 'string',
-      required: true,
-      unique: true,
-    },
-    timestamp: {
-      type: 'string',
-      required: true,
+    user: {
+      model: 'user'
     },
     comment: {
       type: 'string',

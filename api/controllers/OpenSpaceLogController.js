@@ -1,41 +1,31 @@
+var helpers = require('../services/helpers');
+
 module.exports = {
-  getAll: function(req, res) {
-  	OpenSpaceLog.find({},function(err,found){
-      //return if error occurs while fetching log
-      if (err){
-          SystemEvent.add("ERROR", "User log: "+err);
-          return res.json(503,{err:"Error while retrieving userlog"});
+
+  find: function(req, res) {
+    var params = req.params.all(), filter = {};
+
+    if (helpers.isValidTimestamp(params.from)) {
+      filter.createdAt['>'] = new Date(params.from * 1000);
+    }
+    if (helpers.isValidTimestamp(params.to)) {
+      filter.createdAt['<'] = new Date(params.to * 1000);
+    }
+
+    var date = new Date();
+    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    OpenSpaceLog.find(filter)
+      .populate('user').exec(function(err, log) {
+      if (err) {
+        SystemEvent.add("ERROR", "User log: " + err);
+        res.json(503,{err:"Error while retrieving open space log."});
       }
-      // Callback that  matches every log entry to a corresponding user
-      var cb = function(found,i) {
-        //"callback" retuns actual callback given to findOne function
-        return function(err, user) {
-          if (err){
-            SystemEvent.add("ERROR", "User log: "+err);
-            return res.json(503,{err:"Error while retrieving userlog"});
-          }
-
-          found[i].user = user;
-          found[i].last_seen = user.last_seen;
-          i++;
-
-          //if user wasnt last, fetch next.
-          if (i < found.length) {
-            User.findOne({id:found[i].userid},cb(found,i));
-          }
-
-          //all users fetched. return.
-          else {
-            return res.json(found);
-          }
-        };
-      };
-      //return empty JSON if there is no log entries
-      if (!found.length) {
-          return res.json({});
+      if (req.isSocket) {
+        console.log("subscribing to oslog changes");
+        OpenSpaceLog.watch(req);
+        OpenSpaceLog.subscribe(req.socket, log);
       }
-      //start combining users to log entries
-      User.findOne({id:found[0].userid},cb(found,0))
-  });
-  },
+      res.json(log);
+    });
+  }
 };

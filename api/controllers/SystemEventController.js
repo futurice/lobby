@@ -16,9 +16,11 @@ module.exports = {
         console.log(err);
         return res.json(503,{err:"Error while retrieving system events"});
       }
-      SystemEvent.watch(req);
-      SystemEvent.subscribe(req.socket, models);
-      console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'systemevent\'.');
+      if (req.isSocket) {
+        SystemEvent.watch(req);
+        SystemEvent.subscribe(req.socket, models);
+        console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'systemevent\'.');
+      }
       res.json(models);
     });
   }

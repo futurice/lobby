@@ -4,14 +4,10 @@ module.exports = {
 
   find: function(req, res) {
     Message.find().spread(function(models) {
+      console.log(req.socket.id, 'subscribed to all of the model instances in \'messages\'.');
       Message.watch(req);
-
-      //  Message.watch(req.socket, models);
-      //  Message.subscribe(req.socket, models);
-      //  Message.subscribe(req.socket,models,['create','destroy','update']);
-      Message.subscribe(req.socket,models);
-
-      res.json({data: models});
+      Message.subscribe(req.socket, models, ['create','destroy','update']);
+      res.json(models);
     })
     .fail(function(err) {
       // An error occured
@@ -20,29 +16,9 @@ module.exports = {
     });
   },
 
-  getAll: function(req, res) {
-    console.log("getall msgs");
-    Message.find().exec(function(err, models) {
-      if (err) {
-        SystemEvent.add("ERROR", err);
-        res.send(400);
-      }
-      else {
-        // Watch for model changes
-        Message.watch(req);
-
-        // Subscribe the client
-        Message.subscribe(req.socket,models);
-
-        console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'messages\'.');
-        res.json({data: models});
-      }
-    });
-  },
   getOne: function(req, res) {
     Message.getOne(req.param('id')).spread(function(model) {
       Message.subscribe(req.socket, model);
-      console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'messages\'.');
       res.json(model);
     })
     .fail(function(err) {
@@ -52,10 +28,8 @@ module.exports = {
   },
 
   create: function (req, res) {
-    var params = req.params.all();
-
-    // Calculate visibility time
-    model.visibleUntil = (new Date()).getTime() + params.visibility;
+    var params = _.pick(req.params.all(),
+      'title', 'description', 'visibleUntil', 'forceVisible', 'eventTime');
 
     Message.create(params).exec(function(err, model) {
       if (err) {
@@ -72,22 +46,17 @@ module.exports = {
   },
 
   update: function (req, res, next) {
+    var params = req.params.all();
     var id = req.param("id");
-    var status = req.param("status");
-    var title = req.param("title");
-    isComplete = (status === 4) ? true : false;
-    if (status && title && req.isSocket) {
-      Message.update(id, {status: status, title: title ,isComplete:isComplete}).exec(function update(err, updated) {
-        Message.publishUpdate(updated[0].id, { status: updated[0].status, title: updated[0].title });
-      })
-    }
-    else {
-      if (status && req.isSocket) {
-        Message.update(id, {status: status,isComplete:isComplete }).exec(function update(err, updated) {
-            Message.publishUpdate(updated[0].id, { status: updated[0].status });
-        })
+    Message.update(params.id, params).exec(function update(err, updated) {
+      if (err) {
+        res.json(422, err);
       }
-    }
+      else {
+        Message.publishUpdate(updated[0].id, updated[0]);
+        res.json(updated);
+      }
+    });
   },
 
   destroy: function (req, res) {
@@ -105,23 +74,12 @@ module.exports = {
       if (!model) {
         return res.notFound();
       }
-      /*
-      Audit.create(model)
-          .exec(function (err, todo) {
-              if (err) {
-                  return console.log(err);
-              }
-              else {
 
-              }
-          });
-      */
       Message.destroy(id, function(err) {
         if (err) {
           SystemEvent.add("ERROR", err);
           return res.serverError(err);
         }
-        console.log('User with socket id '+req.socket.id+' is now subscribed to all of the model instances in \'Message destroy \'.',model.id);
         Message.publishDestroy(model.id);
         return res.json(model);
       });

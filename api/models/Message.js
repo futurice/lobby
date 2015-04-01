@@ -1,7 +1,7 @@
 /**
 * Message
 *
-* @description :: Represents a single that is shown on the media screen
+* @description :: Represents a single message that is shown on the media screen
 */
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
     visibleUntil: {
       type: 'datetime',
     },
-    visible: {
+    forceVisible: {
       type: 'boolean',
       defaultsTo: true
     },
@@ -26,27 +26,4 @@ module.exports = {
       type: 'datetime'
     }
   },
-
-  getAll: function() {
-    return Message.find();
-    // TODO: sort by createdAt DESC does not work here
-    //.sort('title')
-    /*
-    .populate('user')
-    .then(function (models) {
-      return [models];
-    });
-    */
-  },
-
-  getOne: function(id) {
-    return Message.findOne(id)
-    /*
-    .populate('user')
-    .then(function (model) {
-      // you have the option to do something with the model here if needed, before returning it to the controller
-      return [model];
-    });
-    */
-  }
 };

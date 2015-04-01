@@ -23,5 +23,16 @@ module.exports = {
       }
       res.json(models);
     });
+  },
+
+  delete: function(req, res) {
+    SystemEvent.destroy({}, function (err) {
+      if (err) {
+        console.log(err);
+        SystemEvent.add("ERROR", "Error deleting system event entries: "+err);
+        return res.json(503,{err:"Error while deleting event entries"});
+      }
+    });
+    return res.json(200);
   }
 };

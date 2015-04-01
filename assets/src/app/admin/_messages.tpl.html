@@ -8,13 +8,13 @@
       <div class="row">
         <div class="large-12 columns">
           <label>Header
-            <textarea ng-model="message.header"></textarea>
+            <textarea ng-model="message.title"></textarea>
           </label>
           <label>Body text
-            <textarea ng-model="message.body"></textarea>
+            <textarea ng-model="message.description"></textarea>
           </label>
           <label>Visibility time
-            <p>Current: {{visibilityTime/60000}} minutes</p>
+            <p>Current: {{message.visibilityTime/60000}} minutes</p>
             <a class="button secondary" ng-click="setVisibility(5)">5 min</a>
             <a class="button secondary" ng-click="setVisibility(10)">10 min</a>
             <a class="button secondary" ng-click="setVisibility(20)">20 min</a>
@@ -28,4 +28,21 @@
     </form>
     <div id="errors" ng-bind="errors"></div>
   </section>
+</div>
+
+<div id="errorPopup" class="reveal-modal" data-reveal>
+  <h2><i class="fa fa-warning"></i> {{errors}}</h2>
+  <div class="right">
+    <a class="button secondary" ng-click="closeModal()">OK</a>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="successPopup" class="reveal-modal" data-reveal>
+  <h3><i class="fa fa-info-circle"></i> Succesfully created a message:<br>
+    Visible until {{created | amCalendar}}</h3>
+  <div class="right">
+    <a class="button secondary" ng-click="closeModal()">OK</a>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>

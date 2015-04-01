@@ -29,18 +29,24 @@ module.exports = {
 
   create: function (req, res) {
     var params = _.pick(req.params.all(),
-      'title', 'description', 'visibleUntil', 'forceVisible', 'eventTime');
+      'title', 'description', 'visibilityTime', 'forceVisible', 'eventTime');
+    var d = new Date();
+    console.log("visll", params);
+
+    d.setMilliseconds(d.getMilliseconds() + params.visibilityTime);
+    params.visibleUntil = d;
 
     Message.create(params).exec(function(err, model) {
       if (err) {
         SystemEvent.add("ERROR", err);
-        return console.log(err);
+        console.log(err)
+        return res.json(422, err);
       }
       else {
         // publish create to subscribers
         Message.publishCreate(model);
         console.log("msg publish create", model);
-        res.json(model);
+        return res.json(model);
       }
     });
   },

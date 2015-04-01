@@ -6,17 +6,17 @@ Search: <input ng-model="searchText">
 
     <tr class="row">
         <th class="small-2 columns"> Name</td>
-        <th class="small-2 columns"> Email </td>
+        <th class="small-3 columns"> Email </td>
         <th class="small-2 columns"> Phone </td>
-        <th class="small-3 columns"> Time</td>
         <th class="small-3 columns"> Comment</td>
+        <th class="small-2 columns"> Time</td>
 
     </tr>
-    <tr class="row" ng-repeat="login in logins | filter:searchText | filter :{timestamp:timeWindow} :tstampgt |  orderBy:predicate">
+    <tr class="row" ng-repeat="login in logins | filter:searchText | filter :{createdAt:timeWindow} :tstampgt |  orderBy:predicate">
         <td class="small-2 columns"> {{login.user.first_name}} {{login.user.last_name}}</td>
-        <td class="small-2 columns"> {{login.user.email}} </td>
+        <td class="small-3 columns"> {{login.user.email}} </td>
         <td class="small-2 columns"> {{login.user.phone}} </td>
-        <td class="small-3 columns"> {{login.time}}</td>
         <td class="small-3 columns"> {{login.comment}}</td>
+        <td class="small-2 columns"> {{login.createdAt | amCalendar}}</td>
     </tr>
 </table>

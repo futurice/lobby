@@ -13,13 +13,11 @@ angular.module( 'lobby', [
 	'lobby.home',
 	'lobby.help',
   'lobby.employees',
-  'lobby.systemEvents',
   'lobby.delivery',
   'lobby.finish',
   'lobby.openspace',
   'lobby.feedback',
-  'lobby.admin',
-  'lobby.messageCreator'
+  'lobby.admin'
 ])
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
   function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider ) {

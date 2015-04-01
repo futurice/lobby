@@ -29,20 +29,25 @@ module.exports = {
           OpenSpaceLog.publishCreate(created);
         });
         var d = new Date();
-  			User.update({id:found.id}, {last_seen:d.getTime()}, function(err,found) {
+  			User.update({id:found.id}, {last_seen:d.getTime()}, function(err,updated) {
   				if (err) {
             SystemEvent.add("ERROR", "User update: "+err);
-  					console.log(err);
+  					console.log("user up err", err);
+            return res.json(503, err)
   				}
   				else {
-            User.publishUpdate(found.id, found);
-            SystemEvent.add("CheckIn", found.first_name +' '+ found.last_name);
-  					console.log(found);
-            return res.json(found);
+            console.log("123");
+            updated = updated[0];
+            User.publishUpdate(updated.id, updated);
+            SystemEvent.add("CheckIn", updated.first_name +' '+ updated.last_name);
+  					console.log("up", updated);
+            return res.json(updated);
   				}
   			});
       }
-      return res.json(404,{err:"User not found"});
+      else {
+        return res.json(404,{err:"User not found"});
+      }
     });
   },
 

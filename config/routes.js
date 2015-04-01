@@ -43,6 +43,12 @@ module.exports.routes = {
   },
   'get /api/blog': 'MediaScreenController.blog',
 
+  // Media Screen messages
+  'get /api/messages': 'MessagesController.find',
+  'post /api/messages': 'MessagesController.create',
+  'delete /api/messages': 'MessagesController.delete',
+  'put /api/messages': 'MessagesController.update',
+
   // Open Space Users
   'put /api/user': 'UserController.checkin',
   'post /api/user': 'UserController.create',
@@ -61,6 +67,7 @@ module.exports.routes = {
 
   // Event log
   'get /api/systemEvents': 'SystemEventController.getAll',
+  'delete /api/systemEvents': 'SystemEventController.delete',
 
 // If a request to a URL doesn't match any of the custom routes above, it is matched
 // against Sails route blueprints.  See `config/blueprints.js` for configuration options

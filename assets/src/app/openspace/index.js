@@ -25,9 +25,9 @@ angular.module( 'lobby.openspace', [])
 .controller('OpenSpaceCtrl', ['$scope', '$sails', '$http', 'config','$state',
   function OpenSpaceController( $scope, $sails, $http, config, $state) {
 
-  $scope.person = {first_name:"", last_name:"",email:"",phone:"", comments:""};
+  $scope.person = {first_name:"", last_name:"",email:"",phone:"", comment:""};
   $scope.errors = "";
-  $scope.predicate = "-createdAt";
+  $scope.predicate = "-last_seen";
   $scope.timeWindow = 0;
 
   // Check into open space
@@ -73,26 +73,6 @@ angular.module( 'lobby.openspace', [])
     });
   };
 
-  // Get open space checkins
-  $scope.getLogins = function(opts) {
-    $sails.get("/api/openspace").success(function(data,status,headers,config) {
-      console.log("getlogins");
-      $scope.logins = data;
-    })
-    .error(function(data,status,headers,config){
-      $scope.errors = data.err;
-      $('#errorPopup').foundation('reveal', 'open');
-    });
-
-    // listening to updates
-    $sails.on('openspacelog', function(message) {
-      console.log(message);
-      if (message.verb == "created") {
-        $scope.logins.push(message.data);
-        console.log("new checkin!", message.data);
-      }
-    });
-  };
   $scope.tstampgt = function(actual,expected){
     return actual > expected;
   };
@@ -100,24 +80,12 @@ angular.module( 'lobby.openspace', [])
     var now = new Date();
     $scope.timeWindow = new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
   };
-  $scope.filterMonth = function(){
-    var now = new Date();
-    $scope.timeWindow = new Date(now.getFullYear(),now.getMonth()).getTime();
-  };
 
   $scope.closeModal = function() {
     $('#errorPopup').foundation('reveal', 'close');
   };
 
-  if (!$state.includes('openspaceadmin')) { // When in other state than admin
-    $scope.filterDay(); // (To list users checked in today)
-    $scope.getUsers();
-    $scope.predicate = "-last_seen";
-  }
-  else {
-    $state.go("openspaceadmin.users");
-    $scope.getUsers();
-    $scope.getLogins();
-  }
+  $scope.filterDay(); // (To list users checked in today)
+  $scope.getUsers();
 }]);
 

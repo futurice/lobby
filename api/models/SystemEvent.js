@@ -23,7 +23,10 @@ module.exports = {
 			if (err) {
 				console.log(err);
 			}
+      else {
+        console.log("ev publish");
+        SystemEvent.publishCreate(model);
+      }
 		});
-
 	}
 };

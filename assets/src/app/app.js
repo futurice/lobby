@@ -13,7 +13,6 @@ angular.module( 'lobby', [
 	'lobby.home',
 	'lobby.help',
   'lobby.employees',
-  'lobby.systemEvents',
   'lobby.delivery',
   'lobby.finish',
   'lobby.openspace',
@@ -68,7 +67,7 @@ angular.module( 'lobby', [
     $timeout.cancel($scope.timer);
     $scope.timer = $timeout(function() {
       $location.path("/");
-    }, config.IDLE_TIMEOUT);    
+    }, config.IDLE_TIMEOUT);
   }, 1000));
 
 }])

@@ -44,7 +44,7 @@ module.exports.routes = {
   'get /api/blog': 'MediaScreenController.blog',
 
   // Media Screen messages
-  'get /api/messages': 'MessagesController.getAll',
+  'get /api/messages': 'MessagesController.find',
   'post /api/messages': 'MessagesController.create',
   'delete /api/messages': 'MessagesController.delete',
   'put /api/messages': 'MessagesController.update',

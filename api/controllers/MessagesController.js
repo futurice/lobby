@@ -59,7 +59,7 @@ module.exports = {
     });
   },
 
-  destroy: function (req, res) {
+  delete: function (req, res) {
     var id = req.param('id');
     if (!id) {
       return res.badRequest('No id provided.');

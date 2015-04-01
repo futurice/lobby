@@ -47,7 +47,7 @@ module.exports.routes = {
   'put /api/user': 'UserController.checkin',
   'post /api/user': 'UserController.create',
   'get /api/users': 'UserController.getAll',
-  'get /api/oslogins': 'OpenSpaceLogController.getAll',
+  'get /api/openspace': 'OpenSpaceLogController.find',
 
   // Employees
   'get /api/employees': 'EmployeeController.getAll',

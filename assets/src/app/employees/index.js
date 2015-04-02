@@ -7,7 +7,7 @@ angular.module( 'lobby.employees', [])
         views: {
           "main": {
             controller: 'EmployeeCtrl',
-            templateUrl: 'employees/index.tpl.html'
+            templateUrl: 'app/employees/index.tpl.html'
           }
         },
       });

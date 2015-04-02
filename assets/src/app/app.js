@@ -5,7 +5,7 @@ angular.module( 'lobby', [
 	'angularMoment',
 	'lodash',
 	'angularMoment',
-	'templates-app',
+	'templates',
 	'services',
 	'models',
   'ngTable',
@@ -30,7 +30,7 @@ angular.module( 'lobby', [
 }])
 
 .run( function run () {
-	moment.lang('en');
+	moment.locale('en');
 })
 
 .run(function() {

@@ -7,7 +7,7 @@ angular.module( 'lobby.feedback', [])
       "main": {
         abstract: true,
         controller: 'FeedbackCtrl',
-        templateUrl: 'feedback/index.tpl.html'
+        templateUrl: 'app/feedback/index.tpl.html'
       }
     },
     });

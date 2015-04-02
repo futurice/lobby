@@ -16,37 +16,30 @@
  */
 module.exports = function(grunt) {
 
-	var filesToCopy = require('../pipeline').jsFilesToInjectNoPathChange;
 	var fontsToCopy = require('../pipeline').fontFilesToInject;
-  var imagesToCopy = require('../pipeline').imagesFilesToInject;
+  var imagesToCopy = require('../pipeline').imageFilesToInject;
 	grunt.config.set('copy', {
 		dev: {
-			files: [{
-				expand: true,
-				cwd: './assets',
-				src: filesToCopy,
-				dest: '.tmp/public'
-			},
-            {
-                nonull: true,
-                expand:true,
-                flatten: true,
-                cwd: './assets',
-                src: [fontsToCopy],
-                //changed this to specific folder because fontawesome needs it.
-                //considered it better than change fontawesome.css by hand
-                dest: '.tmp/public/bower_components/fontawesome/fonts'
-            }
-               ,
-            {
-                nonull: true,
-                expand:true,
-                flatten: true,
-                cwd: './assets',
-                src: [imagesToCopy],
-                dest: '.tmp/public/images'
-
-            }]
+			files: [
+        {
+          nonull: true,
+          expand:true,
+          flatten: true,
+          cwd: './assets',
+          src: [fontsToCopy],
+          //changed this to specific folder because fontawesome needs it.
+          //considered it better than change fontawesome.css by hand
+          dest: '.tmp/public/bower_components/fontawesome/fonts'
+        },
+        {
+          nonull: true,
+          expand:true,
+          flatten: true,
+          cwd: './assets',
+          src: [imagesToCopy],
+          dest: '.tmp/public/images'
+        }
+      ]
 		},
 		build: {
 			files: [{

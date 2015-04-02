@@ -1,11 +1,11 @@
-<section class="intro medium-8">
+<section class="intro">
   <h2>Employee lookup</h2>
   <p>Let's see if we can find what you're looking for.<br>Type the name of the person below.</p>
 
-  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText" ng-change="filterEmployees()" auto-focus>
+  <input type="text" placeholder="Who should we find?" ng-model="searchText" ng-change="filterEmployees()" auto-focus>
 </section>
 
-<section class="employees-container medium-8">
+<section class="employees-container">
   <ul class="employees" ng-show="searchText.length">
     <li
       ng-repeat="employee in filteredEmployees.slice(0, show_i)"
@@ -22,7 +22,7 @@
       
     </li>
   </ul>
-  <button ng-if="filteredEmployees.length == show_i && searchText.length" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
+  <button ng-if="filteredEmployees.length > show_i && searchText.length" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>
 </section>
 
 <div class="box alert medium-8" ng-if="!filteredEmployees.length && searchText.length">

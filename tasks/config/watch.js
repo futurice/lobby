@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 			files: ['assets/**/*', '!assets/bower_components/**/*'],
 
 			// When assets are changed:
-			tasks: ['syncAssets' , 'linkAssets']
+			tasks: ['syncAssets' /*, 'linkAssets' */]
 		}
 	});
 

@@ -5,7 +5,7 @@ angular.module( 'lobby.home', [])
 		views: {
 			"main": {
 				controller: 'HomeCtrl',
-				templateUrl: 'home/index.tpl.html'
+				templateUrl: 'app/home/index.tpl.html'
 			}
 		}
 	});

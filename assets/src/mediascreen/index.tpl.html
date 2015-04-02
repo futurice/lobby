@@ -1,0 +1,23 @@
+<header>
+
+<aside class="weather" ng-show="weather">
+  <img ng-src="{{weather.icon}}">
+  {{weather.desc}} {{weather.temp}} °C
+</aside>
+
+  <div id="logo">
+    <img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg">
+  </div>
+  <time>{{clock | date: 'HH:mm' }}</time>
+
+</header>
+
+<section class="blog">
+  <article ng-repeat="article in blog">
+    <div style='background-image:url({{article.cover_url}})'></div>
+    <h1>{{article.title}}</h1>
+    {{article.summary}} <span>by {{article.authors[0].firstname}} {{article.authors[0].lastname}}</span>
+  </article>
+</section>
+
+<footer>Read more from the Futurice blog!</footer>

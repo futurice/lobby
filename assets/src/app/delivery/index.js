@@ -6,17 +6,17 @@ angular.module( 'lobby.delivery', [
 		views: {
 			"main": {
 				controller: 'DeliveryCtrl',
-				templateUrl: 'delivery/index.tpl.html'
+				templateUrl: 'app/delivery/index.tpl.html'
 			}
 		}
 	});
 }])
 
-.controller( 'DeliveryCtrl',['$scope', '$http', 'config', '$state', 
+.controller( 'DeliveryCtrl',['$scope', '$http', 'config', '$state',
   function DeliveryController( $scope, $http, config, $state ) {
 
 	$scope.notify = function() {
-	    
+
 		var msg = "A delivery has arrived at the lobby!";
 
 	    $http.put("/api/notify",
@@ -25,7 +25,7 @@ angular.module( 'lobby.delivery', [
 	        "message": msg
 	      }
 	    );
-	    
+
 	    $state.go("finish.delivery");
 	}
 }]);

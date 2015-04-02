@@ -7,26 +7,15 @@ angular.module( 'lobby.feedback', [])
       "main": {
         abstract: true,
         controller: 'FeedbackCtrl',
-        templateUrl: 'feedback/index.tpl.html'
+        templateUrl: 'app/feedback/index.tpl.html'
       }
     },
-    })
-    .state('feedbackadmin', {
-      url: '/fbadmin',
-      views: {
-        "main": {
-          abstract: true,
-          controller: 'FeedbackCtrl',
-          templateUrl: 'feedback/_admin.tpl.html'
-        }
-      }
     });
 }])
 .controller('FeedbackCtrl', ['$scope', '$sails', '$http', 'config','$state',
-      function OpenSpaceController( $scope, $sails, $http, config, $state) {
+      function FeedbackController( $scope, $sails, $http, config, $state) {
 
     $scope.feedback = {comments: ""};
-    $scope.predicate = "-createdAt";
     $scope.errors = "";
    
     $scope.sendFeedback = function(){
@@ -40,15 +29,5 @@ angular.module( 'lobby.feedback', [])
           });
     }
 
-    $scope.getAll = function() {
-      $http.get("/api/feedback")
-        .success(function(data,status,headers,config){
-          $scope.feedbacklist = data;
-        })
-        .error(function(data,status,headers,config){
-          $scope.errors = data.err;
-        });
-    };
-    $scope.getAll();
 }]);
 

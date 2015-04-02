@@ -1,11 +1,5 @@
 /**
  * Compiles SASS files into CSS.
- *
- * ---------------------------------------------------------------
- *
- * Only the `assets/styles/importer.scss` is compiled.
- * This allows you to control the ordering yourself, i.e. import your
- * dependencies, mixins, variables, resets, etc. before other stylesheets)
  */
 module.exports = function(grunt) {
 
@@ -17,14 +11,14 @@ module.exports = function(grunt) {
 	    files: [{
 	      expand: true,
 	      cwd: 'assets/styles/',
-	      src: ['importer.scss'],
+	      src: ['lobby.scss'],
 	      dest: '.tmp/public/styles/',
 	      ext: '.css'
 	    },
       {
         expand: true,
         cwd: 'assets/styles/',
-        src: ['mediascreen.sass'],
+        src: ['mediascreen.scss'],
         dest: '.tmp/public/styles/',
         ext: '.css'
       }]

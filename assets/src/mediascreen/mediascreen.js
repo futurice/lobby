@@ -2,6 +2,7 @@ angular.module( 'mediascreen', [
   'ui.router',
   'ngSails',
   'angularMoment',
+  'wu.masonry',
   'lodash',
   'templates',
   'services',

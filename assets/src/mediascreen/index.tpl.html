@@ -12,8 +12,8 @@
 
 </header>
 
-<section class="blog">
-  <article ng-repeat="article in blog">
+<section class="blog" masonry preserve-order load-images="false" item-selector="article">
+  <article ng-repeat="article in blog" masonry-brick>
     <div style='background-image:url({{article.cover_url}})' class="featured-img"></div>
     <h3>{{article.title}}</h3>
     <div class="category">{{article.category.name}}</div>

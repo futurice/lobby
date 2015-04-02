@@ -24,11 +24,12 @@ angular.module( 'mediascreen.index', [])
         var articles = data.articles;
 
 
-        $scope.blog = _.map(articles, function(article) {
+        $scope.allBlogEntries = _.map(articles, function(article) {
             article.author = article.authors[0];
             return _.omit(article, 'authors');
           });
         console.log("recv", data);
+        $scope.blog = $scope.allBlogEntries.slice(0, 8);
       })
       .error(function(data,status,headers,config){
         $scope.errors = data.err;
@@ -56,7 +57,23 @@ angular.module( 'mediascreen.index', [])
     $scope.clock = Date.now()
   }
 
+  var shuffle = function() {
+    var total = config.BLOG_SHUFFLE_ENTRIES - 1;
+    var i = getRandom(0, total), newArticle = $scope.allBlogEntries[i];
+    while ($scope.blog.indexOf(newArticle) != -1) {
+      i = getRandom(0, total);
+      newArticle = $scope.allBlogEntries[i];
+    }
+    var pos = getRandom(0, 7);
+    $scope.blog.splice(pos, 1, newArticle);
+  }
+
+  function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   $interval(tick, 1000);
+  $interval(shuffle, config.BLOG_SHUFFLE_TIME);
   $scope.getBlogEntries();
   $scope.getWeather();
 }]);

@@ -8,7 +8,7 @@ module.exports = {
   },
 
   blog: function (req, res) {
-    https.get("https://flockler.com/api/sections/1992/articles?count=8", function(blog) {
+    https.get("https://flockler.com/api/sections/1992/articles?count=30", function(blog) {
 
       var body = '';
       blog.on('data', function(chunk) {

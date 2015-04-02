@@ -13,6 +13,12 @@
 </header>
 
 <section class="blog">
+  <article ng-repeat="msg in messages">
+    <center><h2><i class="fa fa-info-circle"></i></h2></center>
+    <center><h2><small>{{msg.title}}</small></h2></center>
+    <center><div class="summary">{{msg.description}}</div></center>
+  </article>
+
   <article ng-repeat="article in blog">
     <div style='background-image:url({{article.cover_url}})' class="featured-img"></div>
     <h3>{{article.title}}</h3>

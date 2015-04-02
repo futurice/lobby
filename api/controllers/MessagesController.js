@@ -3,17 +3,29 @@ var _ = require('lodash');
 module.exports = {
 
   find: function(req, res) {
-    Message.find().spread(function(models) {
+    Message.find({}, function(err, found) {
+      if (err) {
+        SystemEvent.add("ERROR", "Error while retrieving mediascreen messages: "+err);
+        return res.json(503,{err:"Error while retrieving mediascreen messages"});
+      }
+      res.json(found);
+      if (req.isSocket) {
+        Message.watch(req);
+        Message.subscribe(req.socket, found);
+        console.log(req.socket.id, "subscribed to message upd");
+      }
+    });
+    /*.spread(function(models) {
       console.log(req.socket.id, 'subscribed to all of the model instances in \'messages\'.');
       Message.watch(req);
       Message.subscribe(req.socket, models, ['create','destroy','update']);
-      res.json(models);
+      //res.json(models);
     })
     .fail(function(err) {
       // An error occured
       SystemEvent.add("ERROR", err);
       res.json(err);
-    });
+    });*/
   },
 
   getOne: function(req, res) {

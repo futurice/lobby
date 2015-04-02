@@ -7,34 +7,34 @@ angular.module( 'lobby.admin', [])
       "main": {
         abstract: true,
         controller: 'AdminCtrl',
-        templateUrl: 'admin/index.tpl.html'
+        templateUrl: 'app/admin/index.tpl.html'
       }
     },
     })
     .state('admin.feedback', {
       url: '/feedback',
       controller: 'FeedbackCtrl',
-      templateUrl: 'admin/_feedback.tpl.html'
+      templateUrl: 'app/admin/_feedback.tpl.html'
     })
     .state('admin.events', {
       url: '/events',
       controller: 'SystemEventCtrl',
-      templateUrl: 'admin/_systemevents.tpl.html'
+      templateUrl: 'app/admin/_systemevents.tpl.html'
     })
     .state('admin.users', {
       url: '/users',
       controller: 'OsAdminCtrl',
-      templateUrl: 'admin/_openspace_users.tpl.html',
+      templateUrl: 'app/admin/_openspace_users.tpl.html',
     })
     .state('admin.checkins', {
       url: '/checkins',
       controller: 'OsAdminCtrl',
-      templateUrl: 'admin/_openspace_checkins.tpl.html',
+      templateUrl: 'app/admin/_openspace_checkins.tpl.html',
     })
     .state('admin.messages', {
       url: '/messages',
       controller: 'MessagesCtrl',
-      templateUrl: 'admin/_messages.tpl.html',
+      templateUrl: 'app/admin/_messages.tpl.html',
     });
 }])
 
@@ -62,7 +62,7 @@ angular.module( 'lobby.admin', [])
     $scope.getFeedback();
 }])
 
-.controller( 'SystemEventCtrl',['$scope', '$sails', '$http', 'config', 'SystemEventModel', 
+.controller( 'SystemEventCtrl',['$scope', '$sails', '$http', 'config', 'SystemEventModel',
  function SystemEventController( $scope, $sails, $http, config, SystemEventModel ) {
 
   $scope.errors = "";
@@ -92,7 +92,7 @@ angular.module( 'lobby.admin', [])
       if (message.verb == "created") {
         $scope.systemEvents.push(message.data);
       }
-    });      
+    });
   }
 
   $scope.tstampgt = function(actual,expected){

@@ -8,7 +8,7 @@ angular.module( 'lobby.finish', [])
       "main": {
         abstract: true,
         controller: 'FinishCtrl',
-        templateUrl: 'finish/index.tpl.html'
+        templateUrl: 'app/finish/index.tpl.html'
       }
     }
   })

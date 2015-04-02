@@ -7,18 +7,18 @@ angular.module( 'lobby.openspace', [])
       "main": {
         abstract: true,
         controller: 'OpenSpaceCtrl',
-        templateUrl: 'openspace/index.tpl.html'
+        templateUrl: 'app/openspace/index.tpl.html'
       }
     },
     })
     .state('openspace.register', {
       url: '/register',
-      templateUrl: 'openspace/_register.tpl.html',
+      templateUrl: 'app/openspace/_register.tpl.html',
 
     })
     .state('openspace.checkin', {
       url: '/checkin',
-      templateUrl: 'openspace/_checkin.tpl.html',
+      templateUrl: 'app/openspace/_checkin.tpl.html',
 
     });
 }])

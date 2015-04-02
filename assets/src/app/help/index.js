@@ -7,13 +7,13 @@ angular.module( 'lobby.help', [
 		views: {
 			"main": {
 				controller: 'HelpCtrl',
-				templateUrl: 'help/index.tpl.html'
+				templateUrl: 'app/help/index.tpl.html'
 			}
 		}
 	});
 }])
 
-.controller( 'HelpCtrl',['$scope', '$http', '$state', 
+.controller( 'HelpCtrl',['$scope', '$http', '$state',
   function HelpController( $scope, $http, $state ) {
 	$scope.details = "";
 

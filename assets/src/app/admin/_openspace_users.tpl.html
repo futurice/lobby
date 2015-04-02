@@ -1,0 +1,18 @@
+Search: <input ng-model="searchText">
+<br/>
+<table id="searchTextResults">
+
+    <tr class="row">
+        <th class="small-3 columns">Name</td>
+        <th class="small-3 columns">Email </td>
+        <th class="small-2 columns">Phone </td>
+        <th class="small-2 columns">Created</td>
+
+    </tr>
+    <tr class="row" ng-repeat="user in users | filter:searchText | orderBy:predicate">
+        <td class="small-3 columns">{{user.first_name}} {{user.last_name}}</td>
+        <td class="small-3 columns">{{user.email}} </td>
+        <td class="small-2 columns">{{user.phone}} </td>
+        <td class="small-2 columns">{{user.createdAt | amCalendar}}</td>
+    </tr>
+</table>

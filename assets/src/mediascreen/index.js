@@ -20,8 +20,14 @@ angular.module( 'mediascreen.index', [])
 
   $scope.getBlogEntries = function() {
     $sails.get('/api/blog/')
-      .success(function(data,status,headers,config){
-        $scope.blog = data.articles;
+      .success(function(data,status,headers,config) {
+        var articles = data.articles;
+
+
+        $scope.blog = _.map(articles, function(article) {
+            article.author = article.authors[0];
+            return _.omit(article, 'authors');
+          });
         console.log("recv", data);
       })
       .error(function(data,status,headers,config){

@@ -11,14 +11,14 @@ module.exports = function(grunt) {
 	    files: [{
 	      expand: true,
 	      cwd: 'assets/styles/',
-	      src: ['importer.scss'],
+	      src: ['lobby.scss'],
 	      dest: '.tmp/public/styles/',
 	      ext: '.css'
 	    },
       {
         expand: true,
         cwd: 'assets/styles/',
-        src: ['mediascreen.sass'],
+        src: ['mediascreen.scss'],
         dest: '.tmp/public/styles/',
         ext: '.css'
       }]

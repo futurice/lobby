@@ -21,10 +21,6 @@ var cssFilesToInject = {
   mediascreen: [ 'styles/**/mediascreen.sass' ]
 };
 
-var fontFilesToInject = [
-    'bower_components/fontawesome/fonts/*'
-];
-
 // Client-side javascript files to concatenate in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = {
@@ -68,6 +64,10 @@ var jsFilesToInject = {
 };
 var imageFilesToInject = [
   'images/**/*'
+];
+
+var fontFilesToInject = [
+    'fonts/**/*'
 ];
 
 //module.exports.jsFilesToCopy = Object.keys(jsFilesToInject);

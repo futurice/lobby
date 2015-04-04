@@ -21,8 +21,7 @@ angular.module( 'mediascreen.index', [])
   $scope.getBlogEntries = function() {
     $sails.get('/api/blog/')
       .success(function(data,status,headers,config) {
-        var articles = data.articles;
-
+        var articles = data;
 
         $scope.allBlogEntries = _.map(articles, function(article) {
             article.author = article.authors[0];
@@ -39,11 +38,13 @@ angular.module( 'mediascreen.index', [])
   $scope.getWeather = function() {
     $http.get("http://api.openweathermap.org/data/2.5/weather?id=658225")
       .success(function(data,status,headers,config) {
-        console.log("recv", data);
+        console.log("weather", data);
         var weather = data.weather;
         $scope.weather = {
-          icon: "http://openweathermap.org/img/w/" + weather[0].icon + ".png",
+          location: data.name,
+          icon: weather[0].id,
           desc: weather[0].main,
+          wind: data.weather.speed,
           temp: parseFloat(data.main.temp - 273).toFixed(1)
         };
       })

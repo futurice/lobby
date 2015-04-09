@@ -37,25 +37,26 @@ angular.module( 'lobby', [
   FastClick.attach(document.body);
 })
 
-.controller( 'AppCtrl',['$scope', '$rootScope', '$location', '$timeout', 'EmployeeModel', 'config',
- function AppCtrl ( $scope, $rootScope, $location, $timeout, EmployeeModel, config ) {
+.controller( 'AppCtrl',['$scope', '$interval', '$rootScope', '$location', '$timeout', 'EmployeeModel', 'config',
+ function AppCtrl ( $scope, $interval, $rootScope, $location, $timeout, EmployeeModel, config ) {
 
   $rootScope.employees = [];
+  var interval;
 
   $rootScope.getEmployees = function() {
     // Fetch the employee listing
     EmployeeModel.getAll($scope).then(function(models) {
       $rootScope.employees = models;
       $rootScope.fuse = new Fuse(models, config.fuse);
-      if ($rootScope.employees.size() == 0) { // If could not get employees
-        setInterval($rootScope.getEmployees, config.EMPLOYEE_TRYAGAIN_INTERVAL);
+      $interval.cancel(interval);
+      if (!$rootScope.employees.length) { // If could not get employees
+        interval = $interval($rootScope.getEmployees, config.EMPLOYEE_TRYAGAIN_INTERVAL);
       } else {
-        setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
+        interval = $interval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
       }
     });
   };
   $rootScope.getEmployees();
-  setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
 
   $scope.$on('$viewContentLoaded', function() {
     // if timer already exists, destroy it so that it resets when user navigates

@@ -47,6 +47,11 @@ angular.module( 'lobby', [
     EmployeeModel.getAll($scope).then(function(models) {
       $rootScope.employees = models;
       $rootScope.fuse = new Fuse(models, config.fuse);
+      if ($rootScope.employees.size() == 0) { // If could not get employees
+        setInterval($rootScope.getEmployees, config.EMPLOYEE_TRYAGAIN_INTERVAL);
+      } else {
+        setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
+      }
     });
   };
   $rootScope.getEmployees();

@@ -3,16 +3,16 @@ var _ = require('lodash');
 module.exports = {
 
   find: function(req, res) {
-    Message.find().spread(function(models) {
+    Message.find().exec(function(err, models) {
+      if (err) {
+        // An error occured
+        SystemEvent.add("ERROR", err);
+        return res.json(err);
+      }
       console.log(req.socket.id, 'subscribed to all of the model instances in \'messages\'.');
       Message.watch(req);
       Message.subscribe(req.socket, models, ['create','destroy','update']);
       res.json(models);
-    })
-    .fail(function(err) {
-      // An error occured
-      SystemEvent.add("ERROR", err);
-      res.json(err);
     });
   },
 

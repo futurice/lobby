@@ -15,7 +15,7 @@
 
 </header>
 
-<section class="blog" masonry masonry-options="{ gutter: 0 }"preserve-order load-images="false" item-selector="article">
+<section ng-show="blogVisible" class="blog" masonry masonry-options="{ gutter: 0 }"preserve-order load-images="false" reload-on-show item-selector="article">
   <article ng-repeat="article in blog" masonry-brick>
     <div style='background-image:url({{article.cover_url}})' class="featured-img"></div>
     <h3>{{article.title}}</h3>
@@ -32,3 +32,11 @@
 </section>
 
 <footer class="site-footer">Read more from the Futurice blog!</footer>
+
+<section class="messages | limit: 1" ng-hide="blogVisible">
+  <article ng-repeat="message in messages">
+    <h1>{{message.title}}</h1>
+    <time class="created-at">{{message.createdAt | amCalendar }}</time>
+    <div class="desc">{{message.description}}</div>
+  </article>
+</section>

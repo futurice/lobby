@@ -225,6 +225,40 @@ angular.module( 'lobby.admin', [])
         });
     }
 
+    // Get messages
+    $scope.getMessages = function() {
+      $sails.get("/api/messages").success(function(data,status,headers,config) {
+        $scope.messages = data;
+        console.log("messages fetched", data);
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+      });
+
+      // listening to updates
+      $sails.on('message', function(message) {
+        console.log(message);
+        if (message.verb == "created") {
+          $scope.messages.push(message.data);
+          console.log("message created!", message.data);
+        }
+      });
+
+    };
+
+    $scope.deleteMessage = function(message) {
+      $sails.delete("/api/messages/", message).success(function(data,status,headers,config) {
+        $scope.messages = _.without($scope.messages, message);
+        console.log("message deleted");
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+        console.log("err", data.err);
+      });
+    }
+
+    $scope.getMessages();
+
     $scope.closeModal = function() {
       $('#errorPopup').foundation('reveal', 'close');
       $('#successPopup').foundation('reveal', 'close');

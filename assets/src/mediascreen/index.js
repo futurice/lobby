@@ -54,6 +54,38 @@ angular.module( 'mediascreen.index', [])
       });
   }
 
+  $scope.messages = [];
+  $scope.blogVisible = true;
+
+  // Get messages
+  $scope.getMessages = function() {
+    $sails.get("/api/messages").success(function(data,status,headers,config) {
+      $scope.messages = data;
+      console.log("messages fetched", data);
+      $scope.blogVisible = !data.length;
+    })
+    .error(function(data,status,headers,config){
+      $scope.errors = data.err;
+    });
+
+    // listening to updates
+    $sails.on('message', function(message) {
+      console.log(message);
+      if (message.verb == "created") {
+        $scope.messages.push(message.data);
+        console.log("message created!", message.data);
+        $scope.blogVisible = false;
+      }
+      if (message.verb == "destroyed") {
+        var deleted = _.findWhere($scope.messages, { id: message.id });
+        $scope.messages = _.without($scope.messages, deleted);
+        $scope.blogVisible = !$scope.messages.length;
+      }
+    });
+
+    //$scope.blogVisible = false;
+  };
+
   var tick = function() {
     $scope.clock = Date.now()
   }
@@ -77,4 +109,5 @@ angular.module( 'mediascreen.index', [])
   $interval(shuffle, config.BLOG_SHUFFLE_TIME);
   $scope.getBlogEntries();
   $scope.getWeather();
+  $scope.getMessages();
 }]);

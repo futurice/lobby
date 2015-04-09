@@ -1,16 +1,13 @@
-<section class="intro">
-  <h2>Create media screen message</h2>
-</section>
 
-<div class="row">
-  <section class="medium-12 columns">
-    <form>
-      <div class="row">
-        <div class="large-12 columns">
-          <label>Header
-            <textarea ng-model="message.title"></textarea>
+<section>
+    <div class="row">
+      <div class="large-6 columns">
+        <h3>Create media screen message</h3>
+        <form>
+          <label>Title
+            <input type="text" ng-model="message.title">
           </label>
-          <label>Body text
+          <label>Description
             <textarea ng-model="message.description"></textarea>
           </label>
           <label>Visibility time
@@ -22,13 +19,36 @@
             <a class="button secondary" ng-click="setVisibility(60)">1 hour</a>
             <a class="button secondary" ng-click="setVisibility(180)">3 hours</a>
           </label>
-        </div>
+
+          <button type="submit" class="button success expand radius" ng-click="createMessage()">Create message</button>
+        </form>
       </div>
-      <button type="submit" class="button success expand radius" ng-click="createMessage()">Create message</button>
-    </form>
-    <div id="errors" ng-bind="errors"></div>
-  </section>
-</div>
+      <div class="large-6 columns">
+        <h3>Messages</h3>
+        <table ng-show="messages.length">
+          <tr>
+            <th>Time</td>
+            <th>Title</td>
+            <th>Description</td>
+            <th>Visible</td>
+            <th></th>
+          </tr>
+
+          <tr ng-repeat="msg in messages | orderBy:predicate">
+            <td> {{msg.createdAt | amCalendar}}</td>
+            <td> {{msg.title}}</td>
+            <td> {{msg.description}}</td>
+            <td> {{msg.visible}}</td>
+            <td><a class="button small alert" ng-click="deleteMessage(msg)">Delete</a></td>
+          </tr>
+        </table>
+        <div ng-hide="messages.length">No messages.</div>
+
+<div> {{errors}}</div>
+      </div>
+    </div>
+  <div id="errors" ng-bind="errors"></div>
+</section>
 
 <div id="errorPopup" class="reveal-modal" data-reveal>
   <h2><i class="fa fa-warning"></i> {{errors}}</h2>

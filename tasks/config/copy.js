@@ -27,9 +27,7 @@ module.exports = function(grunt) {
           flatten: true,
           cwd: './assets',
           src: [fontsToCopy],
-          //changed this to specific folder because fontawesome needs it.
-          //considered it better than change fontawesome.css by hand
-          dest: '.tmp/public/bower_components/fontawesome/fonts'
+          dest: '.tmp/public/fonts'
         },
         {
           nonull: true,

@@ -37,20 +37,26 @@ angular.module( 'lobby', [
   FastClick.attach(document.body);
 })
 
-.controller( 'AppCtrl',['$scope', '$rootScope', '$location', '$timeout', 'EmployeeModel', 'config',
- function AppCtrl ( $scope, $rootScope, $location, $timeout, EmployeeModel, config ) {
+.controller( 'AppCtrl',['$scope', '$interval', '$rootScope', '$location', '$timeout', 'EmployeeModel', 'config',
+ function AppCtrl ( $scope, $interval, $rootScope, $location, $timeout, EmployeeModel, config ) {
 
   $rootScope.employees = [];
+  var interval;
 
   $rootScope.getEmployees = function() {
     // Fetch the employee listing
     EmployeeModel.getAll($scope).then(function(models) {
       $rootScope.employees = models;
       $rootScope.fuse = new Fuse(models, config.fuse);
+      $interval.cancel(interval);
+      if (!$rootScope.employees.length) { // If could not get employees
+        interval = $interval($rootScope.getEmployees, config.EMPLOYEE_TRYAGAIN_INTERVAL);
+      } else {
+        interval = $interval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
+      }
     });
   };
   $rootScope.getEmployees();
-  setInterval($rootScope.getEmployees, config.EMPLOYEE_FETCH_INTERVAL);
 
   $scope.$on('$viewContentLoaded', function() {
     // if timer already exists, destroy it so that it resets when user navigates
@@ -62,12 +68,21 @@ angular.module( 'lobby', [
     }, config.IDLE_TIMEOUT);
   });
 
-  // reset timer when clicking/moving mouse etc
-  $('body').mousemove(_.throttle(function() {
+  $rootScope.resetTimer = function() {
     $timeout.cancel($scope.timer);
     $scope.timer = $timeout(function() {
       $location.path("/");
     }, config.IDLE_TIMEOUT);
+  };
+
+  // reset timer when clicking/moving mouse etc
+  $('body').mousemove(_.throttle(function() {
+    $rootScope.resetTimer();
+  }, 1000));
+
+  // reset timer when typing
+  $('body').keypress(_.throttle(function() {
+    $rootScope.resetTimer();
   }, 1000));
 
 }])

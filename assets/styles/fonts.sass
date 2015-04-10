@@ -1,0 +1,71 @@
+@font-face
+  font-family: 'MeteoconsRegular'
+  src: url('../fonts/meteocons-webfont.eot')
+  src: url('../fonts/meteocons-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/meteocons-webfont.woff') format("woff"), url('../fonts/meteocons-webfont.ttf') format("truetype"), url('../fonts/meteocons-webfont.svg#MeteoconsRegular') format("svg")
+  font-weight: normal
+  font-style: normal
+
+.icon-weather:before
+  font-family: 'MeteoconsRegular'
+
+// Thunderstorm
+
+.icon-weather[data-icon="2"]
+  color: #FF7A00
+  text-shadow: 0 0 20px #FFBC90
+  &:before
+    content: "P"
+
+// Drizzle
+
+.icon-weather[data-icon="3"]
+  color: #949494
+  text-shadow: 0 0 20px #7CCEDD
+  &:before
+    content: "Q"
+
+// Rain
+
+.icon-weather[data-icon="5"], .icon-weather[data-icon="500"]
+  color: #fff
+  text-shadow: 0 0 20px #7CCEDD
+  &:before
+    content: "8"
+
+// Snow
+
+.icon-weather[data-icon="6"]:before
+  content: "W"
+
+// Sleet
+
+.icon-weather[data-icon="611"]:before
+  content: "X"
+
+// Atmosphere
+
+.icon-weather[data-icon="7"]:before
+  content: "E"
+
+// Clouds
+
+.icon-weather[data-icon="8"]:before
+  content: "H"
+
+// Sunny
+
+.icon-weather[data-icon="800"]
+  color: #FFFF00
+  text-shadow: 0 0 20px #FFFF99
+  &:before
+    content: "1"
+
+// Broken Clouds
+
+.icon-weather[data-icon="803"]:before, .icon-weather[data-icon="804"]:before
+  content: "Y"
+
+// Clouds
+
+.icon-weather[data-icon="9"]:before
+  content: "%"

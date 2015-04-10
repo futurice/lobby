@@ -13,7 +13,7 @@ angular.module( 'lobby.admin', [])
     })
     .state('admin.feedback', {
       url: '/feedback',
-      controller: 'FeedbackCtrl',
+      controller: 'FbAdminCtrl',
       templateUrl: 'app/admin/_feedback.tpl.html'
     })
     .state('admin.events', {
@@ -44,8 +44,8 @@ angular.module( 'lobby.admin', [])
     $state.go("admin.feedback");
 }])
 
-.controller('FeedbackCtrl', ['$scope', '$sails', '$http', 'config','$state',
-  function FeedbackController( $scope, $sails, $http, config, $state) {
+.controller('FbAdminCtrl', ['$scope', '$sails', '$http', 'config','$state',
+  function FeedbackAdminController( $scope, $sails, $http, config, $state) {
 
     $scope.predicate = "-createdAt";
 
@@ -224,6 +224,40 @@ angular.module( 'lobby.admin', [])
             $('#errorPopup').foundation('reveal', 'open');
         });
     }
+
+    // Get messages
+    $scope.getMessages = function() {
+      $sails.get("/api/messages").success(function(data,status,headers,config) {
+        $scope.messages = data;
+        console.log("messages fetched", data);
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+      });
+
+      // listening to updates
+      $sails.on('message', function(message) {
+        console.log(message);
+        if (message.verb == "created") {
+          $scope.messages.push(message.data);
+          console.log("message created!", message.data);
+        }
+      });
+
+    };
+
+    $scope.deleteMessage = function(message) {
+      $sails.delete("/api/messages/", message).success(function(data,status,headers,config) {
+        $scope.messages = _.without($scope.messages, message);
+        console.log("message deleted");
+      })
+      .error(function(data,status,headers,config){
+        $scope.errors = data.err;
+        console.log("err", data.err);
+      });
+    }
+
+    $scope.getMessages();
 
     $scope.closeModal = function() {
       $('#errorPopup').foundation('reveal', 'close');

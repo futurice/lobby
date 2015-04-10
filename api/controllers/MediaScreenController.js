@@ -1,4 +1,5 @@
-var https = require("https");
+var request = require("request");
+var S = require('string');
 
 module.exports = {
   index: function(req, res) {
@@ -8,24 +9,32 @@ module.exports = {
   },
 
   blog: function (req, res) {
-    https.get("https://flockler.com/api/sections/1992/articles?count=8", function(blog) {
 
-      var body = '';
-      blog.on('data', function(chunk) {
-        body += chunk;
-      });
-      blog.on('end', function() {
+    request("https://flockler.com/api/sections/1992/articles?count=30", function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("done") // Show the HTML for the Google homepage.
+
+
         try {
-          return res.json(JSON.parse(body));
+          console.log("done");
+          var json = JSON.parse(body).articles.map(function(article) {
+            if (!article.summary) {
+              article.summary = S(article.body).stripTags().unescapeHTML().s;
+            }
+            article.summary = S(article.summary).truncate(180).s;
+            return article;
+          });
+          return res.json(json);
         }
         catch(e) {
-          SystemEvent.add("ERROR", "Media screen: couldn't parse response. "+e);
-          return res.json(503, {'error': "Couldn't parse response."});
+          SystemEvent.add("ERROR", "Media screen: get blog: "+e);
+          return res.json({'error': 'Couldnt parse response'});
         }
-      });
-    }).on('error', function(e) {
-      SystemEvent.add("ERROR", "Media screen: get blog: "+e);
-      return res.json({'error': e});
+      }
+      else {
+        SystemEvent.add("ERROR", "Media screen: get blog: "+error);
+        return res.json({'error': e});
+      }
     });
   },
 };

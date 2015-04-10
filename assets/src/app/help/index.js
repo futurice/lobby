@@ -19,7 +19,7 @@ angular.module( 'lobby.help', [
 
 	$scope.helpMessage = function() {
 
-		var msg = "Someone needs help";
+		var msg = "Someone is lost, send help to lobby!";
 		if ($scope.details != "") {
 			msg = msg+": "+$scope.details;
 		}

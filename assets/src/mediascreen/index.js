@@ -60,9 +60,15 @@ angular.module( 'mediascreen.index', [])
   // Get messages
   $scope.getMessages = function() {
     $sails.get("/api/messages").success(function(data,status,headers,config) {
-      $scope.messages = data;
-      console.log("messages fetched", data);
-      $scope.blogVisible = !data.length;
+      for (i=0; i<data.length; i++) {
+        console.log(data[i]);
+        if (data[i].forceVisible) {
+          console.log("Push message");
+          $scope.messages.push(data[i]);
+        }
+      }
+      console.log("visible messages fetched", $scope.messages);
+      $scope.blogVisible = !$scope.messages.length;
     })
     .error(function(data,status,headers,config){
       $scope.errors = data.err;
@@ -105,8 +111,35 @@ angular.module( 'mediascreen.index', [])
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
+  function checkMessageVisibility() {
+    var time = (new Date()).toISOString();
+    if ($scope.messages.length) {
+      // Check message array for old messages and change their forceVisible to false
+      for (i=0; i < $scope.messages.length; i++) {
+
+        if ($scope.messages[i].visibleUntil < time) {
+          $scope.messages[i].forceVisible = false;
+
+          // Update the message on server
+          $sails.put("/api/messages", $scope.messages[i]).success(function(data,status,headers,config) {
+            console.log("message forceVisible updated");
+          })
+          .error(function(data,status,headers,config){
+            $scope.errors = data.err;
+            console.log(data);
+          });
+          
+          $scope.messages.splice(i, 1); // Remove from array
+          if (!$scope.messages.length)
+            $scope.blogVisible = true;
+        }
+      }
+    }
+  }
+
   $interval(tick, 1000);
   $interval(shuffle, config.BLOG_SHUFFLE_TIME);
+  $interval(checkMessageVisibility, 60000);
   $scope.getBlogEntries();
   $scope.getWeather();
   $scope.getMessages();

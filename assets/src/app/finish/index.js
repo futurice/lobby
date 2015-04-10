@@ -15,27 +15,27 @@ angular.module( 'lobby.finish', [])
 
   .state( 'finish.delivery', {
     url: '/delivery',
-    templateUrl: 'finish/_delivery.tpl.html'
+    templateUrl: 'app/finish/_delivery.tpl.html'
   })
 
   .state( 'finish.notification', {
     url: '/notification',
-    templateUrl: 'finish/_notification.tpl.html'
+    templateUrl: 'app/finish/_notification.tpl.html'
   })
 
   .state( 'finish.openspace', {
     url: '/openspace',
-    templateUrl: 'finish/_openspace.tpl.html'
+    templateUrl: 'app/finish/_openspace.tpl.html'
   })
 
   .state( 'finish.help', {
     url: '/help',
-    templateUrl: 'finish/_help.tpl.html'
+    templateUrl: 'app/finish/_help.tpl.html'
   })
 
   .state( 'finish.feedback', {
     url: '/feedback',
-    templateUrl: 'finish/_feedback.tpl.html'
+    templateUrl: 'app/finish/_feedback.tpl.html'
   });
 }])
 

@@ -13,7 +13,7 @@ angular.module( 'lobby.admin', [])
     })
     .state('admin.feedback', {
       url: '/feedback',
-      controller: 'FeedbackCtrl',
+      controller: 'FbAdminCtrl',
       templateUrl: 'app/admin/_feedback.tpl.html'
     })
     .state('admin.events', {
@@ -44,8 +44,8 @@ angular.module( 'lobby.admin', [])
     $state.go("admin.feedback");
 }])
 
-.controller('FeedbackCtrl', ['$scope', '$sails', '$http', 'config','$state',
-  function FeedbackController( $scope, $sails, $http, config, $state) {
+.controller('FbAdminCtrl', ['$scope', '$sails', '$http', 'config','$state',
+  function FeedbackAdminController( $scope, $sails, $http, config, $state) {
 
     $scope.predicate = "-createdAt";
 

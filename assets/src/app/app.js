@@ -62,12 +62,21 @@ angular.module( 'lobby', [
     }, config.IDLE_TIMEOUT);
   });
 
-  // reset timer when clicking/moving mouse etc
-  $('body').mousemove(_.throttle(function() {
+  $rootScope.resetTimer = function() {
     $timeout.cancel($scope.timer);
     $scope.timer = $timeout(function() {
       $location.path("/");
     }, config.IDLE_TIMEOUT);
+  };
+
+  // reset timer when clicking/moving mouse etc
+  $('body').mousemove(_.throttle(function() {
+    $rootScope.resetTimer();
+  }, 1000));
+
+  // reset timer when typing
+  $('body').keypress(_.throttle(function() {
+    $rootScope.resetTimer();
   }, 1000));
 
 }])

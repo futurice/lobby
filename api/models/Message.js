@@ -20,7 +20,7 @@ module.exports = {
     },
     forceVisible: {
       type: 'boolean',
-      defaultsTo: true
+      required: true
     },
     eventTime: {
       type: 'datetime'

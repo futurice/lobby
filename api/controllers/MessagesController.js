@@ -3,16 +3,16 @@ var _ = require('lodash');
 module.exports = {
 
   find: function(req, res) {
-    Message.find().spread(function(models) {
+    Message.find().exec(function(err, models) {
+      if (err) {
+        // An error occured
+        SystemEvent.add("ERROR", err);
+        return res.json(err);
+      }
       console.log(req.socket.id, 'subscribed to all of the model instances in \'messages\'.');
       Message.watch(req);
       Message.subscribe(req.socket, models, ['create','destroy','update']);
       res.json(models);
-    })
-    .fail(function(err) {
-      // An error occured
-      SystemEvent.add("ERROR", err);
-      res.json(err);
     });
   },
 
@@ -29,9 +29,10 @@ module.exports = {
 
   create: function (req, res) {
     var params = _.pick(req.params.all(),
-      'title', 'description', 'visibilityTime', 'forceVisible', 'eventTime');
+      'title', 'description', 'visibilityTime', 'eventTime');
     var d = new Date();
     console.log("visll", params);
+    params.forceVisible = true;
 
     d.setMilliseconds(d.getMilliseconds() + params.visibilityTime);
     params.visibleUntil = d;
@@ -46,13 +47,15 @@ module.exports = {
         // publish create to subscribers
         Message.publishCreate(model);
         console.log("msg publish create", model);
+        SystemEvent.add("MediaScreenMessage", "Title: "+model.title+"; Description: "+model.description);
         return res.json(model);
       }
     });
   },
 
   update: function (req, res, next) {
-    var params = req.params.all();
+    var params = _.pick(req.params.all(),
+      'forceVisible');
     var id = req.param("id");
     Message.update(params.id, params).exec(function update(err, updated) {
       if (err) {

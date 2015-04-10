@@ -1,29 +1,42 @@
 <header>
 
-<aside class="weather" ng-show="weather">
-  <img ng-src="{{weather.icon}}">
-  {{weather.desc}} {{weather.temp}} °C
-</aside>
-
-  <div id="logo">
-    <img src="http://static.flockler.com/assets/futurice/images/futurice-logo--green.svg">
-  </div>
   <time>{{clock | date: 'HH:mm' }}</time>
+  <div id="logo">
+    <img src="http://static.flockler.com/assets/futurice/images/futurice-logo--white.svg">
+  </div>
+  <aside class="weather" ng-show="weather">
+    <i class="icon-weather" data-icon="{{weather.icon}}"></i>
+    <div class="conditions">
+      <div class="location">{{weather.location}}</div>
+      <div class="temp">{{weather.temp}}°C</div>
+      <div class="desc">{{weather.desc}}</div>
+    </div>
+  </aside>
 
 </header>
 
-<section class="blog">
-  <article ng-repeat="article in blog">
+<section ng-show="blogVisible" class="blog" masonry masonry-options="{ gutter: 0 }"preserve-order load-images="false" reload-on-show item-selector="article">
+  <article ng-repeat="article in blog" masonry-brick>
     <div style='background-image:url({{article.cover_url}})' class="featured-img"></div>
     <h3>{{article.title}}</h3>
     <div class="category">{{article.category.name}}</div>
     <div class="summary">{{article.summary}}</div>
 
     <footer>
-      <div class="author">{{article.author.firstname}} {{article.author.lastname}}</div>
+      <div class="hr"><hr></div>
+      <div class="author">
+      {{article.author.firstname}} {{article.author.lastname}}</div>
       <div class="author-title">{{article.author.job_title}}</div>
     </footer>
   </article>
 </section>
 
 <footer class="site-footer">Read more from the Futurice blog!</footer>
+
+<section class="messages | limit: 1" ng-hide="blogVisible">
+  <article ng-repeat="message in messages">
+    <h1>{{message.title}}</h1>
+    <time class="created-at">{{message.createdAt | amCalendar }}</time>
+    <div class="desc">{{message.description}}</div>
+  </article>
+</section>

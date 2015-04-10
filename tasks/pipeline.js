@@ -21,14 +21,11 @@ var cssFilesToInject = {
   mediascreen: [ 'styles/**/mediascreen.sass' ]
 };
 
-var fontFilesToInject = [
-    'bower_components/fontawesome/fonts/*'
-];
-
 // Client-side javascript files to concatenate in order
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = {
   app: [
+    'bower_components/jquery/dist/jquery.min.js',
     'bower_components/angular/angular.min.js',
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-ui-utils/ui-utils.min.js',
@@ -39,7 +36,6 @@ var jsFilesToInject = {
     'bower_components/moment/min/moment.min.js',
     'bower_components/angular-moment/angular-moment.min.js',
     'bower_components/ng-table/ng-table.js',
-    'bower_components/jquery/dist/jquery.min.js',
     'bower_components/angular-touch/angular-touch.min.js',
     'bower_components/foundation/js/foundation.min.js',
     'bower_components/fastclick/lib/fastclick.js',
@@ -48,6 +44,9 @@ var jsFilesToInject = {
     'src/app/**/*.js'
   ],
   mediascreen: [
+    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/jquery-bridget/jquery.bridget.js',
+    'bower_components/masonry/dist/masonry.pkgd.min.js',
     'bower_components/angular/angular.min.js',
     'bower_components/angular-ui-router/release/angular-ui-router.min.js',
     'bower_components/angular-ui-utils/ui-utils.min.js',
@@ -57,7 +56,7 @@ var jsFilesToInject = {
     'bower_components/lodash/dist/lodash.js',
     'bower_components/moment/min/moment.min.js',
     'bower_components/angular-moment/angular-moment.min.js',
-    'bower_components/jquery/dist/jquery.min.js',
+    'bower_components/angular-masonry/angular-masonry.js',
     'bower_components/foundation/js/foundation.min.js',
     'src/common/**/*.js',
     'src/mediascreen/**/*.js'
@@ -65,6 +64,10 @@ var jsFilesToInject = {
 };
 var imageFilesToInject = [
   'images/**/*'
+];
+
+var fontFilesToInject = [
+    'fonts/**/*'
 ];
 
 //module.exports.jsFilesToCopy = Object.keys(jsFilesToInject);

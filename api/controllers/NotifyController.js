@@ -60,6 +60,7 @@ module.exports = {
           }
         }
       );
+      return res.json({status: 'OK'})
         //this is for sending messages to single person
         /*
         var users = session.get(

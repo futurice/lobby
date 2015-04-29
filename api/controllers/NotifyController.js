@@ -9,7 +9,7 @@ module.exports = {
    */
   notify: function(req, res) {
     console.log("notify");
-	if (req.body.type === "sms") {
+    if (req.body.type === "sms") {
       //TODO validate number / only pass user id here?
       if (!req.body.recipient) {
         return res.json({'error': 'Invalid recipient'});
@@ -42,8 +42,8 @@ module.exports = {
         return res.json({'error': e});
       });
     } else if (req.body.type==="flowdock") {
-  		console.log(sails.config.futurice.flowdock_key);
-  		var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);
+      console.log(sails.config.futurice.flowdock_key);
+      var session = new sails.flowdock.Session(sails.config.futurice.flowdock_key);
       request.post(
         'https://api.flowdock.com/v1/messages/chat/'+sails.config.futurice.flowdock_flow_api_key,
         {form:{'external_user_name':'lobby','content':req.body.message,'tags': ""}},
@@ -52,8 +52,7 @@ module.exports = {
           if(error) {
             SystemEvent.add("ERROR", "Sending Flowdock message: "+error);
             console.log(error);
-          }
-          else {
+          } else {
             SystemEvent.add("Flowdock message", "Flowdock message ok: "+response+" "+body);
             console.log(body);
             console.log(response);
@@ -61,26 +60,26 @@ module.exports = {
         }
       );
       return res.json({status: 'OK'})
-        //this is for sending messages to single person
-        /*
-        var users = session.get(
-    			'/users', "",
-    			function (err, flow, response){
-    				if(err)
-    					console.log(err)
-    				else if (response) {
-  			      var users = response.body;
-  			      var user = users.filter(function(usr){
-  			         return usr.email==="miki.tolonen@gmail.com"
-  			      })[0];
-  			      if(!user){
-  			         console.log("User not found");
-  			         return
-  			      }
-  			      session.privateMessage(user.id, req.body.message);
-  			      res.ok("Sent message to : " + user.name);		   		}
-  				}
-  			);*/
-	   }
+      //this is for sending messages to single person
+      /*
+       var users = session.get(
+       '/users', "",
+       function (err, flow, response){
+       if(err)
+       console.log(err)
+       else if (response) {
+       var users = response.body;
+       var user = users.filter(function(usr){
+       return usr.email==="miki.tolonen@gmail.com"
+       })[0];
+       if(!user){
+       console.log("User not found");
+       return
+       }
+       session.privateMessage(user.id, req.body.message);
+       res.ok("Sent message to : " + user.name);		   		}
+       }
+       );*/
+    }
   }
 };

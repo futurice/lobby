@@ -2,7 +2,7 @@
   <h2>Employee search</h2>
   <p>Start by typing the name of the person.</p>
 
-  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText" maxlength="32" required highlight-on-error ng-change="filterEmployees()" auto-focus>
+  <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText" maxlength="32" required highlight-on-error ng-change="filterEmployees()" auto-focus ng-model-options="{debounce: 100}">
 </section>
 
 <section class="employees-container">
@@ -10,7 +10,7 @@
     <li
       ng-repeat="employee in filteredEmployees.slice(0, show_i)"
       class="box clearfix">
-      <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait">
+      <img ng-src="{{employee.portrait_thumb_url}}" alt="" class="portrait" />
       <div class="left">
         <strong>{{employee.first_name}} {{employee.last_name}}</strong>
         <span class="email"><i class="fa fa-envelope-square"></i> {{employee.email}}</span>
@@ -19,7 +19,6 @@
       <div class="right">
         <a class="button success" ng-click="notify(employee)">Send Notification</a>
       </div>
-      
     </li>
   </ul>
   <button ng-if="filteredEmployees.length > show_i && searchText.length" type="submit" class="button success expand radius" ng-click="loadMore()">Load more...</button>

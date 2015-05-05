@@ -8,7 +8,7 @@ angular.module( 'services.config', ['lodash'])
 		siteName: 'Electronic Receptionist',
 		siteUrl: '/',
 		apiUrl: '/api',
-    RESULTS_SHOW_AMOUNT: 20,
+    RESULTS_SHOW_AMOUNT: 10,
     RESULTS_SHOW_THRESHOLD: 20,
     EMPLOYEE_FETCH_INTERVAL: 3600000, // 1 hour
     EMPLOYEE_TRYAGAIN_INTERVAL: 120000, // 2 min
@@ -18,7 +18,7 @@ angular.module( 'services.config', ['lodash'])
 
     // Fuzzy search options, see https://github.com/krisk/Fuse#options
     fuse: {
-      keys: ['first_name', 'last_name', 'full_name'],
+      keys: ['full_name'],
       threshold: 0.4
     }
 	};

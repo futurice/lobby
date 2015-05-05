@@ -144,6 +144,9 @@ table
     margin-right: 1rem
     width: 5rem
     max-height: 10rem
+    -webkit-transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
     -webkit-filter: grayscale(.5)
     border-radius: 4px
     border: 2px white solid
@@ -151,6 +154,8 @@ table
   .phone, .email
     display: block
     margin-left: 0.5rem
+  .email
+    font-size: 17px
 
 .form-info
   font-size: $form-label-font-size

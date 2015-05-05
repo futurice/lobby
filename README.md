@@ -52,6 +52,9 @@ To run using production configuration with asset minification, use
 View the app on your local machine at [http://localhost:1337](http://localhost:1337)
 
 
+For long-running production setups:
+    $ sudo npm install forever -g
+
 #Folder Structure #
 
 ```

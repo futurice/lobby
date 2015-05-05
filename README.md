@@ -152,4 +152,6 @@ Sample file:
       sms_override_number: "+35840999999",
       flowdock_key: "asdgasdg",
       flowdock_flow_api_key: "sdfgh9s6dasdasfa25wq2"
+      api_url: "http://endpoint-for-user-data/",
+      sms_url: "http://endpoint-for-sending-sms/"
     };

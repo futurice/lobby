@@ -14,7 +14,7 @@ module.exports = {
    * `EmployeeController.getAll()`
    */
   getAll: function (req, res) {
-    https.get("https://api.fum.futurice.com/v1/list/employees/", function(fum) {
+    https.get(sails.config.futurice.api_url, function(fum) {
       var body = '';
       fum.on('data', function(chunk) {
         body += chunk;

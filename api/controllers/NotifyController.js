@@ -22,7 +22,7 @@ module.exports = {
         password: sails.config.futurice.sms_password
       });
       process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
-      https.get("https://backupmaster2.futurice.com:13013/cgi-bin/sendsms?" + params, function(sms) {
+      https.get(sails.config.futurice.sms_url + "?" + params, function(sms) {
         var body = '';
         sms.on('data', function(chunk) {
           body += chunk;

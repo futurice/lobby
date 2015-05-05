@@ -1,12 +1,14 @@
 <section class="intro">
-  <h2>Check in to Open Space</h2>
-  <p>Please fill in your personal information below.</p>
+    <h2>Check-in to FutuCafe
+        <br/>
+        <small>... this help us measure interest into our open working space</small>
+    </h2>
 </section>
 
 <div class="row">
   <section class="medium-12 columns">
     <dl class="tabs" data-tab>
-      <dd ui-sref-active="active"><a ui-sref="openspace.checkin">Already registered? Check in.</a></dd>
+      <dd ui-sref-active="active"><a ui-sref="openspace.checkin">Already registered? Check-in.</a></dd>
       <dd ui-sref-active="active"><a ui-sref="openspace.register">Create an account</a></dd>
     </dl>
     <div class="tabs-content box" ui-view></div>
@@ -19,12 +21,12 @@
     <h3>Users checked in today:</h3>
     <table>
       <tr class="row">
-        <th class="small-2 columns"> Name</td>
-        <th class="small-3 columns"> Last seen</td>
+        <th class="small-2 columns">Name</td>
+        <th class="small-3 columns">Last seen</td>
       </tr>
       <tr class="row" ng-repeat="user in users | filter :{last_seen:timeWindow} :tstampgt |  orderBy:predicate">
-        <td class="small-2 columns"> {{user.first_name}} {{user.last_name}}</td>
-        <td class="small-3 columns"> {{user.last_seen | amCalendar}}</td>
+        <td class="small-2 columns">{{user.first_name}} {{user.last_name}}</td>
+        <td class="small-3 columns">{{user.last_seen | amCalendar}}</td>
       </tr>
     </table>
   </section>

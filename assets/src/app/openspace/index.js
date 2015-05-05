@@ -48,7 +48,7 @@ angular.module( 'lobby.openspace', [])
         $state.go("finish.openspace");
       })
       .error(function(data,status,headers,config){
-        $scope.errors = "registering failed";
+        $scope.errors = "Registration failed";
         $('#errorPopup').foundation('reveal', 'open');
       });
   };

@@ -1,6 +1,6 @@
 <section class="intro">
-  <h2>Employee lookup</h2>
-  <p>Let's see if we can find what you're looking for.<br>Type the name of the person below.</p>
+  <h2>Employee search</h2>
+  <p>Start by typing the name of the person.</p>
 
   <input type="text" class="medium-8" placeholder="Who should we find?" ng-model="searchText" maxlength="32" required highlight-on-error ng-change="filterEmployees()" auto-focus>
 </section>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="box alert medium-8" ng-if="!employees.length">
-  Unable to fetch employee list. Please try again in a few minutes.
+  Unable to fetch employee list. Please try again shortly.
 </div>
 
 <div id="employeeSelect" class="reveal-modal" data-reveal>

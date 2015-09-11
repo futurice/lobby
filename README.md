@@ -155,3 +155,18 @@ Sample file:
       api_url: "http://endpoint-for-user-data/",
       sms_url: "http://endpoint-for-sending-sms/"
     };
+
+# Running with docker #
+
+The project contains Dockerfile which allows running the project with docker. The single container will run both mongodb and the node.js app.
+The http port 8080 is exposed to docker host.
+
+    docker build -t lobby .
+    docker run \
+        -e "SMS_USER=foobar" \
+        -e "SMS_PASSWORD=asldgf" \
+        -e "FLOWDOCK_KEY=asdga" \
+        -e "FLOWDOCK_FLOW_API_KEY=adfgadsfgds" \
+        -e "API_URL=https://api.example.com" \
+        -e "SMS_URL=https://smsapi.example.com" \
+        -P lobby
